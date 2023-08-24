@@ -1,4 +1,3 @@
-
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import {
   ApplicationLayout,
@@ -7,12 +6,7 @@ import {
   UnAuthorized,
 } from "./components";
 
-import {
-  Auth,
-  Signin,
-} from "./modules/auth";
-
-
+import { Signup, Signin } from "./modules/auth";
 
 function App() {
   return (
@@ -30,10 +24,8 @@ function App() {
         </Route>
 
         {/* Auth Page */}
-        <Route path="/" element={<Auth />}>
-          <Route path="/signin" element={<Signin />} />
-          
-        </Route>
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/signin" element={<Signin />} />
 
         {/* Error Page */}
         <Route path="unauthorized" element={<UnAuthorized />} />

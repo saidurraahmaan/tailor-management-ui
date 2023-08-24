@@ -241,9 +241,13 @@ body {
 }
 
 /* height */
-.min-h-200 {
-  min-height: 200px;
+.min-h-100v {
+  min-height: 100vh;
 }
+.h-100v {
+  height: 100vh;
+}
+
 
 /* google recaptcha grecaptcha-badge */
 .grecaptcha-badge {
