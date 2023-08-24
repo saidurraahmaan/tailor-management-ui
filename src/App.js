@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import {
   ApplicationLayout,
   NotFound,
-  PrivateRoute,
+  // PrivateRoute,
   UnAuthorized,
 } from "./components";
 

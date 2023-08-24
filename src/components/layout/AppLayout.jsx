@@ -1,13 +1,11 @@
 import React from "react";
 import { Container } from "@mui/material";
 import { Outlet } from "react-router-dom";
-import Navbar from "./Navbar";
 
-const ApplicationLayout = ({ showNavBackBtn }) => {
+const ApplicationLayout = () => {
   return (
     <>
-      <Container maxWidth="sm">
-        <Navbar showNavBackBtn={showNavBackBtn} />
+      <Container maxWidth="lg">
         <Outlet />
       </Container>
     </>
