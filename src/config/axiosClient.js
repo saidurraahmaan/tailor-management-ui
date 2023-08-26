@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const HttpInstance = axios.create({
-  baseURL: `${process.env.API_URL}`,
-  timeout: 10000,
+  baseURL: process.env.REACT_APP_API_URL,
+  timeout: 2500,
   headers: {
     "Content-Type": "application/json",
   },
@@ -18,15 +18,6 @@ export const formDataHeader = {
   headers: {
     "Content-Type": "multipart/form-data",
   },
-};
-
-export const headerWithToken = (token) => {
-  return {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  };
 };
 
 HttpInstance.interceptors.request.use(

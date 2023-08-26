@@ -1,10 +1,9 @@
 import { combineReducers } from "@reduxjs/toolkit";
-// import authReducer from "../modules/auth/authSlice";
+import authReducer from "../modules/auth/authSlice";
 import { resetState } from "../services/logoutService";
 
-
 const combinedReducer = combineReducers({
-  // auth: authReducer,
+  auth: authReducer,
 });
 
 const rootReducer = (state, action) => {

@@ -11,7 +11,7 @@ const persistConfig = {
 
 const middlewares = [];
 
-if (process.env.ENVIRONMENT === "development") {
+if (process.env.NODE_ENV === "development") {
   const { createLogger } = require(`redux-logger`);
   const logger = createLogger({
     collapsed: (getState, action, logEntry) => !logEntry.error,
@@ -28,7 +28,7 @@ const store = configureStore({
     getDefaultMiddleware({
       serializableCheck: false,
     }).concat(middlewares),
-  devTools: process.env.ENVIRONMENT !== "production",
+  devTools: process.env.NODE_ENV !== "production",
 });
 
 const persistor = persistStore(store);

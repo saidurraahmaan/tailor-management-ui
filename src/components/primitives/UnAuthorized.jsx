@@ -4,9 +4,11 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate, Link } from "react-router-dom";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import unauthorizeImg from "../../assets/images/unauthorize.webp";
+import { APPROUTES } from "../../constants/routes";
 
 const UnAuthorized = () => {
   const navigate = useNavigate();
+  
   return (
     <Container maxWidth="sm">
       <Grid container alignItems={"center"} className="p-5" minHeight="80vh">
@@ -23,7 +25,7 @@ const UnAuthorized = () => {
             <Typography className="text-center">
               If you want to access this page then{" "}
               <Link
-                to={"/"}
+                to={APPROUTES.signin}
                 className="font-main text-decoration-none font-w-700"
               >
                 login

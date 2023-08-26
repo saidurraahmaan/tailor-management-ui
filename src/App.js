@@ -2,30 +2,36 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import {
   ApplicationLayout,
   NotFound,
-  // PrivateRoute,
+  PrivateRoute,
   UnAuthorized,
 } from "./components";
 
-import { Signup, Signin } from "./modules/auth";
+import { Signup, Signin, RegistrationSuccess } from "./modules/auth";
+import { OrderList } from "./modules/orderList";
+import { APPROUTES } from "./constants/routes";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<ApplicationLayout />}>
-          {/* <Route
-            path="/profile"
+          <Route
+            path="/"
             element={
               <PrivateRoute>
-                <Profile />
+                <OrderList />
               </PrivateRoute>
             }
-          /> */}
+          />
         </Route>
 
         {/* Auth Page */}
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/signin" element={<Signin />} />
+        <Route path={APPROUTES.signup} element={<Signup />} />
+        <Route path={APPROUTES.signin} element={<Signin />} />
+        <Route
+          path={APPROUTES.registrationSuccess}
+          element={<RegistrationSuccess />}
+        />
 
         {/* Error Page */}
         <Route path="unauthorized" element={<UnAuthorized />} />
