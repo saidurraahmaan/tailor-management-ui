@@ -1,7 +1,9 @@
-.box{
-    margin: 0 auto;
-    padding: 40px 20px;
-    width: 50%;
-    border: 1px solid rgb(243, 235, 235);
-    box-shadow: 6px 4px 4px white;
+.box {
+  margin: 0 auto;
+  padding: 10px 20px;
+  width: 50%;
+  border: 1px solid rgb(243, 235, 235);
+  box-shadow: 2px 1px 51px -20px rgba(0,0,0,0.46);
+-webkit-box-shadow: 2px 1px 51px -20px rgba(0,0,0,0.46);
+-moz-box-shadow: 2px 1px 51px -20px rgba(0,0,0,0.46);
 }
