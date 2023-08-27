@@ -9,6 +9,7 @@ import {
 import { Signup, Signin, RegistrationSuccess } from "./modules/auth";
 import { OrderList } from "./modules/orderList";
 import { APPROUTES } from "./constants/routes";
+import { NewOrder } from "./modules/newOrder";
 
 function App() {
   return (
@@ -20,6 +21,14 @@ function App() {
             element={
               <PrivateRoute>
                 <OrderList />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={APPROUTES.newOrder}
+            element={
+              <PrivateRoute>
+                <NewOrder />
               </PrivateRoute>
             }
           />

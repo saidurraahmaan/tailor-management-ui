@@ -17,17 +17,25 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
 import { APPROUTES } from "../../constants/routes";
+import { useDispatch } from "react-redux";
+import { resetState } from "../../services/logoutService";
 
 const drawerWidth = 220;
 
 export default function PermanentDrawerLeft({ children }) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [drawerText, setDrawerText] = React.useState("Order List");
 
   const handleClick = (link, text) => {
     setDrawerText(text);
     navigate(link);
+  };
+
+  const handleLogout = () => {
+    navigate(APPROUTES.signin);
+    dispatch(resetState());
   };
 
   return (
@@ -63,7 +71,9 @@ export default function PermanentDrawerLeft({ children }) {
         <Divider />
         <List>
           <ListItem disablePadding>
-            <ListItemButton onClick={()=>handleClick(APPROUTES.home,)}>
+            <ListItemButton
+              onClick={() => handleClick(APPROUTES.home, "Order list")}
+            >
               <ListItemIcon>
                 <ListIcon />
               </ListItemIcon>
@@ -71,7 +81,9 @@ export default function PermanentDrawerLeft({ children }) {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton>
+            <ListItemButton
+              onClick={() => handleClick(APPROUTES.newOrder, "New order")}
+            >
               <ListItemIcon>
                 <AddCircleOutlineIcon />
               </ListItemIcon>
@@ -79,7 +91,7 @@ export default function PermanentDrawerLeft({ children }) {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={() => handleClick(APPROUTES.product)}>
               <ListItemIcon>
                 <ViewListIcon />
               </ListItemIcon>
@@ -87,7 +99,7 @@ export default function PermanentDrawerLeft({ children }) {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={() => handleClick(APPROUTES.cost)}>
               <ListItemIcon>
                 <AttachMoneyIcon />
               </ListItemIcon>
@@ -95,7 +107,7 @@ export default function PermanentDrawerLeft({ children }) {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={handleLogout}>
               <ListItemIcon>
                 <LogoutIcon />
               </ListItemIcon>
