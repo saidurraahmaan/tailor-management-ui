@@ -1,6 +1,7 @@
 export const APIROUTES = {
   login: "/auth/login",
   register: "/auth/register",
+  getUserAllProduct: "/product/byUser",
 };
 
 export const APPROUTES = {

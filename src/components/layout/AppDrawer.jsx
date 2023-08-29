@@ -91,7 +91,9 @@ export default function PermanentDrawerLeft({ children }) {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton onClick={() => handleClick(APPROUTES.product)}>
+            <ListItemButton
+              onClick={() => handleClick(APPROUTES.product, "Product list")}
+            >
               <ListItemIcon>
                 <ViewListIcon />
               </ListItemIcon>

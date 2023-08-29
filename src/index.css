@@ -251,6 +251,9 @@ body {
 .h-100v {
   height: 100vh;
 }
+.height-240 {
+  height: 240px;
+}
 
 /* google recaptcha grecaptcha-badge */
 .grecaptcha-badge {

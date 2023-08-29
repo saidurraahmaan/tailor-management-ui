@@ -1,0 +1,55 @@
+import React from "react";
+import useApiHook from "../../utils/ApiCustomHook";
+import { APIROUTES, APPROUTES } from "../../constants/routes";
+import CircularWithValueLabel from "../../components/primitives/CircularLoader";
+import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import ProductListDetails from "./components/ProductListDetails";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+
+const ProductList = () => {
+  const navigate = useNavigate();
+
+  const { loading, responseData } = useApiHook(
+    "get",
+    APIROUTES.getUserAllProduct
+  );
+
+  if (loading) {
+    return <CircularWithValueLabel />;
+  }
+
+  return (
+    <div>
+      <div className="py-1 pb-3 flex justify-content-center">
+        <Button
+          variant="contained"
+          color="success"
+          onClick={() => navigate(APPROUTES.newProduct)}
+        >
+          Add new product
+        </Button>
+      </div>
+      {!responseData ? (
+        <></>
+      ) : !responseData.length ? (
+        <>You have no product</>
+      ) : (
+        <Grid container spacing={2}>
+          <Grid xs={3}>ProductName</Grid>
+          <Grid xs={3}>Type</Grid>
+          <Grid xs={6}>Action</Grid>
+          {responseData.map((ele) => (
+            <ProductListDetails
+              key={ele._id}
+              type={ele.productType}
+              productName={ele.productName}
+            />
+          ))}
+        </Grid>
+      )}
+    </div>
+  );
+};
+
+export default ProductList;
