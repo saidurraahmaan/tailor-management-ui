@@ -22,14 +22,15 @@ import { resetState } from "../../services/logoutService";
 
 const drawerWidth = 220;
 
-export default function PermanentDrawerLeft({ children }) {
+export default function PermanentDrawerLeft({
+  children,
+  setDrawerText,
+  drawerText,
+}) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [drawerText, setDrawerText] = React.useState("Order List");
-
-  const handleClick = (link, text) => {
-    setDrawerText(text);
+  const handleClick = (link) => {
     navigate(link);
   };
 
@@ -71,9 +72,7 @@ export default function PermanentDrawerLeft({ children }) {
         <Divider />
         <List>
           <ListItem disablePadding>
-            <ListItemButton
-              onClick={() => handleClick(APPROUTES.home, "Order list")}
-            >
+            <ListItemButton onClick={() => handleClick(APPROUTES.home)}>
               <ListItemIcon>
                 <ListIcon />
               </ListItemIcon>
@@ -81,9 +80,7 @@ export default function PermanentDrawerLeft({ children }) {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton
-              onClick={() => handleClick(APPROUTES.newOrder, "New order")}
-            >
+            <ListItemButton onClick={() => handleClick(APPROUTES.newOrder)}>
               <ListItemIcon>
                 <AddCircleOutlineIcon />
               </ListItemIcon>
@@ -91,13 +88,11 @@ export default function PermanentDrawerLeft({ children }) {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton
-              onClick={() => handleClick(APPROUTES.product, "Product list")}
-            >
+            <ListItemButton onClick={() => handleClick(APPROUTES.product)}>
               <ListItemIcon>
                 <ViewListIcon />
               </ListItemIcon>
-              <ListItemText primary={"Product list"} />
+              <ListItemText primary={"Product List"} />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>

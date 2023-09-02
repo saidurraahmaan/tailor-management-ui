@@ -1,7 +1,9 @@
 export const APIROUTES = {
   login: "/auth/login",
+  addProduct: "/product",
   register: "/auth/register",
   getUserAllProduct: "/product/byUser",
+  getUserProductByType: (type) => `/product/type/${type}`,
 };
 
 export const APPROUTES = {

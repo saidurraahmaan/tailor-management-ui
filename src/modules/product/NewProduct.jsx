@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -6,29 +6,71 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { TextField } from "@mui/material";
 import { MuiChipsInput } from "mui-chips-input";
+import { useNavigate, useOutletContext } from "react-router-dom";
+import { LoadingButton } from "@mui/lab";
+import { ProductType } from "../../constants/application";
+import { STATUS } from "../../constants/fetch";
+import { addProduct } from "./productApi";
+import { APPROUTES } from "../../constants/routes";
 
 const NewProduct = () => {
-  const [measurements, setMeasurement] = React.useState([]);
-  const [descriptions, setDescriptions] = React.useState([]);
+  const navigate = useNavigate();
+  const { setDrawerText } = useOutletContext();
+  const [status, setStatus] = useState(STATUS.IDLE);
+  const [productInfo, setProductInfo] = React.useState({
+    productName: "",
+    measurements: [],
+    descriptions: [],
+    productType: ProductType.Gents,
+  });
 
-  const handleMeasurementChange = (newChips) => {
-    setMeasurement(newChips);
+  // const [productError, setProductError] = useState({
+  //   isError: false,
+  //   errorMessage: "",
+  // });
+
+  const handleApiError = (error) => {
+    console.log(error);
+    setStatus(STATUS.ERROR);
   };
-  const handleDescriptionChange = (newChips) => {
-    setDescriptions(newChips);
+
+  const handleAdd = async () => {
+    setStatus(STATUS.LOADING);
+    const { productName, measurements, descriptions, productType } =
+      productInfo;
+
+    if (!productName || !measurements.length || !descriptions.length) {
+      setStatus(STATUS.ERROR);
+      return;
+    }
+    const response = await addProduct({
+      productName,
+      measurements,
+      descriptions,
+      productType,
+    }).catch((e) => handleApiError(e.response));
+    if (response) {
+      setStatus(STATUS.SUCCESS);
+      navigate(APPROUTES.product);
+    }
   };
+
+  useEffect(() => {
+    setDrawerText("Add New Product");
+  }, [setDrawerText]);
 
   return (
     <div>
       <div className="py-2">
         <TextField
+          required
           label="Product Name"
           variant="outlined"
           sx={{ width: "50%" }}
-          // value={loginInfo.username}
-          // onChange={(e) =>
-          //   setLoginInfo({ ...loginInfo, username: e.target.value })
-          // }
+          value={productInfo.productName}
+          onChange={(e) =>
+            setProductInfo({ ...productInfo, productName: e.target.value })
+          }
         />
       </div>
       <div className="py-2">
@@ -38,12 +80,22 @@ const NewProduct = () => {
           </FormLabel>
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue="gents"
             name="radio-buttons-group"
+            value={productInfo.productType}
+            onChange={(event) =>
+              setProductInfo({
+                ...productInfo,
+                productType: event.target.value,
+              })
+            }
           >
-            <FormControlLabel value="gents" control={<Radio />} label="Gents" />
             <FormControlLabel
-              value="ladies"
+              value={ProductType.Gents}
+              control={<Radio />}
+              label="Gents"
+            />
+            <FormControlLabel
+              value={ProductType.Ladies}
               control={<Radio />}
               label="Ladies"
             />
@@ -52,19 +104,36 @@ const NewProduct = () => {
       </div>
       <div className="py-2">
         <MuiChipsInput
+          required
           sx={{ width: "50%" }}
           label="Measurement"
-          value={measurements}
-          onChange={handleMeasurementChange}
+          value={productInfo.measurements}
+          onChange={(newChips) =>
+            setProductInfo({ ...productInfo, measurements: newChips })
+          }
+          disableDeleteOnBackspace
         />
       </div>
       <div className="py-2">
         <MuiChipsInput
+          required
           label="Description"
-          value={descriptions}
+          value={productInfo.descriptions}
           sx={{ width: "50%" }}
-          onChange={handleDescriptionChange}
+          onChange={(newChips) =>
+            setProductInfo({ ...productInfo, descriptions: newChips })
+          }
+          disableDeleteOnBackspace
         />
+      </div>
+      <div className="py-2 flex justify-content-center">
+        <LoadingButton
+          variant="contained"
+          onClick={handleAdd}
+          loading={status === STATUS.LOADING}
+        >
+          Add
+        </LoadingButton>
       </div>
     </div>
   );

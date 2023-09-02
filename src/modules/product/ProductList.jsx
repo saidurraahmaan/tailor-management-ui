@@ -1,19 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useApiHook from "../../utils/ApiCustomHook";
 import { APIROUTES, APPROUTES } from "../../constants/routes";
 import CircularWithValueLabel from "../../components/primitives/CircularLoader";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import ProductListDetails from "./components/ProductListDetails";
 import { Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 const ProductList = () => {
   const navigate = useNavigate();
+  const { setDrawerText } = useOutletContext();
 
   const { loading, responseData } = useApiHook(
     "get",
     APIROUTES.getUserAllProduct
   );
+
+  useEffect(() => {
+    setDrawerText("Product List");
+  }, [setDrawerText]);
 
   if (loading) {
     return <CircularWithValueLabel />;
@@ -35,7 +40,7 @@ const ProductList = () => {
       ) : !responseData.length ? (
         <>You have no product</>
       ) : (
-        <Grid container spacing={2}>
+        <Grid container spacing={2} alignItems={"center"}>
           <Grid xs={3}>ProductName</Grid>
           <Grid xs={3}>Type</Grid>
           <Grid xs={6}>Action</Grid>

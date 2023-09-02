@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useEffect } from "react";
+import { useOutletContext } from "react-router-dom";
 
 const OrderList = () => {
-  return (
-    <div>OrderList</div>
-  )
-}
+  const { setDrawerText } = useOutletContext();
 
-export default OrderList
+  useEffect(() => {
+    setDrawerText("Order List");
+  }, [setDrawerText]);
+
+  return <div>OrderList</div>;
+};
+
+export default OrderList;
