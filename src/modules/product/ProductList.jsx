@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import useApiHook from "../../utils/ApiCustomHook";
-import { APIROUTES, APPROUTES } from "../../constants/routes";
-import CircularWithValueLabel from "../../components/primitives/CircularLoader";
-import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import ProductListDetails from "./components/ProductListDetails";
 import { Button } from "@mui/material";
+import useApiHook from "../../utils/ApiCustomHook";
+import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import { APIROUTES, APPROUTES } from "../../constants/routes";
+import ProductListDetails from "./components/ProductListDetails";
 import { useNavigate, useOutletContext } from "react-router-dom";
+import CircularWithValueLabel from "../../components/primitives/CircularLoader";
 
 const ProductList = () => {
   const navigate = useNavigate();

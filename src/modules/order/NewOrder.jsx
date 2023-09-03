@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import { ProductType } from "../../constants/application";
 import { useOutletContext } from "react-router-dom";
+import { getUserProductByType } from "../product/productApi";
+import { STATUS } from "../../constants/fetch";
+import { itemTypeSelectList } from "../../constants/application";
+import { Dropdown } from "./";
 
 const NewOrder = () => {
   const { setDrawerText } = useOutletContext();
@@ -12,10 +11,25 @@ const NewOrder = () => {
   const [orderInfo, setOrderInfo] = useState({
     itemType: "",
     itemList: [],
+    itemFetchStatus: STATUS.IDLE,
   });
 
-  const handleSelectChange = (e) => {
+  const handleFetchItemError = (error) => {
+    setOrderInfo({ ...orderInfo, itemFetchStatus: STATUS.ERROR });
+    console.log(error);
+  };
+
+  const handleSelectChange = async (e) => {
     setOrderInfo({ ...orderInfo, itemType: e.target.value });
+    setOrderInfo({ ...orderInfo, itemFetchStatus: STATUS.LOADING });
+    const response = await getUserProductByType(e.target.value).catch((e) =>
+      handleFetchItemError(e.response)
+    );
+    if (response) {
+      const { data } = response;
+      console.log(data);
+      setOrderInfo({ ...orderInfo, itemFetchStatus: STATUS.SUCCESS });
+    }
   };
 
   useEffect(() => {
@@ -25,21 +39,12 @@ const NewOrder = () => {
   return (
     <div>
       <div className="py-2">
-        <FormControl>
-          <Select
-            displayEmpty
-            value={orderInfo.itemType}
-            onChange={handleSelectChange}
-            sx={{ height: "45px" }}
-            input={<OutlinedInput />}
-          >
-            <MenuItem disabled value="">
-              Select item
-            </MenuItem>
-            <MenuItem value={ProductType.Ladies}>Ladies</MenuItem>
-            <MenuItem value={ProductType.Gents}>Gents</MenuItem>
-          </Select>
-        </FormControl>
+        <Dropdown
+          value={orderInfo.itemType}
+          defaultSelectLabel={"Select item"}
+          items={itemTypeSelectList}
+          handleChange={handleSelectChange}
+        />
       </div>
     </div>
   );
