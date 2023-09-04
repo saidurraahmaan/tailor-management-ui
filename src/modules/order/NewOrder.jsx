@@ -1,34 +1,96 @@
 import React, { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
-import { getUserProductByType } from "../product/productApi";
+import { CircularProgress } from "@mui/material";
 import { STATUS } from "../../constants/fetch";
+import {
+  getUserProductById,
+  getUserProductByType,
+} from "../product/productApi";
 import { itemTypeSelectList } from "../../constants/application";
 import { Dropdown } from "./";
+import {
+  prepareNewOrderDescriptionList,
+  prepareNewOrderMeasurementList,
+} from "../../utils/helperFunction";
 
 const NewOrder = () => {
   const { setDrawerText } = useOutletContext();
 
+  const [newOrderState, setNewOrderState] = useState({
+    productType: "",
+    productList: [],
+    selectedProduct: "",
+    productFetchStatus: STATUS.IDLE,
+    productInfoFetchStatus: STATUS.IDLE,
+  });
   const [orderInfo, setOrderInfo] = useState({
-    itemType: "",
-    itemList: [],
-    itemFetchStatus: STATUS.IDLE,
+    quantity: 0,
+    delivery: "",
+    makingCost: 0,
+    productName: "",
+    customerName: [],
+    status: STATUS.IDLE,
+    productMeasurements: [],
+    productDescriptions: [],
   });
 
   const handleFetchItemError = (error) => {
-    setOrderInfo({ ...orderInfo, itemFetchStatus: STATUS.ERROR });
+    setNewOrderState((prev) => ({ ...prev, productFetchStatus: STATUS.ERROR }));
     console.log(error);
   };
 
-  const handleSelectChange = async (e) => {
-    setOrderInfo({ ...orderInfo, itemType: e.target.value });
-    setOrderInfo({ ...orderInfo, itemFetchStatus: STATUS.LOADING });
+  const handleProductInfoFetchError = (error) => {
+    setNewOrderState((prev) => ({
+      ...prev,
+      productInfoFetchStatus: STATUS.ERROR,
+    }));
+    console.log(error);
+  };
+
+  const handleProductTypeSelectChange = async (e) => {
+    setNewOrderState((prev) => ({
+      ...prev,
+      selectedProduct: "",
+      productType: e.target.value,
+      productFetchStatus: STATUS.LOADING,
+      productInfoFetchStatus: STATUS.IDLE,
+    }));
     const response = await getUserProductByType(e.target.value).catch((e) =>
       handleFetchItemError(e.response)
     );
     if (response) {
       const { data } = response;
-      console.log(data);
-      setOrderInfo({ ...orderInfo, itemFetchStatus: STATUS.SUCCESS });
+      setNewOrderState((prev) => ({
+        ...prev,
+        productList: data.map((ele) => ({
+          value: ele._id,
+          label: ele.productName,
+        })),
+        productFetchStatus: STATUS.SUCCESS,
+      }));
+    }
+  };
+
+  const handleProductSelectChange = async (e) => {
+    setNewOrderState((prev) => ({
+      ...prev,
+      selectedProduct: e.target.value,
+      productInfoFetchStatus: STATUS.LOADING,
+    }));
+    const response = await getUserProductById(e.target.value).catch((e) =>
+      handleProductInfoFetchError(e.response)
+    );
+    if (response) {
+      const { data } = response;
+      const { productName, measurements, descriptions } = data;
+
+      setOrderInfo((prev) => ({
+        ...prev,
+        productName,
+        productMeasurements: prepareNewOrderMeasurementList(measurements),
+        productDescriptions: prepareNewOrderDescriptionList(descriptions),
+        status: STATUS.SUCCESS,
+      }));
     }
   };
 
@@ -36,15 +98,40 @@ const NewOrder = () => {
     setDrawerText("New Order");
   }, [setDrawerText]);
 
+  console.log(orderInfo)
   return (
     <div>
-      <div className="py-2">
+      <div className="py-2 flex g-3">
         <Dropdown
-          value={orderInfo.itemType}
-          defaultSelectLabel={"Select item"}
+          value={newOrderState.productType}
+          defaultSelectLabel={"Select product type"}
           items={itemTypeSelectList}
-          handleChange={handleSelectChange}
+          handleChange={handleProductTypeSelectChange}
         />
+
+        {newOrderState.productFetchStatus === STATUS.SUCCESS && (
+          <Dropdown
+            value={newOrderState.selectedProduct}
+            defaultSelectLabel={"Select product"}
+            items={newOrderState.productList}
+            handleChange={handleProductSelectChange}
+          />
+        )}
+        {newOrderState.productFetchStatus === STATUS.LOADING && (
+          <CircularProgress />
+        )}
+      </div>
+      <div className="py-2">
+        {newOrderState.productInfoFetchStatus === STATUS.SUCCESS && (
+          <div className="flex align-items-center">
+            <CircularProgress />
+          </div>
+        )}
+        {newOrderState.productInfoFetchStatus === STATUS.LOADING && (
+          <div className="flex justify-content-center">
+            <CircularProgress />
+          </div>
+        )}
       </div>
     </div>
   );

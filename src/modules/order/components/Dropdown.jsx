@@ -7,7 +7,7 @@ import Select from "@mui/material/Select";
 const Dropdown = ({ value, handleChange, items, defaultSelectLabel }) => {
   return (
     <div>
-      <FormControl>
+      <FormControl sx={{ minWidth: "250px" }}>
         <Select
           displayEmpty
           value={value}
