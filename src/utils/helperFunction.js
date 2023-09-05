@@ -1,7 +1,9 @@
+import { v4 as uuidv4 } from "uuid";
+
 export const prepareNewOrderMeasurementList = (measurements) => {
   let result = [];
   measurements.forEach((element) => {
-    result.push({ _id: Date.now(), label: element, value: 0 });
+    result.push({ _id: uuidv4(), label: element, value: "" });
   });
   return result;
 };
@@ -9,7 +11,7 @@ export const prepareNewOrderMeasurementList = (measurements) => {
 export const prepareNewOrderDescriptionList = (descriptions) => {
   let result = [];
   descriptions.forEach((element) => {
-    result.push({ _id: Date.now(), label: element, value: false });
+    result.push({ _id: uuidv4(), label: element, value: false });
   });
   return result;
 };

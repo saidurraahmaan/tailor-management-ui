@@ -7,7 +7,7 @@ import {
   getUserProductByType,
 } from "../product/productApi";
 import { itemTypeSelectList } from "../../constants/application";
-import { Dropdown } from "./";
+import { DescriptionBoxes, Dropdown, MeasurementFields } from "./";
 import {
   prepareNewOrderDescriptionList,
   prepareNewOrderMeasurementList,
@@ -83,13 +83,16 @@ const NewOrder = () => {
     if (response) {
       const { data } = response;
       const { productName, measurements, descriptions } = data;
+      setNewOrderState((prev) => ({
+        ...prev,
+        productInfoFetchStatus: STATUS.SUCCESS,
+      }));
 
       setOrderInfo((prev) => ({
         ...prev,
         productName,
         productMeasurements: prepareNewOrderMeasurementList(measurements),
         productDescriptions: prepareNewOrderDescriptionList(descriptions),
-        status: STATUS.SUCCESS,
       }));
     }
   };
@@ -98,7 +101,7 @@ const NewOrder = () => {
     setDrawerText("New Order");
   }, [setDrawerText]);
 
-  console.log(orderInfo)
+  console.log(orderInfo);
   return (
     <div>
       <div className="py-2 flex g-3">
@@ -123,8 +126,19 @@ const NewOrder = () => {
       </div>
       <div className="py-2">
         {newOrderState.productInfoFetchStatus === STATUS.SUCCESS && (
-          <div className="flex align-items-center">
-            <CircularProgress />
+          <div className="flex align-items-start g-3 py-1">
+            <div className="wd-30">
+              <MeasurementFields
+                orderInfo={orderInfo}
+                setOrderInfo={setOrderInfo}
+              />
+            </div>
+            <div className="wd-70">
+              <DescriptionBoxes
+                orderInfo={orderInfo}
+                setOrderInfo={setOrderInfo}
+              />
+            </div>
           </div>
         )}
         {newOrderState.productInfoFetchStatus === STATUS.LOADING && (

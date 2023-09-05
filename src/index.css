@@ -242,6 +242,13 @@ body {
 .wd-50 {
   width: 50%;
 }
+.wd-30 {
+  width: 30%;
+}
+
+.wd-70 {
+  width: 70%;
+}
 
 .font-error {
   color: red;
