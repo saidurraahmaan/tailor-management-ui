@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
-import { CircularProgress } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 import { STATUS } from "../../constants/fetch";
 import {
   getUserProductById,
@@ -146,6 +146,9 @@ const NewOrder = () => {
             <CircularProgress />
           </div>
         )}
+      </div>
+      <div className="py-2">
+        <Button variant="outlined">Add</Button>
       </div>
     </div>
   );
