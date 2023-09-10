@@ -1,5 +1,6 @@
 export const APIROUTES = {
   login: "/auth/login",
+  placeOrder: "/order",
   addProduct: "/product",
   register: "/auth/register",
   getUserAllProduct: "/product/byUser",
