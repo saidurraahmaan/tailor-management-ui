@@ -1,13 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
-import { Button, CircularProgress } from "@mui/material";
+import { CircularProgress } from "@mui/material";
 import { STATUS } from "../../constants/fetch";
 import {
   getUserProductById,
   getUserProductByType,
 } from "../product/productApi";
-import { itemTypeSelectList } from "../../constants/application";
-import { DescriptionBoxes, Dropdown, MeasurementFields } from "./";
+import {
+  NewOrderTabConstant,
+  itemTypeSelectList,
+} from "../../constants/application";
+import {
+  DescriptionBoxes,
+  Dropdown,
+  MeasurementFields,
+  OrderSubmission,
+  OrderTab,
+} from "./";
 import {
   prepareNewOrderDescriptionList,
   prepareNewOrderMeasurementList,
@@ -24,15 +33,11 @@ const NewOrder = () => {
     productInfoFetchStatus: STATUS.IDLE,
   });
   const [orderInfo, setOrderInfo] = useState({
-    quantity: 0,
-    delivery: "",
-    makingCost: 0,
     productName: "",
-    customerName: [],
-    status: STATUS.IDLE,
     productMeasurements: [],
     productDescriptions: [],
   });
+  const [tabValue, setTabValue] = useState(NewOrderTabConstant.Measurement);
 
   const handleFetchItemError = (error) => {
     setNewOrderState((prev) => ({ ...prev, productFetchStatus: STATUS.ERROR }));
@@ -125,30 +130,37 @@ const NewOrder = () => {
         )}
       </div>
       <div className="py-2">
-        {newOrderState.productInfoFetchStatus === STATUS.SUCCESS && (
-          <div className="flex align-items-start g-3 py-1">
-            <div className="wd-30">
-              <MeasurementFields
-                orderInfo={orderInfo}
-                setOrderInfo={setOrderInfo}
-              />
-            </div>
-            <div className="wd-70">
-              <DescriptionBoxes
-                orderInfo={orderInfo}
-                setOrderInfo={setOrderInfo}
-              />
-            </div>
-          </div>
-        )}
         {newOrderState.productInfoFetchStatus === STATUS.LOADING && (
           <div className="flex justify-content-center">
             <CircularProgress />
           </div>
         )}
-      </div>
-      <div className="py-2">
-        <Button variant="outlined">Add</Button>
+        {newOrderState.productInfoFetchStatus === STATUS.SUCCESS && (
+          <React.Fragment>
+            <div className="py-1 flex justify-content-center">
+              <OrderTab setValue={setTabValue} value={tabValue} />
+            </div>
+            {tabValue === NewOrderTabConstant.Measurement && (
+              <div className="flex align-items-start g-3 py-1">
+                <div className="wd-30">
+                  <MeasurementFields
+                    orderInfo={orderInfo}
+                    setOrderInfo={setOrderInfo}
+                  />
+                </div>
+                <div className="wd-70">
+                  <DescriptionBoxes
+                    orderInfo={orderInfo}
+                    setOrderInfo={setOrderInfo}
+                  />
+                </div>
+              </div>
+            )}
+            {tabValue === NewOrderTabConstant.OrderInfo && (
+              <OrderSubmission measurementInfo={orderInfo} />
+            )}
+          </React.Fragment>
+        )}
       </div>
     </div>
   );
