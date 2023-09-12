@@ -11,16 +11,19 @@ import {
   itemTypeSelectList,
 } from "../../constants/application";
 import {
+  CustomerCopy,
   DescriptionBoxes,
   Dropdown,
   MeasurementFields,
   OrderSubmission,
   OrderTab,
+  ProductionCopy,
 } from "./";
 import {
   prepareNewOrderDescriptionList,
   prepareNewOrderMeasurementList,
 } from "../../utils/helperFunction";
+import dayjs from "dayjs";
 
 const NewOrder = () => {
   const { setDrawerText } = useOutletContext();
@@ -29,6 +32,7 @@ const NewOrder = () => {
     productType: "",
     productList: [],
     selectedProduct: "",
+    orderNo: 0,
     productFetchStatus: STATUS.IDLE,
     productInfoFetchStatus: STATUS.IDLE,
   });
@@ -36,6 +40,17 @@ const NewOrder = () => {
     productName: "",
     productMeasurements: [],
     productDescriptions: [],
+  });
+  const [orderFinalData, setOrderFinalData] = useState({
+    quantity: 1,
+    delivery: dayjs(),
+    makingCost: 0,
+    advance: 0,
+    mobileNumber: "",
+    customerName: "",
+    discount: 0,
+    clothPrice: 0,
+    status: STATUS.IDLE,
   });
   const [tabValue, setTabValue] = useState(NewOrderTabConstant.Measurement);
 
@@ -87,7 +102,7 @@ const NewOrder = () => {
     );
     if (response) {
       const { data } = response;
-      const { productName, measurements, descriptions } = data;
+      const { productName, measurements, descriptions, orderNo } = data;
       setNewOrderState((prev) => ({
         ...prev,
         productInfoFetchStatus: STATUS.SUCCESS,
@@ -95,6 +110,7 @@ const NewOrder = () => {
 
       setOrderInfo((prev) => ({
         ...prev,
+        orderNo,
         productName,
         productMeasurements: prepareNewOrderMeasurementList(measurements),
         productDescriptions: prepareNewOrderDescriptionList(descriptions),
@@ -105,8 +121,7 @@ const NewOrder = () => {
   useEffect(() => {
     setDrawerText("New Order");
   }, [setDrawerText]);
-
-  console.log(orderInfo);
+  
   return (
     <div>
       <div className="py-2 flex g-3">
@@ -157,7 +172,23 @@ const NewOrder = () => {
               </div>
             )}
             {tabValue === NewOrderTabConstant.OrderInfo && (
-              <OrderSubmission measurementInfo={orderInfo} />
+              <OrderSubmission
+                measurementInfo={orderInfo}
+                orderFinalData={orderFinalData}
+                setOrderFinalData={setOrderFinalData}
+              />
+            )}
+            {tabValue === NewOrderTabConstant.ProductionCopy && (
+              <ProductionCopy
+                measurementInfo={orderInfo}
+                orderFinalData={orderFinalData}
+              />
+            )}
+            {tabValue === NewOrderTabConstant.CustomerCopy && (
+              <CustomerCopy
+                measurementInfo={orderInfo}
+                orderFinalData={orderFinalData}
+              />
             )}
           </React.Fragment>
         )}

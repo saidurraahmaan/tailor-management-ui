@@ -17,6 +17,8 @@ export default function OrderTab({ value, setValue }) {
     >
       <Tab value={NewOrderTabConstant.Measurement} label="Measurements" />
       <Tab value={NewOrderTabConstant.OrderInfo} label="Order info" />
+      <Tab value={NewOrderTabConstant.ProductionCopy} label="Production Copy" />
+      <Tab value={NewOrderTabConstant.CustomerCopy} label="Customer Copy" />
     </Tabs>
   );
 }

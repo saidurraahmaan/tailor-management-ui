@@ -6,8 +6,10 @@ export const ProductType = {
 };
 
 export const NewOrderTabConstant = {
-  Measurement: "measurement",
   OrderInfo: "orderInfo",
+  CustomerCopy: "customer",
+  Measurement: "measurement",
+  ProductionCopy: "production",
 };
 
 export const itemTypeSelectList = [

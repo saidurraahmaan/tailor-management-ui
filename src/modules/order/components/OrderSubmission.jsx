@@ -1,22 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, TextField } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import { STATUS } from "../../../constants/fetch";
 import ResponsiveCalendar from "../../../components/patterns/ResponsiveCalendar";
-import dayjs from "dayjs";
 
-const OrderSubmission = ({ measurementInfo }) => {
-  const [orderFinalData, setOrderFinalData] = useState({
-    quantity: 1,
-    delivery: dayjs(),
-    makingCost: 0,
-    advance: 0,
-    mobileNumber: "",
-    customerName: "",
-    discount: 0,
-    clothPrice: 0,
-    status: STATUS.IDLE,
-  });
+const OrderSubmission = ({
+  measurementInfo,
+  orderFinalData,
+  setOrderFinalData,
+}) => {
   const calculateTotalPrice = () => {
     const totalCost =
       Number(orderFinalData.makingCost) + Number(orderFinalData.clothPrice);
