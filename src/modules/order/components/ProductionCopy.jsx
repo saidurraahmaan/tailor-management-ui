@@ -1,36 +1,22 @@
+import { Button } from "@mui/material";
 import React from "react";
-import { PDFViewer } from "@react-pdf/renderer";
-import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
-
-// Create styles
-const styles = StyleSheet.create({
-  page: {
-    flexDirection: "row",
-    backgroundColor: "#E4E4E4",
-  },
-  section: {
-    margin: 10,
-    padding: 10,
-    flexGrow: 1,
-  },
-});
+import { useRef } from "react";
+import generatePDF from "react-to-pdf";
 
 const ProductionCopy = ({ measurementInfo, orderFinalData }) => {
+  const targetRef = useRef();
   console.log({ measurementInfo, orderFinalData });
   return (
-    <div className="flex justify-content-center">
-      <PDFViewer width="600" height="650">
-        <Document>
-          <Page size="A6" style={styles.page}>
-            <View style={styles.section}>
-              <Text >Section #1</Text>
-            </View>
-            {/* <View style={styles.section}>
-              <Text>Section #2</Text>
-            </View> */}
-          </Page>
-        </Document>
-      </PDFViewer>
+    <div>
+      <div className="flex justify-content-center" ref={targetRef}>
+        <div>
+          <div className="font-primary font-w-700">Hello Saidur</div>
+          <div style={{ color: "red" }}>Where are you</div>
+        </div>
+      </div>
+      <Button onClick={() => generatePDF(targetRef, { filename: "page.pdf" })} >
+        Download Production Copy
+      </Button>
     </div>
   );
 };
