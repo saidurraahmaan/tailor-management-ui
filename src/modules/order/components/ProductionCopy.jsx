@@ -9,14 +9,18 @@ const ProductionCopy = ({ measurementInfo, orderFinalData }) => {
   return (
     <div>
       <div className="flex justify-content-center" ref={targetRef}>
-        <div>
+        <div className="production-container">
           <div className="font-primary font-w-700">Hello Saidur</div>
           <div style={{ color: "red" }}>Where are you</div>
         </div>
       </div>
-      <Button onClick={() => generatePDF(targetRef, { filename: "page.pdf" })} >
-        Download Production Copy
-      </Button>
+      <div className="flex justify-content-center py-2">
+        <Button
+          onClick={() => generatePDF(targetRef, { filename: "page.pdf" })}
+        >
+          Download Production Copy
+        </Button>
+      </div>
     </div>
   );
 };

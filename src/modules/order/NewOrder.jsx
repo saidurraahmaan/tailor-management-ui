@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
+import dayjs from "dayjs";
 import { STATUS } from "../../constants/fetch";
 import {
   getUserProductById,
@@ -23,7 +24,7 @@ import {
   prepareNewOrderDescriptionList,
   prepareNewOrderMeasurementList,
 } from "../../utils/helperFunction";
-import dayjs from "dayjs";
+import "./index.css";
 
 const NewOrder = () => {
   const { setDrawerText } = useOutletContext();
@@ -121,7 +122,7 @@ const NewOrder = () => {
   useEffect(() => {
     setDrawerText("New Order");
   }, [setDrawerText]);
-  
+
   return (
     <div>
       <div className="py-2 flex g-3">
