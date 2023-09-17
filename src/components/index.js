@@ -3,6 +3,7 @@ import ErrorPage from "./primitives/ErrorPage";
 import ApplicationLayout from "./layout/AppLayout";
 import PrivateRoute from "./primitives/PrivateRoute";
 import UnAuthorized from "./primitives/UnAuthorized";
+import InvoiceHeader from "./patterns/InvoiceHeader";
 import ResponsiveCalendar from "./patterns/ResponsiveCalendar";
 
 export {
@@ -10,6 +11,7 @@ export {
   ErrorPage,
   UnAuthorized,
   PrivateRoute,
+  InvoiceHeader,
   ApplicationLayout,
   ResponsiveCalendar,
 };

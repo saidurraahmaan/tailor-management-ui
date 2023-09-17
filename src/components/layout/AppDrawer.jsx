@@ -17,8 +17,9 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
 import { APPROUTES } from "../../constants/routes";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { resetState } from "../../services/logoutService";
+import { authInformation } from "../../modules/auth/authSlice";
 
 const drawerWidth = 220;
 
@@ -29,6 +30,9 @@ export default function PermanentDrawerLeft({
 }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const {
+    user: { storeName },
+  } = useSelector(authInformation);
 
   const handleClick = (link) => {
     navigate(link);
@@ -68,7 +72,7 @@ export default function PermanentDrawerLeft({
         variant="permanent"
         anchor="left"
       >
-        <Toolbar>Luckey tailors</Toolbar>
+        <Toolbar>{storeName}</Toolbar>
         <Divider />
         <List>
           <ListItem disablePadding>
