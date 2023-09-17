@@ -5,6 +5,7 @@ import '../index.css'
 
 const InvoiceHeader = () => {
     const {user} = useSelector(authInformation)
+    console.log(user)
   return (
     <div>InvoiceHeader</div>
   )
