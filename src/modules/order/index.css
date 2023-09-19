@@ -2,4 +2,13 @@
   border: 1px solid black;
   padding: 1rem;
   margin: 8px;
+  max-width: 750px;
+}
+
+.font-24{
+  font-size: 24px;
+}
+
+.font-32{
+font-size: 32px;
 }
