@@ -1,7 +1,8 @@
-import { Button } from "@mui/material";
+import { Button, Divider } from "@mui/material";
 import React from "react";
 import { useRef } from "react";
 import generatePDF from "react-to-pdf";
+import { InvoiceHeader, OrderCustomerInfo } from "../../../components";
 
 const ProductionCopy = ({ measurementInfo, orderFinalData }) => {
   const targetRef = useRef();
@@ -9,9 +10,10 @@ const ProductionCopy = ({ measurementInfo, orderFinalData }) => {
   return (
     <div>
       <div className="flex justify-content-center" ref={targetRef}>
-        <div className="production-container">
-          <div className="font-primary font-w-700">Hello Saidur</div>
-          <div style={{ color: "red" }}>Where are you</div>
+        <div className="production-container wd-100">
+          <InvoiceHeader />
+          <Divider sx={{ backgroundColor: "aqua", marginBlock: "8px" }} />
+          <OrderCustomerInfo />
         </div>
       </div>
       <div className="flex justify-content-center py-2">
