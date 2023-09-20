@@ -8,7 +8,7 @@ export const ProductType = {
 export const NewOrderTabConstant = {
   OrderInfo: "orderInfo",
   CustomerCopy: "customer",
-  Measurement: "measurement",
+  ProductList: "productList",
   ProductionCopy: "production",
 };
 

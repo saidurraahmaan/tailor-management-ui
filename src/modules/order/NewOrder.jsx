@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
-import dayjs from "dayjs";
 import { STATUS } from "../../constants/fetch";
 import {
   getUserProductById,
@@ -14,7 +13,8 @@ import {
 import {
   CustomerCopy,
   Dropdown,
-  MeasurementTab,
+  MeasuredProductList,
+  Measurement,
   OrderSubmission,
   OrderTab,
   ProductionCopy,
@@ -29,15 +29,15 @@ const NewOrder = () => {
   const { setDrawerText } = useOutletContext();
 
   const [newOrderState, setNewOrderState] = useState({
+    orderNo: 0,
     productType: "",
     productList: [],
     selectedProduct: "",
-    orderNo: 0,
     productFetchStatus: STATUS.IDLE,
     productInfoFetchStatus: STATUS.IDLE,
   });
   const [orderInfo, setOrderInfo] = useState({
-    id:"",
+    id: "",
     productName: "",
     productMeasurements: [],
     productDescriptions: [],
@@ -45,16 +45,8 @@ const NewOrder = () => {
     makingCost: 0,
     quantity: 1,
   });
-  const [orderFinalData, setOrderFinalData] = useState({
-    delivery: dayjs(),
-    advance: 0,
-    mobileNumber: "",
-    customerName: "",
-    discount: 0,
-    products: [],
-    status: STATUS.IDLE,
-  });
-  const [tabValue, setTabValue] = useState(NewOrderTabConstant.Measurement);
+
+  const [tabValue, setTabValue] = useState(NewOrderTabConstant.ProductList);
 
   const handleFetchItemError = (error) => {
     setNewOrderState((prev) => ({ ...prev, productFetchStatus: STATUS.ERROR }));
@@ -126,7 +118,17 @@ const NewOrder = () => {
 
   return (
     <div>
-      <div className="py-2"></div>
+      <div className="py-2">
+        <div className="py-1 flex justify-content-center">
+          <OrderTab setValue={setTabValue} value={tabValue} />
+        </div>
+        {tabValue === NewOrderTabConstant.ProductList && (
+          <MeasuredProductList />
+        )}
+        {tabValue === NewOrderTabConstant.OrderInfo && <OrderSubmission />}
+        {tabValue === NewOrderTabConstant.ProductionCopy && <ProductionCopy />}
+        {tabValue === NewOrderTabConstant.CustomerCopy && <CustomerCopy />}
+      </div>
       <div className="py-2 flex g-3">
         <Dropdown
           value={newOrderState.productType}
@@ -155,35 +157,7 @@ const NewOrder = () => {
         )}
         {newOrderState.productInfoFetchStatus === STATUS.SUCCESS && (
           <React.Fragment>
-            <MeasurementTab orderInfo={orderInfo} setOrderInfo={setOrderInfo} />
-            {/* <div className="py-1 flex justify-content-center">
-              <OrderTab setValue={setTabValue} value={tabValue} />
-            </div>
-            {tabValue === NewOrderTabConstant.Measurement && (
-              <MeasurementTab
-                orderInfo={orderInfo}
-                setOrderInfo={setOrderInfo}
-              />
-            )}
-            {tabValue === NewOrderTabConstant.OrderInfo && (
-              <OrderSubmission
-                measurementInfo={orderInfo}
-                orderFinalData={orderFinalData}
-                setOrderFinalData={setOrderFinalData}
-              />
-            )}
-            {tabValue === NewOrderTabConstant.ProductionCopy && (
-              <ProductionCopy
-                measurementInfo={orderInfo}
-                orderFinalData={orderFinalData}
-              />
-            )}
-            {tabValue === NewOrderTabConstant.CustomerCopy && (
-              <CustomerCopy
-                measurementInfo={orderInfo}
-                orderFinalData={orderFinalData}
-              />
-            )} */}
+            <Measurement orderInfo={orderInfo} setOrderInfo={setOrderInfo} />
           </React.Fragment>
         )}
       </div>

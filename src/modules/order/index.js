@@ -3,11 +3,12 @@ import OrderList from "./OrderList";
 import Dropdown from "./components/Dropdown";
 import OrderTab from "./components/OrderTab";
 import CustomerCopy from "./components/CustomerCopy";
+import Measurement from "./components/Measurement";
 import ProductionCopy from "./components/ProductionCopy";
 import OrderSubmission from "./components/OrderSubmission";
 import DescriptionBoxes from "./components/DescriptionBoxes";
-import MeasurementTab from "./components/MeasurementTab";
 import MeasurementFields from "./components/MeasurementFields";
+import MeasuredProductList from "./components/MeasuredProductList";
 
 export {
   NewOrder,
@@ -15,9 +16,10 @@ export {
   Dropdown,
   OrderList,
   CustomerCopy,
-  MeasurementTab,
+  Measurement,
   ProductionCopy,
   OrderSubmission,
   DescriptionBoxes,
   MeasurementFields,
+  MeasuredProductList,
 };
