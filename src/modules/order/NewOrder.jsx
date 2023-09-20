@@ -13,9 +13,8 @@ import {
 } from "../../constants/application";
 import {
   CustomerCopy,
-  DescriptionBoxes,
   Dropdown,
-  MeasurementFields,
+  MeasurementTab,
   OrderSubmission,
   OrderTab,
   ProductionCopy,
@@ -38,19 +37,21 @@ const NewOrder = () => {
     productInfoFetchStatus: STATUS.IDLE,
   });
   const [orderInfo, setOrderInfo] = useState({
+    id:"",
     productName: "",
     productMeasurements: [],
     productDescriptions: [],
+    clothPrice: 0,
+    makingCost: 0,
+    quantity: 1,
   });
   const [orderFinalData, setOrderFinalData] = useState({
-    quantity: 1,
     delivery: dayjs(),
-    makingCost: 0,
     advance: 0,
     mobileNumber: "",
     customerName: "",
     discount: 0,
-    clothPrice: 0,
+    products: [],
     status: STATUS.IDLE,
   });
   const [tabValue, setTabValue] = useState(NewOrderTabConstant.Measurement);
@@ -125,6 +126,7 @@ const NewOrder = () => {
 
   return (
     <div>
+      <div className="py-2"></div>
       <div className="py-2 flex g-3">
         <Dropdown
           value={newOrderState.productType}
@@ -153,24 +155,15 @@ const NewOrder = () => {
         )}
         {newOrderState.productInfoFetchStatus === STATUS.SUCCESS && (
           <React.Fragment>
-            <div className="py-1 flex justify-content-center">
+            <MeasurementTab orderInfo={orderInfo} setOrderInfo={setOrderInfo} />
+            {/* <div className="py-1 flex justify-content-center">
               <OrderTab setValue={setTabValue} value={tabValue} />
             </div>
             {tabValue === NewOrderTabConstant.Measurement && (
-              <div className="flex align-items-start g-3 py-1">
-                <div className="wd-30">
-                  <MeasurementFields
-                    orderInfo={orderInfo}
-                    setOrderInfo={setOrderInfo}
-                  />
-                </div>
-                <div className="wd-70">
-                  <DescriptionBoxes
-                    orderInfo={orderInfo}
-                    setOrderInfo={setOrderInfo}
-                  />
-                </div>
-              </div>
+              <MeasurementTab
+                orderInfo={orderInfo}
+                setOrderInfo={setOrderInfo}
+              />
             )}
             {tabValue === NewOrderTabConstant.OrderInfo && (
               <OrderSubmission
@@ -190,7 +183,7 @@ const NewOrder = () => {
                 measurementInfo={orderInfo}
                 orderFinalData={orderFinalData}
               />
-            )}
+            )} */}
           </React.Fragment>
         )}
       </div>
