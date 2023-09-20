@@ -60,54 +60,7 @@ const OrderSubmission = ({
             }
           />
         </Grid>
-        <Grid xs={12} md={6} lg={4}>
-          <TextField
-            label="Cloth Price"
-            variant="outlined"
-            type="number"
-            fullWidth
-            value={orderFinalData.clothPrice}
-            inputProps={{ min: "0" }}
-            onChange={(e) =>
-              setOrderFinalData((prev) => ({
-                ...prev,
-                clothPrice: e.target.value,
-              }))
-            }
-          />
-        </Grid>
-        <Grid xs={12} md={6} lg={4}>
-          <TextField
-            label="Making Cost"
-            variant="outlined"
-            type="number"
-            fullWidth
-            value={orderFinalData.makingCost}
-            inputProps={{ min: "0" }}
-            onChange={(e) =>
-              setOrderFinalData((prev) => ({
-                ...prev,
-                makingCost: e.target.value,
-              }))
-            }
-          />
-        </Grid>
-        <Grid xs={12} md={6} lg={4}>
-          <TextField
-            label="Quantity"
-            variant="outlined"
-            type="number"
-            fullWidth
-            value={orderFinalData.quantity}
-            inputProps={{ min: "0" }}
-            onChange={(e) =>
-              setOrderFinalData((prev) => ({
-                ...prev,
-                quantity: e.target.value,
-              }))
-            }
-          />
-        </Grid>
+
         <Grid xs={12} md={6} lg={4}>
           <TextField
             label="Discount (%)"

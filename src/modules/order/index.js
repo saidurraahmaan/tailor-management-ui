@@ -6,6 +6,7 @@ import CustomerCopy from "./components/CustomerCopy";
 import ProductionCopy from "./components/ProductionCopy";
 import OrderSubmission from "./components/OrderSubmission";
 import DescriptionBoxes from "./components/DescriptionBoxes";
+import MeasurementTab from "./components/MeasurementTab";
 import MeasurementFields from "./components/MeasurementFields";
 
 export {
@@ -14,6 +15,7 @@ export {
   Dropdown,
   OrderList,
   CustomerCopy,
+  MeasurementTab,
   ProductionCopy,
   OrderSubmission,
   DescriptionBoxes,
