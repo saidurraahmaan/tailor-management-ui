@@ -8,6 +8,7 @@ import {
 } from "../product/productApi";
 import {
   NewOrderTabConstant,
+  ProductType,
   itemTypeSelectList,
 } from "../../constants/application";
 import {
@@ -24,6 +25,8 @@ import {
   prepareNewOrderMeasurementList,
 } from "../../utils/helperFunction";
 import "./index.css";
+import { useSelector } from "react-redux";
+import { getOrderReducer } from "./orderSlice";
 
 const NewOrder = () => {
   const { setDrawerText } = useOutletContext();
@@ -37,20 +40,24 @@ const NewOrder = () => {
     productInfoFetchStatus: STATUS.IDLE,
   });
   const [orderInfo, setOrderInfo] = useState({
-    id: "",
+    _id: "",
     productName: "",
+    productType: ProductType.Gents,
     productMeasurements: [],
     productDescriptions: [],
     clothPrice: 0,
     makingCost: 0,
     quantity: 1,
   });
-
+  const [showProductType, setShowProductType] = useState(true);
+  const [showProductMeasurements, setShowProductMeasurements] = useState(false);
   const [tabValue, setTabValue] = useState(NewOrderTabConstant.ProductList);
+
+
+  const { measuredItems } = useSelector(getOrderReducer);
 
   const handleFetchItemError = (error) => {
     setNewOrderState((prev) => ({ ...prev, productFetchStatus: STATUS.ERROR }));
-    console.log(error);
   };
 
   const handleProductInfoFetchError = (error) => {
@@ -96,7 +103,8 @@ const NewOrder = () => {
     );
     if (response) {
       const { data } = response;
-      const { productName, measurements, descriptions, orderNo } = data;
+      const { productName, measurements, descriptions, orderNo, productType } =
+        data;
       setNewOrderState((prev) => ({
         ...prev,
         productInfoFetchStatus: STATUS.SUCCESS,
@@ -106,6 +114,7 @@ const NewOrder = () => {
         ...prev,
         orderNo,
         productName,
+        productType,
         productMeasurements: prepareNewOrderMeasurementList(measurements),
         productDescriptions: prepareNewOrderDescriptionList(descriptions),
       }));
@@ -118,49 +127,64 @@ const NewOrder = () => {
 
   return (
     <div>
-      <div className="py-2">
-        <div className="py-1 flex justify-content-center">
-          <OrderTab setValue={setTabValue} value={tabValue} />
-        </div>
-        {tabValue === NewOrderTabConstant.ProductList && (
-          <MeasuredProductList />
-        )}
-        {tabValue === NewOrderTabConstant.OrderInfo && <OrderSubmission />}
-        {tabValue === NewOrderTabConstant.ProductionCopy && <ProductionCopy />}
-        {tabValue === NewOrderTabConstant.CustomerCopy && <CustomerCopy />}
-      </div>
-      <div className="py-2 flex g-3">
-        <Dropdown
-          value={newOrderState.productType}
-          defaultSelectLabel={"Select product type"}
-          items={itemTypeSelectList}
-          handleChange={handleProductTypeSelectChange}
-        />
-
-        {newOrderState.productFetchStatus === STATUS.SUCCESS && (
-          <Dropdown
-            value={newOrderState.selectedProduct}
-            defaultSelectLabel={"Select product"}
-            items={newOrderState.productList}
-            handleChange={handleProductSelectChange}
-          />
-        )}
-        {newOrderState.productFetchStatus === STATUS.LOADING && (
-          <CircularProgress />
-        )}
-      </div>
-      <div className="py-2">
-        {newOrderState.productInfoFetchStatus === STATUS.LOADING && (
-          <div className="flex justify-content-center">
-            <CircularProgress />
+      {measuredItems.length > 0 && (
+        <div className="py-2">
+          <div className="py-1 flex justify-content-center">
+            <OrderTab setValue={setTabValue} value={tabValue} />
           </div>
-        )}
-        {newOrderState.productInfoFetchStatus === STATUS.SUCCESS && (
-          <React.Fragment>
-            <Measurement orderInfo={orderInfo} setOrderInfo={setOrderInfo} />
-          </React.Fragment>
-        )}
-      </div>
+          {tabValue === NewOrderTabConstant.ProductList && (
+            <MeasuredProductList
+              setShowProductType={setShowProductType}
+              setNewOrderState={setNewOrderState}
+            />
+          )}
+          {tabValue === NewOrderTabConstant.OrderInfo && <OrderSubmission />}
+          {tabValue === NewOrderTabConstant.ProductionCopy && (
+            <ProductionCopy />
+          )}
+          {tabValue === NewOrderTabConstant.CustomerCopy && <CustomerCopy />}
+        </div>
+      )}
+      {showProductType && (
+        <React.Fragment>
+          <div className="py-2 flex g-3">
+            <Dropdown
+              value={newOrderState.productType}
+              defaultSelectLabel={"Select product type"}
+              items={itemTypeSelectList}
+              handleChange={handleProductTypeSelectChange}
+            />
+
+            {newOrderState.productFetchStatus === STATUS.SUCCESS && (
+              <Dropdown
+                value={newOrderState.selectedProduct}
+                defaultSelectLabel={"Select product"}
+                items={newOrderState.productList}
+                handleChange={handleProductSelectChange}
+              />
+            )}
+            {newOrderState.productFetchStatus === STATUS.LOADING && (
+              <CircularProgress />
+            )}
+          </div>
+          <div className="py-2">
+            {newOrderState.productInfoFetchStatus === STATUS.LOADING && (
+              <div className="flex justify-content-center">
+                <CircularProgress />
+              </div>
+            )}
+            {newOrderState.productInfoFetchStatus === STATUS.SUCCESS && (
+              <React.Fragment>
+                <Measurement
+                  orderInfo={orderInfo}
+                  setOrderInfo={setOrderInfo}
+                  setShowProductType={setShowProductType}
+                />
+              </React.Fragment>
+            )}
+          </div>
+        </React.Fragment>
+      )}
     </div>
   );
 };

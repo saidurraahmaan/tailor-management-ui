@@ -3,12 +3,24 @@ import { Button, TextField } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import DescriptionBoxes from "./DescriptionBoxes";
 import MeasurementFields from "./MeasurementFields";
+import { useDispatch, useSelector } from "react-redux";
+import { getOrderReducer, updateOrderField } from "../orderSlice";
 
-const Measurement = ({ orderInfo, setOrderInfo }) => {
+const Measurement = ({ orderInfo, setOrderInfo, setShowProductType }) => {
+  const dispatch = useDispatch();
+  const { measuredItems } = useSelector(getOrderReducer);
+
   const handleAddBtnClick = () => {
-    const { id } = orderInfo;
-    if (!id) {
-      
+    const { _id } = orderInfo;
+    let previousProducts = [...measuredItems];
+    setShowProductType(false);
+    if (!_id) {
+      const itemDetails = { ...orderInfo, _id: Date.now() };
+      previousProducts.push(itemDetails);
+      dispatch(
+        updateOrderField({ field: "measuredItems", value: previousProducts })
+      );
+      return;
     }
     console.log(orderInfo);
   };
@@ -75,7 +87,7 @@ const Measurement = ({ orderInfo, setOrderInfo }) => {
         </Grid>
       </Grid>
       <div className="pt-4 flex justify-content-center">
-        <Button variant="contained" onClick={handleAddBtnClick}>
+        <Button variant="contained" onClick={handleAddBtnClick} color="success">
           Add
         </Button>
       </div>
