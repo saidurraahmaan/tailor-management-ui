@@ -3,16 +3,48 @@ import { Button, TextField } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import DescriptionBoxes from "./DescriptionBoxes";
 import MeasurementFields from "./MeasurementFields";
+import { useDispatch, useSelector } from "react-redux";
+import { getOrderReducer, updateOrderField } from "../orderSlice";
+import { newOrderInitialState, orderInfoInitialState } from "../orderConstant";
 
-const Measurement = ({ orderInfo, setOrderInfo }) => {
+const Measurement = ({
+  orderInfo,
+  showingState,
+  setOrderInfo,
+  setShowingState,
+  setNewOrderState,
+}) => {
+  const { _id } = orderInfo;
+  const dispatch = useDispatch();
+  const { measuredItems } = useSelector(getOrderReducer);
+
   const handleAddBtnClick = () => {
-    const { id } = orderInfo;
-    if (!id) {
-      
-    }
-    console.log(orderInfo);
-  };
+    let previousProducts = [...measuredItems];
 
+    setNewOrderState(newOrderInitialState);
+    setShowingState((prev) => ({
+      ...prev,
+      productType: false,
+      productMeasurement: false,
+      measurementTabAddBtn: true,
+    }));
+    if (!_id) {
+      const itemDetails = { ...orderInfo, _id: Date.now() };
+      previousProducts.push(itemDetails);
+      dispatch(
+        updateOrderField({ field: "measuredItems", value: previousProducts })
+      );
+      setOrderInfo(orderInfoInitialState);
+      return;
+    }
+    // const editedItem = measuredItems.filter((ele) => ele._id === _id)[0];
+    const updatedItems = previousProducts.map((ele) =>
+      ele._id === _id ? { ...orderInfo } : { ...ele }
+    );
+    dispatch(updateOrderField({ field: "measuredItems", value: updatedItems }));
+    setOrderInfo(orderInfoInitialState);
+  };
+  // console.log(orderInfo);
   return (
     <div>
       <div className="flex align-items-start g-3 py-1">
@@ -74,9 +106,10 @@ const Measurement = ({ orderInfo, setOrderInfo }) => {
           />
         </Grid>
       </Grid>
+
       <div className="pt-4 flex justify-content-center">
-        <Button variant="contained" onClick={handleAddBtnClick}>
-          Add
+        <Button variant="contained" onClick={handleAddBtnClick} color="success">
+          {_id ? "Update" : "Add"}
         </Button>
       </div>
     </div>
