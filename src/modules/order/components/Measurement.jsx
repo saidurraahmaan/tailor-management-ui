@@ -5,26 +5,46 @@ import DescriptionBoxes from "./DescriptionBoxes";
 import MeasurementFields from "./MeasurementFields";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrderReducer, updateOrderField } from "../orderSlice";
+import { newOrderInitialState, orderInfoInitialState } from "../orderConstant";
 
-const Measurement = ({ orderInfo, setOrderInfo, setShowProductType }) => {
+const Measurement = ({
+  orderInfo,
+  showingState,
+  setOrderInfo,
+  setShowingState,
+  setNewOrderState,
+}) => {
+  const { _id } = orderInfo;
   const dispatch = useDispatch();
   const { measuredItems } = useSelector(getOrderReducer);
 
   const handleAddBtnClick = () => {
-    const { _id } = orderInfo;
     let previousProducts = [...measuredItems];
-    setShowProductType(false);
+
+    setNewOrderState(newOrderInitialState);
+    setShowingState((prev) => ({
+      ...prev,
+      productType: false,
+      productMeasurement: false,
+      measurementTabAddBtn: true,
+    }));
     if (!_id) {
       const itemDetails = { ...orderInfo, _id: Date.now() };
       previousProducts.push(itemDetails);
       dispatch(
         updateOrderField({ field: "measuredItems", value: previousProducts })
       );
+      setOrderInfo(orderInfoInitialState);
       return;
     }
-    console.log(orderInfo);
+    // const editedItem = measuredItems.filter((ele) => ele._id === _id)[0];
+    const updatedItems = previousProducts.map((ele) =>
+      ele._id === _id ? { ...orderInfo } : { ...ele }
+    );
+    dispatch(updateOrderField({ field: "measuredItems", value: updatedItems }));
+    setOrderInfo(orderInfoInitialState);
   };
-
+  // console.log(orderInfo);
   return (
     <div>
       <div className="flex align-items-start g-3 py-1">
@@ -86,9 +106,10 @@ const Measurement = ({ orderInfo, setOrderInfo, setShowProductType }) => {
           />
         </Grid>
       </Grid>
+
       <div className="pt-4 flex justify-content-center">
         <Button variant="contained" onClick={handleAddBtnClick} color="success">
-          Add
+          {_id ? "Update" : "Add"}
         </Button>
       </div>
     </div>

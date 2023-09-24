@@ -2,22 +2,40 @@ import React from "react";
 import { Button, TextField } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import ResponsiveCalendar from "../../../components/patterns/ResponsiveCalendar";
+import { useDispatch, useSelector } from "react-redux";
+import { getOrderReducer, updateOrderField } from "../orderSlice";
 
-const OrderSubmission = ({
-  measurementInfo,
-  orderFinalData,
-  setOrderFinalData,
-}) => {
+const OrderSubmission = () => {
+  const dispatch = useDispatch();
+
+  const {
+    discount,
+    customerName,
+    delivery,
+    advance,
+    mobileNumber,
+    measuredItems,
+  } = useSelector(getOrderReducer);
+
   const calculateTotalPrice = () => {
-    const totalCost =
-      Number(orderFinalData.makingCost) + Number(orderFinalData.clothPrice);
+    let totalCost = 0;
+    measuredItems.forEach((element) => {
+      totalCost =
+        totalCost +
+        (Number(element.makingCost) + Number(element.clothPrice)) *
+          Number(element.quantity);
+    });
+    // const totalCost = Number(makingCost) + Number(orderFinalData.clothPrice);
 
-    const afterQuantity = Number(totalCost) * Number(orderFinalData.quantity);
+    // const afterQuantity = Number(totalCost) * Number(orderFinalData.quantity);
 
-    const discountAmount =
-      (Number(orderFinalData.discount) / 100) * afterQuantity;
+    const discountAmount = (Number(discount) / 100) * totalCost;
 
-    return afterQuantity - discountAmount;
+    return totalCost - discountAmount;
+  };
+
+  const handleChange = ({ field, value }) => {
+    dispatch(updateOrderField({ field, value }));
   };
 
   return (
@@ -28,12 +46,9 @@ const OrderSubmission = ({
             label="Customer Name"
             variant="outlined"
             fullWidth
-            value={orderFinalData.customerName}
+            value={customerName}
             onChange={(e) =>
-              setOrderFinalData((prev) => ({
-                ...prev,
-                customerName: e.target.value,
-              }))
+              handleChange({ field: "customerName", value: e.target.value })
             }
           />
         </Grid>
@@ -42,21 +57,18 @@ const OrderSubmission = ({
             label="Mobile Number"
             variant="outlined"
             fullWidth
-            value={orderFinalData.mobileNumber}
+            value={mobileNumber}
             onChange={(e) =>
-              setOrderFinalData((prev) => ({
-                ...prev,
-                mobileNumber: e.target.value,
-              }))
+              handleChange({ field: "mobileNumber", value: e.target.value })
             }
           />
         </Grid>
         <Grid xs={12} md={6} lg={4}>
           <ResponsiveCalendar
             label={"Delivery Date"}
-            value={orderFinalData.delivery}
+            value={delivery}
             handleChange={(date) =>
-              setOrderFinalData((prev) => ({ ...prev, delivery: date }))
+              handleChange({ field: "delivery", value: date })
             }
           />
         </Grid>
@@ -68,17 +80,14 @@ const OrderSubmission = ({
             type="number"
             fullWidth
             inputProps={{ min: "0", max: "100" }}
-            value={orderFinalData.discount}
+            value={discount}
             onInput={(e) => {
               e.target.value = Math.max(0, parseInt(e.target.value))
                 .toString()
                 .slice(0, 2);
             }}
             onChange={(e) =>
-              setOrderFinalData((prev) => ({
-                ...prev,
-                discount: e.target.value,
-              }))
+              handleChange({ field: "discount", value: e.target.value })
             }
           />
         </Grid>
@@ -98,13 +107,10 @@ const OrderSubmission = ({
             variant="outlined"
             type="number"
             fullWidth
-            value={orderFinalData.advance}
+            value={advance}
             inputProps={{ min: "0" }}
             onChange={(e) =>
-              setOrderFinalData((prev) => ({
-                ...prev,
-                advance: e.target.value,
-              }))
+              handleChange({ field: "advance", value: e.target.value })
             }
           />
         </Grid>
@@ -115,7 +121,7 @@ const OrderSubmission = ({
             variant="outlined"
             type="number"
             fullWidth
-            value={calculateTotalPrice() - Number(orderFinalData.advance)}
+            value={calculateTotalPrice() - Number(advance)}
             inputProps={{ readOnly: true }}
           />
         </Grid>

@@ -8,7 +8,6 @@ import {
 } from "../product/productApi";
 import {
   NewOrderTabConstant,
-  ProductType,
   itemTypeSelectList,
 } from "../../constants/application";
 import {
@@ -27,32 +26,18 @@ import {
 import "./index.css";
 import { useSelector } from "react-redux";
 import { getOrderReducer } from "./orderSlice";
+import {
+  newOrderInitialState,
+  orderInfoInitialState,
+  showingStateInitialState,
+} from "./orderConstant";
 
 const NewOrder = () => {
   const { setDrawerText } = useOutletContext();
-
-  const [newOrderState, setNewOrderState] = useState({
-    orderNo: 0,
-    productType: "",
-    productList: [],
-    selectedProduct: "",
-    productFetchStatus: STATUS.IDLE,
-    productInfoFetchStatus: STATUS.IDLE,
-  });
-  const [orderInfo, setOrderInfo] = useState({
-    _id: "",
-    productName: "",
-    productType: ProductType.Gents,
-    productMeasurements: [],
-    productDescriptions: [],
-    clothPrice: 0,
-    makingCost: 0,
-    quantity: 1,
-  });
-  const [showProductType, setShowProductType] = useState(true);
-  const [showProductMeasurements, setShowProductMeasurements] = useState(false);
+  const [newOrderState, setNewOrderState] = useState(newOrderInitialState);
+  const [orderInfo, setOrderInfo] = useState(orderInfoInitialState);
+  const [showingState, setShowingState] = useState(showingStateInitialState);
   const [tabValue, setTabValue] = useState(NewOrderTabConstant.ProductList);
-
 
   const { measuredItems } = useSelector(getOrderReducer);
 
@@ -65,6 +50,8 @@ const NewOrder = () => {
       ...prev,
       productInfoFetchStatus: STATUS.ERROR,
     }));
+    // setShowProductMeasurements(false);
+    setShowingState((prev) => ({ ...prev, productMeasurement: false }));
     console.log(error);
   };
 
@@ -93,6 +80,8 @@ const NewOrder = () => {
   };
 
   const handleProductSelectChange = async (e) => {
+    // setShowProductMeasurements(true);
+    setShowingState((prev) => ({ ...prev, productMeasurement: true }));
     setNewOrderState((prev) => ({
       ...prev,
       selectedProduct: e.target.value,
@@ -101,10 +90,11 @@ const NewOrder = () => {
     const response = await getUserProductById(e.target.value).catch((e) =>
       handleProductInfoFetchError(e.response)
     );
+
     if (response) {
       const { data } = response;
-      const { productName, measurements, descriptions, orderNo, productType } =
-        data;
+      const { productName, measurements, descriptions, productType } = data;
+
       setNewOrderState((prev) => ({
         ...prev,
         productInfoFetchStatus: STATUS.SUCCESS,
@@ -112,7 +102,6 @@ const NewOrder = () => {
 
       setOrderInfo((prev) => ({
         ...prev,
-        orderNo,
         productName,
         productType,
         productMeasurements: prepareNewOrderMeasurementList(measurements),
@@ -134,8 +123,10 @@ const NewOrder = () => {
           </div>
           {tabValue === NewOrderTabConstant.ProductList && (
             <MeasuredProductList
-              setShowProductType={setShowProductType}
+              setShowingState={setShowingState}
               setNewOrderState={setNewOrderState}
+              showingState={showingState}
+              setOrderInfo={setOrderInfo}
             />
           )}
           {tabValue === NewOrderTabConstant.OrderInfo && <OrderSubmission />}
@@ -145,8 +136,9 @@ const NewOrder = () => {
           {tabValue === NewOrderTabConstant.CustomerCopy && <CustomerCopy />}
         </div>
       )}
-      {showProductType && (
-        <React.Fragment>
+
+      <React.Fragment>
+        {showingState.productType && (
           <div className="py-2 flex g-3">
             <Dropdown
               value={newOrderState.productType}
@@ -167,6 +159,8 @@ const NewOrder = () => {
               <CircularProgress />
             )}
           </div>
+        )}
+        {showingState.productMeasurement && (
           <div className="py-2">
             {newOrderState.productInfoFetchStatus === STATUS.LOADING && (
               <div className="flex justify-content-center">
@@ -178,13 +172,15 @@ const NewOrder = () => {
                 <Measurement
                   orderInfo={orderInfo}
                   setOrderInfo={setOrderInfo}
-                  setShowProductType={setShowProductType}
+                  setShowingState={setShowingState}
+                  showingState={showingState}
+                  setNewOrderState={setNewOrderState}
                 />
               </React.Fragment>
             )}
           </div>
-        </React.Fragment>
-      )}
+        )}
+      </React.Fragment>
     </div>
   );
 };
