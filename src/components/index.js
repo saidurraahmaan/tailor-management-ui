@@ -5,6 +5,7 @@ import PrivateRoute from "./primitives/PrivateRoute";
 import UnAuthorized from "./primitives/UnAuthorized";
 import InvoiceHeader from "./patterns/InvoiceHeader";
 import OrderCustomerInfo from "./patterns/OrderCustomerInfo";
+import OrderInfoProduction from "./patterns/OrderInfoProduction";
 import ResponsiveCalendar from "./patterns/ResponsiveCalendar";
 
 export {
@@ -16,4 +17,5 @@ export {
   ApplicationLayout,
   OrderCustomerInfo,
   ResponsiveCalendar,
+  OrderInfoProduction,
 };

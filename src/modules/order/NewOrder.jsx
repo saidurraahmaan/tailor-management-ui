@@ -31,6 +31,7 @@ import {
   orderInfoInitialState,
   showingStateInitialState,
 } from "./orderConstant";
+import { getOrderNo } from "./orderApi";
 
 const NewOrder = () => {
   const { setDrawerText } = useOutletContext();
@@ -113,6 +114,14 @@ const NewOrder = () => {
   useEffect(() => {
     setDrawerText("New Order");
   }, [setDrawerText]);
+
+  useEffect(() => {
+    const fetchOrderNo = async () => {
+      const response = await getOrderNo().catch((e) => console.log(e));
+      console.log({ response });
+    };
+    fetchOrderNo();
+  }, []);
 
   return (
     <div>
