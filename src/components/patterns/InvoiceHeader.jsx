@@ -20,12 +20,12 @@ const InvoiceHeader = () => {
         {user.storeAddress}
       </Grid>
 
-      <Grid className="py-1" xs={6}>
-        <span className="font-w-700">Mobile:</span> {user.phone}
+      <Grid className="py-1 text-center" xs={12}>
+        <span className="font-w-700">মোবাইল:</span> {user.phone}
       </Grid>
-      <Grid className="py-1" xs={6}>
+      {/* <Grid className="py-1" xs={6}>
         <span className="font-w-700">Email:</span> {user.email}
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 };
