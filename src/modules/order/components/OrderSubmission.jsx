@@ -1,9 +1,12 @@
 import React from "react";
-import { Button, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import ResponsiveCalendar from "../../../components/patterns/ResponsiveCalendar";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrderReducer, updateOrderField } from "../orderSlice";
+import { LoadingButton } from "@mui/lab";
+import { STATUS } from "../../../constants/fetch";
+import { placeNewOrder } from "../orderApi";
 
 const OrderSubmission = () => {
   const dispatch = useDispatch();
@@ -15,6 +18,7 @@ const OrderSubmission = () => {
     advance,
     mobileNumber,
     measuredItems,
+    status,
   } = useSelector(getOrderReducer);
 
   const calculateTotalPrice = () => {
@@ -36,6 +40,19 @@ const OrderSubmission = () => {
 
   const handleChange = ({ field, value }) => {
     dispatch(updateOrderField({ field, value }));
+  };
+
+  const handlePlaceOrderClick = async () => {
+    const orderData = {
+      customerName,
+      delivery,
+      advance,
+      mobileNumber,
+      discount,
+      measuredItems,
+    };
+    // console.log(orderData);
+    dispatch(placeNewOrder(orderData));
   };
 
   return (
@@ -127,9 +144,14 @@ const OrderSubmission = () => {
         </Grid>
       </Grid>
       <div className="py-2 flex justify-content-end">
-        <Button variant="contained" color="secondary">
+        <LoadingButton
+          variant="contained"
+          color="secondary"
+          loading={status === STATUS.LOADING}
+          onClick={handlePlaceOrderClick}
+        >
           Place the order
-        </Button>
+        </LoadingButton>
       </div>
     </>
   );
