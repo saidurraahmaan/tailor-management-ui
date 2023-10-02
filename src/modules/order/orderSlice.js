@@ -29,6 +29,13 @@ const orderSlice = createSlice({
         state.status = STATUS.LOADING;
       })
       .addCase(placeNewOrder.fulfilled, (state) => {
+        state.orderNo = initialState.orderNo;
+        state.customerName = initialState.customerName;
+        state.advance = initialState.advance;
+        state.delivery = initialState.delivery;
+        state.measuredItems = initialState.measuredItems;
+        state.mobileNumber = initialState.mobileNumber;
+        state.discount = initialState.discount;
         state.status = STATUS.SUCCESS;
       })
       .addCase(placeNewOrder.rejected, (state, action) => {

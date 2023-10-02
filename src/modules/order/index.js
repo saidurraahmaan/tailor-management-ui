@@ -8,6 +8,7 @@ import ProductionCopy from "./components/ProductionCopy";
 import OrderSubmission from "./components/OrderSubmission";
 import DescriptionBoxes from "./components/DescriptionBoxes";
 import MeasurementFields from "./components/MeasurementFields";
+import OrderListDataTable from "./components/OrderListDataTable";
 import MeasuredProductList from "./components/MeasuredProductList";
 
 export {
@@ -21,5 +22,6 @@ export {
   OrderSubmission,
   DescriptionBoxes,
   MeasurementFields,
+  OrderListDataTable,
   MeasuredProductList,
 };
