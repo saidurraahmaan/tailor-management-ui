@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import dayjs from "dayjs";
 import { STATUS } from "../../constants/fetch";
+import { placeNewOrder } from "./orderApi";
 
 const initialState = {
   orderNo: 0,
@@ -22,7 +23,19 @@ const orderSlice = createSlice({
       state[field] = value;
     },
   },
-  extraReducers: (builder) => {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(placeNewOrder.pending, (state) => {
+        state.status = STATUS.LOADING;
+      })
+      .addCase(placeNewOrder.fulfilled, (state) => {
+        state.status = STATUS.SUCCESS;
+      })
+      .addCase(placeNewOrder.rejected, (state, action) => {
+        state.status = STATUS.ERROR;
+        state.error = action.payload.message;
+      });
+  },
 });
 
 export const getOrderReducer = (state) => state.order;
