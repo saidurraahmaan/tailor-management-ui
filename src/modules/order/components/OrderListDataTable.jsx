@@ -30,7 +30,8 @@ const sampleData = [
   },
   // Add more data as needed
 ];
-export default function OrderListDataTable() {
+
+export default function OrderListDataTable({orderDataList}) {
   const [orderList, setOrderList] = useState([]);
 
   // Otherwise filter will be applied on fields such as the hidden column id
