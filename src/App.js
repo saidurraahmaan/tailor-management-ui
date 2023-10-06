@@ -6,7 +6,7 @@ import {
   PrivateRoute,
   UnAuthorized,
 } from "./components";
-import { OrderList, NewOrder } from "./modules/order";
+import { OrderList, NewOrder, OrderDetails } from "./modules/order";
 import { NewProduct, ProductList } from "./modules/product";
 import { Signup, Signin, RegistrationSuccess } from "./modules/auth";
 
@@ -28,6 +28,14 @@ function App() {
             element={
               <PrivateRoute>
                 <NewOrder />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={"/order/details/:id"}
+            element={
+              <PrivateRoute>
+                <OrderDetails />
               </PrivateRoute>
             }
           />
