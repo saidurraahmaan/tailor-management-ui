@@ -5,6 +5,7 @@ export const APIROUTES = {
   register: "/auth/register",
   getOrderNo: "/order/getOrderNo",
   getUserAllProduct: "/product/byUser",
+  getOrderDetailsById: (id) => `/order/${id}`,
   getUserProductById: (id) => `/product/${id}`,
   getUserProductByType: (type) => `/product/type/${type}`,
 };
@@ -18,4 +19,5 @@ export const APPROUTES = {
   newOrder: "/order/new",
   newProduct: "/product/new",
   registrationSuccess: "/signup/success",
+  orderDetails: (id) => `/order/details/${id}`,
 };

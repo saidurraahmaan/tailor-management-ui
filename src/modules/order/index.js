@@ -1,5 +1,6 @@
 import NewOrder from "./NewOrder";
 import OrderList from "./OrderList";
+import OrderDetails from "./OrderDetails";
 import Dropdown from "./components/Dropdown";
 import OrderTab from "./components/OrderTab";
 import CustomerCopy from "./components/CustomerCopy";
@@ -16,8 +17,9 @@ export {
   OrderTab,
   Dropdown,
   OrderList,
-  CustomerCopy,
   Measurement,
+  CustomerCopy,
+  OrderDetails,
   ProductionCopy,
   OrderSubmission,
   DescriptionBoxes,

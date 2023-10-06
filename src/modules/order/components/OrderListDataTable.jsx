@@ -6,6 +6,8 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { dateTimeFormat } from "../../../constants/dateTimeFormat";
 import { Button } from "@mui/material";
+import { useNavigate } from "react-router";
+import { APPROUTES } from "../../../constants/routes";
 
 const VISIBLE_FIELDS = [
   { field: "orderNo", header: "Order No" },
@@ -41,6 +43,7 @@ const VISIBLE_FIELDS = [
 // ];
 
 export default function OrderListDataTable({ orderDataList }) {
+  const navigate = useNavigate();
   // const [orderList, setOrderList] = useState([]);
 
   // Otherwise filter will be applied on fields such as the hidden column id
@@ -69,7 +72,12 @@ export default function OrderListDataTable({ orderDataList }) {
           if (obj.field === "action") {
             return (
               <div>
-                <Button variant="contained" onClick={() => alert("Edit")}>
+                <Button
+                  variant="contained"
+                  onClick={() =>
+                    navigate(APPROUTES.orderDetails(params.row.id))
+                  }
+                >
                   Details
                 </Button>
               </div>
@@ -78,7 +86,7 @@ export default function OrderListDataTable({ orderDataList }) {
           return params.value;
         },
       })),
-    []
+    [navigate]
   );
 
   return (
