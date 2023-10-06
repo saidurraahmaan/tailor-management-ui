@@ -1,3 +1,3 @@
 export const dateTimeFormat = {
-    orderGridDate:"D MMM YYYY"
-}
+  orderGridDate: "YYYY-MM-DD",
+};

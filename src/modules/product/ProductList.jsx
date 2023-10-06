@@ -36,8 +36,9 @@ const ProductList = () => {
           Add new product
         </Button>
       </div>
-      {fetchStatus === STATUS.SUCCESS &&
-        responseData.length === 0(<>You have no product</>)}{" "}
+      {fetchStatus === STATUS.SUCCESS && responseData.length === 0 && (
+        <>You have no product</>
+      )}
       {fetchStatus === STATUS.SUCCESS && responseData.length > 0 && (
         <Grid container spacing={2} alignItems={"center"}>
           <Grid xs={3}>ProductName</Grid>

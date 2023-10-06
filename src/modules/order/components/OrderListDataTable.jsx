@@ -5,6 +5,7 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import CancelIcon from "@mui/icons-material/Cancel";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { dateTimeFormat } from "../../../constants/dateTimeFormat";
+import { Button } from "@mui/material";
 
 const VISIBLE_FIELDS = [
   { field: "orderNo", header: "Order No" },
@@ -14,6 +15,7 @@ const VISIBLE_FIELDS = [
   { field: "orderDate", header: "Order Date" },
   { field: "mobileNumber", header: "Mobile Number" },
   { field: "isDelivered", header: "isDelivered" },
+  { field: "action", header: "actions" },
 ];
 
 // const sampleData = [
@@ -64,6 +66,15 @@ export default function OrderListDataTable({ orderDataList }) {
               <CancelIcon style={{ color: "red" }} />
             );
           }
+          if (obj.field === "action") {
+            return (
+              <div>
+                <Button variant="contained" onClick={() => alert("Edit")}>
+                  Details
+                </Button>
+              </div>
+            );
+          }
           return params.value;
         },
       })),
@@ -75,7 +86,7 @@ export default function OrderListDataTable({ orderDataList }) {
       <DataGrid
         rows={orderDataList}
         columns={columns}
-        disableColumnFilter
+        disableRowSelectionOnClick
         disableColumnSelector
         disableDensitySelector
         slots={{ toolbar: GridToolbar }}
