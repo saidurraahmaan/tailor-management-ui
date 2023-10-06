@@ -1,39 +1,82 @@
-import * as React from "react";
+import React from "react";
+import dayjs from "dayjs";
 import Box from "@mui/material/Box";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import CancelIcon from "@mui/icons-material/Cancel";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import { dateTimeFormat } from "../../../constants/dateTimeFormat";
+import { Button } from "@mui/material";
 
-const VISIBLE_FIELDS = ["orderNo", "customerName", "productName", "deliveryDate", "orderDate"];
+const VISIBLE_FIELDS = [
+  { field: "orderNo", header: "Order No" },
+  { field: "customerName", header: "Customer Name" },
+  { field: "productName", header: "Product Name" },
+  { field: "deliveryDate", header: "Delivery Date" },
+  { field: "orderDate", header: "Order Date" },
+  { field: "mobileNumber", header: "Mobile Number" },
+  { field: "isDelivered", header: "isDelivered" },
+  { field: "action", header: "actions" },
+];
 
+// const sampleData = [
+//   {
+//     id: 1,
+//     orderNo: 12345,
+//     customerName: "John Doe",
+//     productName: ["go", "lol"],
+//     deliveryDate: "2023-10-10",
+//     orderDate: "2023-09-30",
+//     isDelivered: false,
+//   },
+//   {
+//     id: 2,
+//     orderNo: 54321,
+//     customerName: "Jane Smith",
+//     productName: "B",
+//     deliveryDate: "2023-10-15",
+//     orderDate: "2023-09-28",
+//     isDelivered: true,
+//   },
+//   // Add more data as needed
+// ];
 
-const sampleData = [
-    {
-      id: 1,
-      orderNo: 12345,
-      customerName: "John Doe",
-      productName: "Product A",
-      deliveryDate: "2023-10-10",
-      orderDate: "2023-09-30",
-    },
-    {
-      id: 2,
-      orderNo: 54321,
-      customerName: "Jane Smith",
-      productName: "Product B",
-      deliveryDate: "2023-10-15",
-      orderDate: "2023-09-28",
-    },
-    // Add more data as needed
-  ];
-export default function OrderListDataTable() {
-    
+export default function OrderListDataTable({ orderDataList }) {
+  // const [orderList, setOrderList] = useState([]);
 
   // Otherwise filter will be applied on fields such as the hidden column id
   const columns = React.useMemo(
     () =>
-      VISIBLE_FIELDS.map((field) => ({
-        field,
-        headerName: field,
+      VISIBLE_FIELDS.map((obj) => ({
+        field: obj.field,
+        headerName: obj.header,
         flex: 1,
+        headerAlign: "center",
+        align: "center",
+        renderCell: (params) => {
+          if (obj.field === "productName" && Array.isArray(params.value)) {
+            return params.value.join(",");
+          }
+          if (obj.field.includes("Date")) {
+            return dayjs(params.value).format(dateTimeFormat.orderGridDate);
+          }
+          if (obj.field === "isDelivered") {
+            return params.value ? (
+              <CheckCircleIcon style={{ color: "green" }} />
+            ) : (
+              <CancelIcon style={{ color: "red" }} />
+            );
+          }
+          if (obj.field === "action") {
+            return (
+              <div>
+                <Button variant="contained" onClick={() => alert("Edit")}>
+                  Details
+                </Button>
+              </div>
+            );
+          }
+          return params.value;
+        },
       })),
     []
   );
@@ -41,9 +84,9 @@ export default function OrderListDataTable() {
   return (
     <Box sx={{ height: 400, width: 1 }}>
       <DataGrid
-        rows={sampleData}
+        rows={orderDataList}
         columns={columns}
-        disableColumnFilter
+        disableRowSelectionOnClick
         disableColumnSelector
         disableDensitySelector
         slots={{ toolbar: GridToolbar }}

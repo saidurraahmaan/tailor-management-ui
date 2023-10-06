@@ -6,12 +6,13 @@ import { APIROUTES, APPROUTES } from "../../constants/routes";
 import ProductListDetails from "./components/ProductListDetails";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import CircularWithValueLabel from "../../components/primitives/CircularLoader";
+import { STATUS } from "../../constants/fetch";
 
 const ProductList = () => {
   const navigate = useNavigate();
   const { setDrawerText } = useOutletContext();
 
-  const { loading, responseData } = useApiHook(
+  const { fetchStatus, responseData } = useApiHook(
     "get",
     APIROUTES.getUserAllProduct
   );
@@ -20,7 +21,7 @@ const ProductList = () => {
     setDrawerText("Product List");
   }, [setDrawerText]);
 
-  if (loading) {
+  if (fetchStatus === STATUS.LOADING) {
     return <CircularWithValueLabel />;
   }
 
@@ -35,11 +36,10 @@ const ProductList = () => {
           Add new product
         </Button>
       </div>
-      {!responseData ? (
-        <></>
-      ) : !responseData.length ? (
+      {fetchStatus === STATUS.SUCCESS && responseData.length === 0 && (
         <>You have no product</>
-      ) : (
+      )}
+      {fetchStatus === STATUS.SUCCESS && responseData.length > 0 && (
         <Grid container spacing={2} alignItems={"center"}>
           <Grid xs={3}>ProductName</Grid>
           <Grid xs={3}>Type</Grid>
