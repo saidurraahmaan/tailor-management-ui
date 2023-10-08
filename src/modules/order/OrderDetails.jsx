@@ -13,14 +13,18 @@ const OrderDetails = () => {
     "get",
     APIROUTES.getOrderDetailsById(id)
   );
-
+  console.log({ responseData });
   useEffect(() => {
     setDrawerText("Order Details");
   }, [setDrawerText]);
   if (fetchStatus === STATUS.LOADING) {
     return <CircularWithValueLabel />;
   }
-  return <div>{fetchStatus === STATUS.SUCCESS && responseData}</div>;
+  return (
+    <div>
+      {fetchStatus === STATUS.SUCCESS && responseData && <div>DAta</div>}
+    </div>
+  );
 };
 
 export default OrderDetails;
