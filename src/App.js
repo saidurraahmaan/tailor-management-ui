@@ -6,7 +6,12 @@ import {
   PrivateRoute,
   UnAuthorized,
 } from "./components";
-import { OrderList, NewOrder, OrderDetails } from "./modules/order";
+import {
+  OrderList,
+  NewOrder,
+  OrderDetails,
+  DeliveryPage,
+} from "./modules/order";
 import { NewProduct, ProductList } from "./modules/product";
 import { Signup, Signin, RegistrationSuccess } from "./modules/auth";
 
@@ -16,10 +21,18 @@ function App() {
       <Routes>
         <Route element={<ApplicationLayout />}>
           <Route
-            path="/"
+            path={APPROUTES.orderList}
             element={
               <PrivateRoute>
                 <OrderList />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/order/delivery/:id"
+            element={
+              <PrivateRoute>
+                <DeliveryPage />
               </PrivateRoute>
             }
           />

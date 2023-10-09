@@ -28,7 +28,7 @@ const Signin = () => {
     if (response) {
       setStatus(STATUS.SUCCESS);
       dispatch(successfulLogin(response.data));
-      navigate(APPROUTES.home);
+      navigate(APPROUTES.orderList);
     }
   };
 

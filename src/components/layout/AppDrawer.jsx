@@ -76,7 +76,7 @@ export default function PermanentDrawerLeft({
         <Divider />
         <List>
           <ListItem disablePadding>
-            <ListItemButton onClick={() => handleClick(APPROUTES.home)}>
+            <ListItemButton onClick={() => handleClick(APPROUTES.orderList)}>
               <ListItemIcon>
                 <ListIcon />
               </ListItemIcon>

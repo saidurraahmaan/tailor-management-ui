@@ -11,6 +11,7 @@ import DescriptionBoxes from "./components/DescriptionBoxes";
 import MeasurementFields from "./components/MeasurementFields";
 import OrderListDataTable from "./components/OrderListDataTable";
 import MeasuredProductList from "./components/MeasuredProductList";
+import DeliveryPage from "./components/DeliveryPage";
 
 export {
   NewOrder,
@@ -20,6 +21,7 @@ export {
   Measurement,
   CustomerCopy,
   OrderDetails,
+  DeliveryPage,
   ProductionCopy,
   OrderSubmission,
   DescriptionBoxes,
