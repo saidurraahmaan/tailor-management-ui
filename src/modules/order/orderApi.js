@@ -10,6 +10,10 @@ export const newOrder = (order) => {
   return HttpInstance.post(APIROUTES.placeOrder, order);
 };
 
+export const updateOrder = (updatedOrderData, id) => {
+  return HttpInstance.put(APIROUTES.updateOrderById(id), updatedOrderData);
+};
+
 export const userOrderList = () => {
   return HttpInstance.get(APIROUTES.placeOrder);
 };
