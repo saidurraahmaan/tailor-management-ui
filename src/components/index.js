@@ -1,4 +1,6 @@
+import Toaster from "./patterns/Toaster";
 import NotFound from "./primitives/NotFound";
+import AppModal from "./patterns/AppModal";
 import ErrorPage from "./primitives/ErrorPage";
 import ApplicationLayout from "./layout/AppLayout";
 import PrivateRoute from "./primitives/PrivateRoute";
@@ -9,7 +11,9 @@ import OrderInfoProduction from "./patterns/OrderInfoProduction";
 import ResponsiveCalendar from "./patterns/ResponsiveCalendar";
 
 export {
+  Toaster,
   NotFound,
+  AppModal,
   ErrorPage,
   UnAuthorized,
   PrivateRoute,

@@ -128,7 +128,11 @@ const NewOrder = () => {
       {measuredItems.length > 0 && (
         <div className="py-2">
           <div className="py-1 flex justify-content-center">
-            <OrderTab setValue={setTabValue} value={tabValue} />
+            <OrderTab
+              setValue={setTabValue}
+              value={tabValue}
+              setShowingState={setShowingState}
+            />
           </div>
           {tabValue === NewOrderTabConstant.ProductList && (
             <MeasuredProductList

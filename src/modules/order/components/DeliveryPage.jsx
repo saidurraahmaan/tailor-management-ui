@@ -9,7 +9,13 @@ import CircularWithValueLabel from "../../../components/primitives/CircularLoade
 const DeliveryPage = () => {
   const { id } = useParams();
   const { setDrawerText } = useOutletContext();
-  const { fetchStatus } = useApiHook("get", APIROUTES.getOrderDetailsById(id));
+  const { fetchStatus, responseData } = useApiHook(
+    "get",
+    APIROUTES.getOrderDetailsById(id)
+  );
+
+  console.log(responseData);
+
   useEffect(() => {
     setDrawerText("Order Delivery");
   }, [setDrawerText]);
@@ -20,12 +26,19 @@ const DeliveryPage = () => {
 
   return (
     <div>
-      <div className="flex align-items-center g-2 flex-column">
-        <div>Are you sure?</div>
-        <div>
-          <Button variant="contained">Yes</Button>
+      {fetchStatus === STATUS.SUCCESS && responseData.isDelivered && (
+        <div className="flex align-items-center g-2 flex-column">
+          <div>অর্ডারটি ডেলিভারি করা হয়েছে।</div>
+          <div>
+            <Button variant="contained">ডেলিভারি কপি ডাউনলোড করুন</Button>
+          </div>
         </div>
-      </div>
+      )}
+      {fetchStatus === STATUS.SUCCESS && !responseData.isDelivered && (
+        <div className="flex align-items-center g-2 flex-column">
+          <div>এই অর্ডারটি এখনো ডেলিভারি করা হয় নি!!</div>
+        </div>
+      )}
     </div>
   );
 };

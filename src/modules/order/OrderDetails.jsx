@@ -1,31 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import { useOutletContext, useParams, useNavigate } from "react-router";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import useApiHook from "../../utils/ApiCustomHook";
-import { APIROUTES, APPROUTES } from "../../constants/routes";
+import { useOutletContext, useParams, useNavigate } from "react-router";
+import { updateOrder } from "./orderApi";
 import { STATUS } from "../../constants/fetch";
+import useApiHook from "../../utils/ApiCustomHook";
+import { Toaster, AppModal } from "../../components";
+import { APIROUTES, APPROUTES } from "../../constants/routes";
 import CircularWithValueLabel from "../../components/primitives/CircularLoader";
 
 const OrderDetails = () => {
-  const { setDrawerText } = useOutletContext();
   const { id } = useParams();
   const navigate = useNavigate();
+  const { setDrawerText } = useOutletContext();
 
   const { fetchStatus, responseData } = useApiHook(
     "get",
     APIROUTES.getOrderDetailsById(id)
   );
 
-  useEffect(() => {
-    setDrawerText("Order Details");
-  }, [setDrawerText]);
-
-  if (fetchStatus === STATUS.LOADING) {
-    return <CircularWithValueLabel />;
-  }
+  const [openModal, setModalOpen] = useState(false);
+  const [status, setStatus] = useState(STATUS.IDLE);
 
   const calculateTotalPrice = () => {
     let totalCost = 0;
@@ -36,13 +33,52 @@ const OrderDetails = () => {
         (Number(element.makingCost) + Number(element.clothPrice)) *
           Number(element.quantity);
     });
-    // const totalCost = Number(makingCost) + Number(orderFinalData.clothPrice);
-    // const afterQuantity = Number(totalCost) * Number(orderFinalData.quantity);
 
     const discountAmount = (Number(discount) / 100) * totalCost;
 
     return totalCost - discountAmount;
   };
+
+  const handleModalOk = async () => {
+    setStatus(STATUS.LOADING);
+
+    const updatedData = {
+      isDelivered: true,
+      orderNo: responseData.orderNo,
+      advance: responseData.advance,
+      delivery: responseData.delivery,
+      discount: responseData.discount,
+      customerName: responseData.customerName,
+      mobileNumber: responseData.mobileNumber,
+      measuredItems: responseData.measuredItems,
+      orderPlacedBy: responseData.orderPlacedBy,
+    };
+    setModalOpen(false);
+
+    const response = await updateOrder(updatedData, responseData._id).catch(
+      (e) => setStatus(STATUS.ERROR)
+    );
+
+    if (response) {
+      setStatus(STATUS.SUCCESS);
+      navigate(APPROUTES.deliveryPage(responseData._id));
+    }
+  };
+
+  const handleToasterClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setStatus(STATUS.IDLE);
+  };
+
+  useEffect(() => {
+    setDrawerText("Order Details");
+  }, [setDrawerText]);
+
+  if (fetchStatus === STATUS.LOADING) {
+    return <CircularWithValueLabel />;
+  }
 
   return (
     <div>
@@ -50,7 +86,7 @@ const OrderDetails = () => {
         <div>
           <Grid container spacing={2} textAlign={"center"}>
             <Grid xs={2}>
-              <div className="pb-1">ওর্ডার নম্বর</div>
+              <div className="pb-1">অর্ডার নম্বর</div>
               <div>{responseData.orderNo}</div>
             </Grid>
             <Grid xs={2}>
@@ -58,7 +94,7 @@ const OrderDetails = () => {
               <div>{responseData.customerName}</div>
             </Grid>
             <Grid xs={2}>
-              <div className="pb-1">ওর্ডারকৃত আইটেম</div>
+              <div className="pb-1">অর্ডারকৃত আইটেম</div>
               {responseData.measuredItems.map((ele) => (
                 <div key={ele._id}>{ele.productName}</div>
               ))}
@@ -84,9 +120,19 @@ const OrderDetails = () => {
                 <div>
                   <Button
                     variant="contained"
-                    onClick={() => navigate(APPROUTES.deliveryPage(id))}
+                    onClick={() => setModalOpen(true)}
                   >
                     ডেলিভারি করুন
+                  </Button>
+                </div>
+              )}
+              {responseData.isDelivered && (
+                <div>
+                  <Button
+                    variant="contained"
+                    onClick={() => navigate(APPROUTES.deliveryPage(id))}
+                  >
+                    ডেলিভারি স্লিপ
                   </Button>
                 </div>
               )}
@@ -95,6 +141,21 @@ const OrderDetails = () => {
           <Button variant="contained">Preview Production Copy</Button>
         </div>
       )}
+      <AppModal
+        open={openModal}
+        title={"Delivery the product"}
+        handleClose={() => setModalOpen(false)}
+        handleOk={handleModalOk}
+      >
+        আপনি নিশ্চিত যে ডেলিভারি দিচ্ছেন?
+      </AppModal>
+
+      <Toaster
+        severity={"error"}
+        message={`Please try again`}
+        open={status === STATUS.ERROR}
+        handleClose={handleToasterClose}
+      />
     </div>
   );
 };
