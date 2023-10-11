@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { Button, Divider } from "@mui/material";
 import generatePDF from "react-to-pdf";
-import { InvoiceHeader, OrderInfoProduction } from "../../../components";
+import { ProductionCopyHeader, OrderInfoProduction } from "../../../components";
 
 const ProductionCopy = () => {
   const targetRef = useRef();
@@ -10,7 +10,7 @@ const ProductionCopy = () => {
     <div>
       <div className="flex justify-content-center" ref={targetRef}>
         <div className="production-container wd-100">
-          <InvoiceHeader />
+          <ProductionCopyHeader />
           <Divider sx={{ backgroundColor: "aqua", marginBlock: "8px" }} />
           <OrderInfoProduction />
         </div>
