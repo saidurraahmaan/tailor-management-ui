@@ -10,19 +10,19 @@ const OrderInfoProduction = ({
   return (
     <Grid className="font-14" container spacing={2}>
       <Grid xs={6}>
-        <span className="font-w-700">অর্ডার নং :</span>
+        <span className="font-w-700">অর্ডার নং: </span>
         {orderNo}
       </Grid>
       <Grid xs={6}>
-        <span className="font-w-700">ডেলিভারি তারিখ :</span>
+        <span className="font-w-700">ডেলিভারি তারিখ: </span>
         {deliveryDate}
       </Grid>
       <Grid xs={6}>
-        <span className="font-w-700">আইটেমের নাম :</span>
+        <span className="font-w-700">আইটেমের নাম: </span>
         {productName}
       </Grid>
       <Grid xs={6}>
-        <span className="font-w-700">কোয়ান্টিটি :</span>
+        <span className="font-w-700">কোয়ান্টিটি: </span>
         {quantity}
       </Grid>
     </Grid>

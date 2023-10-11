@@ -4,6 +4,12 @@
   margin: 8px;
   max-width: 750px;
 }
+.customer-copy-container{
+  /* border: 1px solid black; */
+  padding: 4px;
+  margin: 4px;
+  max-width: 400px;
+}
 
 .font-24{
   font-size: 24px;
