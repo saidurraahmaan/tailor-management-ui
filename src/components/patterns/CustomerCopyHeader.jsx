@@ -8,6 +8,7 @@ const CustomerCopyHeader = () => {
   const { user } = useSelector(authInformation);
 
   return (
+    
     <Grid className="font-14" container spacing={2}>
       <Grid
         className="py-1 font-20 font-w-700 text-center"
