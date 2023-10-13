@@ -10,11 +10,12 @@ const OrderInfoCustomer = ({ orderNo, deliveryDate, orderDate }) => {
       </Grid>
       <Grid xs={6}>
         <span className="font-w-700">অর্ডার তারিখ: </span>
-        {deliveryDate}
+        {orderDate}
       </Grid>
       <Grid xs={6}>
         <span className="font-w-700">ডেলিভারি তারিখ: </span>
-        {orderDate}
+
+        {deliveryDate}
       </Grid>
     </Grid>
   );

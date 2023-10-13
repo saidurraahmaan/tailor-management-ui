@@ -24,8 +24,8 @@ import {
   prepareNewOrderMeasurementList,
 } from "../../utils/helperFunction";
 import "./index.css";
-import { useSelector } from "react-redux";
-import { getOrderReducer } from "./orderSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { getOrderReducer, updateOrderField } from "./orderSlice";
 import {
   newOrderInitialState,
   orderInfoInitialState,
@@ -35,6 +35,7 @@ import { getOrderNo } from "./orderApi";
 
 const NewOrder = () => {
   const { setDrawerText } = useOutletContext();
+  const dispatch = useDispatch();
   const [newOrderState, setNewOrderState] = useState(newOrderInitialState);
   const [orderInfo, setOrderInfo] = useState(orderInfoInitialState);
   const [showingState, setShowingState] = useState(showingStateInitialState);
@@ -118,10 +119,11 @@ const NewOrder = () => {
   useEffect(() => {
     const fetchOrderNo = async () => {
       const response = await getOrderNo().catch((e) => console.log(e));
-      console.log({ response });
+      
+      dispatch(updateOrderField({ field: "orderNo", value: response.data }));
     };
     fetchOrderNo();
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>

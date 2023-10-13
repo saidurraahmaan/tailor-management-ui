@@ -9,10 +9,12 @@ import {
 } from "../../../components";
 import { getOrderReducer } from "../orderSlice";
 import dayjs from "dayjs";
+import { measuredItemsToCustomerOrderItems } from "../../../utils/objectConverter";
 
 const CustomerCopy = () => {
   const targetRef = useRef();
-  const { orderNo, delivery } = useSelector(getOrderReducer);
+  const { orderNo, delivery, measuredItems, advance, discount } =
+    useSelector(getOrderReducer);
 
   return (
     <div>
@@ -26,7 +28,11 @@ const CustomerCopy = () => {
             orderDate={dayjs().format("D MMM YYYY")}
           />
           <Divider sx={{ backgroundColor: "aqua", marginBlock: "8px" }} />
-          <OrderedItemListCustomer />
+          <OrderedItemListCustomer
+            advance={advance}
+            discount={discount}
+            orderedItems={measuredItemsToCustomerOrderItems(measuredItems)}
+          />
         </div>
       </div>
     </div>
