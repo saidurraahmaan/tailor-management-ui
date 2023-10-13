@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
-import { Button, Divider } from "@mui/material";
-import generatePDF from "react-to-pdf";
+import {  Divider } from "@mui/material";
+// import generatePDF from "react-to-pdf";
 import { ProductionCopyHeader, OrderInfoProduction } from "../../../components";
 
 const ProductionCopy = () => {
@@ -15,14 +15,14 @@ const ProductionCopy = () => {
           <OrderInfoProduction />
         </div>
       </div>
-      <div className="flex justify-content-center py-2">
+      {/* <div className="flex justify-content-center py-2">
         <Button
           variant="contained"
           onClick={() => generatePDF(targetRef, { filename: "page.pdf" })}
         >
           Download Production Copy
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 };
