@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Container, Link, TextField } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { loginUser } from "./authApi";
-import { successfulLogin } from "./authSlice";
+import { authInformation, successfulLogin } from "./authSlice";
 import "./index.css";
 import { STATUS } from "../../constants/fetch";
 import { APPROUTES } from "../../constants/routes";
@@ -14,6 +14,7 @@ const Signin = () => {
   const dispatch = useDispatch();
   const [loginInfo, setLoginInfo] = useState({ username: "", password: "" });
   const [status, setStatus] = useState(STATUS.IDLE);
+  const { isLoggedIn } = useSelector(authInformation);
 
   const handleError = (error) => {
     console.log(error);
@@ -31,6 +32,12 @@ const Signin = () => {
       navigate(APPROUTES.orderList);
     }
   };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate(APPROUTES.orderList);
+    }
+  }, [isLoggedIn, navigate]);
 
   return (
     <Container maxWidth="lg">
