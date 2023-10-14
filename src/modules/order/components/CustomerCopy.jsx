@@ -10,6 +10,7 @@ import {
 import { getOrderReducer } from "../orderSlice";
 import dayjs from "dayjs";
 import { measuredItemsToCustomerOrderItems } from "../../../utils/objectConverter";
+import { dateTimeFormat } from "../../../constants/dateTimeFormat";
 
 const CustomerCopy = () => {
   const [height, setHeight] = useState(0);
@@ -20,19 +21,19 @@ const CustomerCopy = () => {
   useLayoutEffect(() => {
     setHeight(targetRef.current.offsetHeight);
   }, []);
-  console.log(height);
+  // console.log(height);
   return (
     <div>
       <div className="flex justify-content-center" ref={targetRef}>
         <div className="customer-copy-container wd-100">
           <CustomerCopyHeader />
-          <Divider sx={{ backgroundColor: "aqua", marginBlock: "8px" }} />
+          <Divider sx={{ backgroundColor: "aqua", marginBlock: 1 }} />
           <OrderInfoCustomer
             orderNo={orderNo}
-            deliveryDate={dayjs(delivery).format("D MMM YYYY")}
-            orderDate={dayjs().format("D MMM YYYY")}
+            orderDate={dayjs().format(dateTimeFormat.invoiceDate)}
+            deliveryDate={dayjs(delivery).format(dateTimeFormat.invoiceDate)}
           />
-          <Divider sx={{ backgroundColor: "aqua", marginBlock: "8px" }} />
+          <Divider sx={{ backgroundColor: "aqua", marginBlock: 1 }} />
           <OrderedItemListCustomer
             advance={advance}
             discount={discount}
@@ -59,7 +60,7 @@ const CustomerCopy = () => {
             })
           }
         >
-          Download Customer Copy
+          Preview Customer Copy
         </Button>
       </div>
     </div>

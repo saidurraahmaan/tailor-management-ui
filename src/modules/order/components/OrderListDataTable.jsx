@@ -90,7 +90,7 @@ export default function OrderListDataTable({ orderDataList }) {
   );
 
   return (
-    <Box sx={{ height: 400, width: 1 }}>
+    <Box sx={{ width: 1 }}>
       <DataGrid
         rows={orderDataList}
         columns={columns}

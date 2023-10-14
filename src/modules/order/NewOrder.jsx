@@ -25,23 +25,30 @@ import {
 } from "../../utils/helperFunction";
 import "./index.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getOrderReducer, updateOrderField } from "./orderSlice";
+import { useNavigate } from "react-router-dom";
+import {
+  getOrderReducer,
+  resetOrderSlice,
+  updateOrderField,
+} from "./orderSlice";
 import {
   newOrderInitialState,
   orderInfoInitialState,
   showingStateInitialState,
 } from "./orderConstant";
 import { getOrderNo } from "./orderApi";
+import { APPROUTES } from "../../constants/routes";
 
 const NewOrder = () => {
   const { setDrawerText } = useOutletContext();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [newOrderState, setNewOrderState] = useState(newOrderInitialState);
   const [orderInfo, setOrderInfo] = useState(orderInfoInitialState);
   const [showingState, setShowingState] = useState(showingStateInitialState);
   const [tabValue, setTabValue] = useState(NewOrderTabConstant.ProductList);
 
-  const { measuredItems } = useSelector(getOrderReducer);
+  const { measuredItems, status } = useSelector(getOrderReducer);
 
   const handleFetchItemError = (error) => {
     setNewOrderState((prev) => ({ ...prev, productFetchStatus: STATUS.ERROR }));
@@ -119,11 +126,21 @@ const NewOrder = () => {
   useEffect(() => {
     const fetchOrderNo = async () => {
       const response = await getOrderNo().catch((e) => console.log(e));
-      
+
       dispatch(updateOrderField({ field: "orderNo", value: response.data }));
     };
     fetchOrderNo();
+
+    return () => {
+      dispatch(resetOrderSlice());
+    };
   }, [dispatch]);
+
+  useEffect(() => {
+    if (status === STATUS.SUCCESS) {
+      navigate(APPROUTES.orderSuccess);
+    }
+  }, [navigate, status]);
 
   return (
     <div>

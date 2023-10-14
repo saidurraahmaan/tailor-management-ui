@@ -1,5 +1,20 @@
-.customer-order-item-container{
-    border: 1px solid black;
-    border-radius: 3px;
-    padding: 5px;
+.customer-order-item-container {
+  border: 1px solid black;
+  border-radius: 3px;
+  padding: 5px;
+}
+
+.production-order-item-field {
+  padding: 2px 16px;
+  border: 1px solid black;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.production-order-item-value {
+  padding: 2px 16px;
+  border: 1px solid black;
+  border-width: 0px 1px 1px 1px;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
 }

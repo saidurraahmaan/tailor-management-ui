@@ -22,6 +22,9 @@ const orderSlice = createSlice({
       const { field, value } = action.payload;
       state[field] = value;
     },
+    resetOrderSlice(state) {
+      Object.assign(state, initialState);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -46,6 +49,6 @@ const orderSlice = createSlice({
 });
 
 export const getOrderReducer = (state) => state.order;
-export const { updateOrderField } = orderSlice.actions;
+export const { updateOrderField, resetOrderSlice } = orderSlice.actions;
 
 export default orderSlice.reducer;
