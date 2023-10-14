@@ -12,6 +12,7 @@ import CustomerCopyHeader from "./patterns/CustomerCopyHeader";
 import OrderInfoProduction from "./patterns/OrderInfoProduction";
 import ProductionCopyHeader from "./patterns/ProductionCopyHeader";
 import OrderedItemListCustomer from "./patterns/OrderedItemListCustomer";
+import OrderMeasurementProduction from "./patterns/OrderMeasurementProduction";
 
 export {
   Toaster,
@@ -28,4 +29,5 @@ export {
   OrderInfoProduction,
   ProductionCopyHeader,
   OrderedItemListCustomer,
+  OrderMeasurementProduction,
 };

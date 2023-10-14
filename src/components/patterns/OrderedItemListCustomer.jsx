@@ -9,6 +9,8 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const OrderedItemListCustomer = ({ orderedItems, advance, discount }) => {
+  
+  
   const calculateTotalPrice = () => {
     let totalCost = 0;
     orderedItems.forEach((element) => {
@@ -22,6 +24,7 @@ const OrderedItemListCustomer = ({ orderedItems, advance, discount }) => {
 
     return totalCost - discountAmount;
   };
+
   return (
     <div>
       <Grid container spacing={1} className="font-12">

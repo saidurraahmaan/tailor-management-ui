@@ -11,6 +11,7 @@ import {
   NewOrder,
   OrderDetails,
   DeliveryPage,
+  SuccessfulOrder,
 } from "./modules/order";
 import { NewProduct, ProductList } from "./modules/product";
 import { Signup, Signin, RegistrationSuccess } from "./modules/auth";
@@ -33,6 +34,14 @@ function App() {
             element={
               <PrivateRoute>
                 <DeliveryPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={APPROUTES.orderSuccess}
+            element={
+              <PrivateRoute>
+                <SuccessfulOrder />
               </PrivateRoute>
             }
           />
