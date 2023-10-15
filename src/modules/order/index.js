@@ -4,8 +4,10 @@ import OrderDetails from "./OrderDetails";
 import Dropdown from "./components/Dropdown";
 import OrderTab from "./components/OrderTab";
 import Measurement from "./components/Measurement";
+import OrderCustomerCopy from "./OrderCustomerCopy";
 import DeliveryPage from "./components/DeliveryPage";
 import CustomerCopy from "./components/CustomerCopy";
+import OrderProductionCopy from "./OrderProductionCopy";
 import ProductionCopy from "./components/ProductionCopy";
 import OrderSubmission from "./components/OrderSubmission";
 import SuccessfulOrder from "./components/SuccessfulOrder";
@@ -28,6 +30,8 @@ export {
   SuccessfulOrder,
   DescriptionBoxes,
   MeasurementFields,
+  OrderCustomerCopy,
   OrderListDataTable,
+  OrderProductionCopy,
   MeasuredProductList,
 };
