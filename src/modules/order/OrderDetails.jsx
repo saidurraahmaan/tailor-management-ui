@@ -138,7 +138,10 @@ const OrderDetails = () => {
               )}
             </Grid>
           </Grid>
-          <Button variant="contained">Preview Production Copy</Button>
+          <div className="flex justify-content-center pt-4 g-3">
+            <Button variant="contained">Customer Copy</Button>
+            <Button variant="contained" color="secondary">Production Copy</Button>
+          </div>
         </div>
       )}
       <AppModal

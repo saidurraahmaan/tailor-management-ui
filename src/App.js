@@ -12,6 +12,8 @@ import {
   OrderDetails,
   DeliveryPage,
   SuccessfulOrder,
+  OrderCustomerCopy,
+  OrderProductionCopy,
 } from "./modules/order";
 import { NewProduct, ProductList } from "./modules/product";
 import { Signup, Signin, RegistrationSuccess } from "./modules/auth";
@@ -58,6 +60,22 @@ function App() {
             element={
               <PrivateRoute>
                 <OrderDetails />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={"/order/details/customercopy/:id"}
+            element={
+              <PrivateRoute>
+                <OrderCustomerCopy />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={"/order/details/productioncopy/:id"}
+            element={
+              <PrivateRoute>
+                <OrderProductionCopy />
               </PrivateRoute>
             }
           />
