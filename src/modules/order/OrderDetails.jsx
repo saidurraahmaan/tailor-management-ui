@@ -11,6 +11,8 @@ import useApiHook from "../../utils/ApiCustomHook";
 import { Toaster, AppModal } from "../../components";
 import { APIROUTES, APPROUTES } from "../../constants/routes";
 import CircularWithValueLabel from "../../components/primitives/CircularLoader";
+import dayjs from "dayjs";
+import { dateTimeFormat } from "../../constants/dateTimeFormat";
 
 const OrderDetails = () => {
   const { id } = useParams();
@@ -53,6 +55,7 @@ const OrderDetails = () => {
       mobileNumber: responseData.mobileNumber,
       measuredItems: responseData.measuredItems,
       orderPlacedBy: responseData.orderPlacedBy,
+      finalDelivery: dayjs().format(dateTimeFormat.orderGridDate),
     };
     setModalOpen(false);
 
