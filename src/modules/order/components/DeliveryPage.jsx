@@ -6,6 +6,7 @@ import useApiHook from "../../../utils/ApiCustomHook";
 import { APIROUTES } from "../../../constants/routes";
 import { STATUS } from "../../../constants/fetch";
 import CircularWithValueLabel from "../../../components/primitives/CircularLoader";
+import DeliveryCopy from "./DeliveryCopy";
 
 const DeliveryPage = () => {
   const { id } = useParams();
@@ -25,14 +26,18 @@ const DeliveryPage = () => {
   }
 
   return (
-    <div>
+    <>
       {fetchStatus === STATUS.SUCCESS && responseData.isDelivered && (
-        <div className="flex align-items-center g-2 flex-column">
-          <div>অর্ডারটি ডেলিভারি করা হয়েছে।</div>
-          <div>
-            <Button variant="contained">ডেলিভারি কপি দেখুন</Button>
-          </div>
-        </div>
+        <>
+          <div className="text-center">অর্ডারটি ডেলিভারি করা হয়েছে।</div>
+          <DeliveryCopy
+            orderNo={responseData.orderNo}
+            measuredItems={responseData.measuredItems}
+            advance={responseData.advance}
+            delivery={responseData.delivery}
+            discount={responseData.discount}
+          />
+        </>
       )}
       {fetchStatus === STATUS.SUCCESS && !responseData.isDelivered && (
         <div className="flex align-items-center g-2 flex-column">
@@ -49,7 +54,7 @@ const DeliveryPage = () => {
           Back
         </Button>
       </div>
-    </div>
+    </>
   );
 };
 

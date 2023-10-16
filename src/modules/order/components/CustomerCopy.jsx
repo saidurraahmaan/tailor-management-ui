@@ -62,7 +62,7 @@ const CustomerCopy = ({
             })
           }
         >
-          Save Customer Copy
+          Preview Customer Copy
         </Button>
       </div>
     </div>

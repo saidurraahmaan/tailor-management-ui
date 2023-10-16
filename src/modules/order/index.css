@@ -4,17 +4,23 @@
   margin: 8px;
   max-width: 750px;
 }
-.customer-copy-container{
+.customer-copy-container {
   /* border: 1px solid black; */
   padding: 4px;
   margin: 4px;
   max-width: 400px;
 }
 
-.font-24{
+.font-24 {
   font-size: 24px;
 }
 
-.font-32{
-font-size: 32px;
+.font-32 {
+  font-size: 32px;
+}
+.bg-paid-img {
+  background-image: url("../../assets//images/paid.png");
+  background-size: 40% 40%;
+  background-repeat: no-repeat;
+  background-position: center ;
 }
