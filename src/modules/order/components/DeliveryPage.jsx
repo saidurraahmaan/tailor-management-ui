@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Button } from "@mui/material";
-import { useOutletContext, useParams } from "react-router-dom";
+import { useNavigate, useOutletContext, useParams } from "react-router-dom";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import useApiHook from "../../../utils/ApiCustomHook";
 import { APIROUTES } from "../../../constants/routes";
 import { STATUS } from "../../../constants/fetch";
@@ -8,13 +9,12 @@ import CircularWithValueLabel from "../../../components/primitives/CircularLoade
 
 const DeliveryPage = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { setDrawerText } = useOutletContext();
   const { fetchStatus, responseData } = useApiHook(
     "get",
     APIROUTES.getOrderDetailsById(id)
   );
-
-  console.log(responseData);
 
   useEffect(() => {
     setDrawerText("Order Delivery");
@@ -30,7 +30,7 @@ const DeliveryPage = () => {
         <div className="flex align-items-center g-2 flex-column">
           <div>অর্ডারটি ডেলিভারি করা হয়েছে।</div>
           <div>
-            <Button variant="contained">ডেলিভারি কপি ডাউনলোড করুন</Button>
+            <Button variant="contained">ডেলিভারি কপি দেখুন</Button>
           </div>
         </div>
       )}
@@ -39,6 +39,16 @@ const DeliveryPage = () => {
           <div>এই অর্ডারটি এখনো ডেলিভারি করা হয় নি!!</div>
         </div>
       )}
+      <div className="py-2">
+        <Button
+          variant="contained"
+          color="warning"
+          onClick={() => navigate(-1)}
+          startIcon={<ArrowBackIcon />}
+        >
+          Back
+        </Button>
+      </div>
     </div>
   );
 };
