@@ -1,22 +1,24 @@
 import React, { useRef, useLayoutEffect, useState } from "react";
 import { Button, Divider } from "@mui/material";
 import generatePDF from "react-to-pdf";
-import { useSelector } from "react-redux";
 import {
   CustomerCopyHeader,
   OrderInfoCustomer,
   OrderedItemListCustomer,
 } from "../../../components";
-import { getOrderReducer } from "../orderSlice";
 import dayjs from "dayjs";
 import { measuredItemsToCustomerOrderItems } from "../../../utils/objectConverter";
 import { dateTimeFormat } from "../../../constants/dateTimeFormat";
 
-const CustomerCopy = () => {
+const CustomerCopy = ({
+  orderNo,
+  delivery,
+  measuredItems,
+  advance,
+  discount,
+}) => {
   const [height, setHeight] = useState(0);
   const targetRef = useRef();
-  const { orderNo, delivery, measuredItems, advance, discount } =
-    useSelector(getOrderReducer);
 
   useLayoutEffect(() => {
     setHeight(targetRef.current.offsetHeight);
@@ -60,7 +62,7 @@ const CustomerCopy = () => {
             })
           }
         >
-          Preview Customer Copy
+          Save Customer Copy
         </Button>
       </div>
     </div>

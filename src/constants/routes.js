@@ -24,4 +24,6 @@ export const APPROUTES = {
   registrationSuccess: "/signup/success",
   orderDetails: (id) => `/order/details/${id}`,
   deliveryPage: (id) => `/order/delivery/${id}`,
+  orderCustomerCopy: (id) => `/order/customercopy/${id}`,
+  orderProductionCopy: (id) => `/order/productioncopy/${id}`,
 };

@@ -1,22 +1,18 @@
 import React from "react";
 import dayjs from "dayjs";
 import { usePDF } from "react-to-pdf";
-import { useSelector } from "react-redux";
 import { Button, Divider } from "@mui/material";
 import {
   ProductionCopyHeader,
   OrderInfoProduction,
   OrderMeasurementProduction,
 } from "../../../components";
-import { getOrderReducer } from "../orderSlice";
 import { dateTimeFormat } from "../../../constants/dateTimeFormat";
 
-const ProductionCopy = () => {
-  const { orderNo, delivery, measuredItems } = useSelector(getOrderReducer);
+const ProductionCopy = ({ orderNo, delivery, measuredItems }) => {
   const { toPDF, targetRef } = usePDF({
     method: "open",
     filename: "multipage-example.pdf",
-    
   });
 
   return (
@@ -46,7 +42,7 @@ const ProductionCopy = () => {
       </div>
       <div className="flex justify-content-center py-2">
         <Button variant="contained" onClick={toPDF}>
-          Preview Production Copy
+          Save Production Copy
         </Button>
       </div>
     </div>

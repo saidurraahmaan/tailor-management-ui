@@ -64,7 +64,7 @@ function App() {
             }
           />
           <Route
-            path={"/order/details/customercopy/:id"}
+            path={"/order/customercopy/:id"}
             element={
               <PrivateRoute>
                 <OrderCustomerCopy />
@@ -72,7 +72,7 @@ function App() {
             }
           />
           <Route
-            path={"/order/details/productioncopy/:id"}
+            path={"/order/productioncopy/:id"}
             element={
               <PrivateRoute>
                 <OrderProductionCopy />

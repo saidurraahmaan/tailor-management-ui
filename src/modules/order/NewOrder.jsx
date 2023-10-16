@@ -48,7 +48,8 @@ const NewOrder = () => {
   const [showingState, setShowingState] = useState(showingStateInitialState);
   const [tabValue, setTabValue] = useState(NewOrderTabConstant.ProductList);
 
-  const { measuredItems, status } = useSelector(getOrderReducer);
+  const { orderNo, delivery, measuredItems, advance, discount, status } =
+    useSelector(getOrderReducer);
 
   const handleFetchItemError = (error) => {
     setNewOrderState((prev) => ({ ...prev, productFetchStatus: STATUS.ERROR }));
@@ -163,9 +164,21 @@ const NewOrder = () => {
           )}
           {tabValue === NewOrderTabConstant.OrderInfo && <OrderSubmission />}
           {tabValue === NewOrderTabConstant.ProductionCopy && (
-            <ProductionCopy />
+            <ProductionCopy
+              orderNo={orderNo}
+              measuredItems={measuredItems}
+              delivery={delivery}
+            />
           )}
-          {tabValue === NewOrderTabConstant.CustomerCopy && <CustomerCopy />}
+          {tabValue === NewOrderTabConstant.CustomerCopy && (
+            <CustomerCopy
+              orderNo={orderNo}
+              measuredItems={measuredItems}
+              delivery={delivery}
+              advance={advance}
+              discount={discount}
+            />
+          )}
         </div>
       )}
 

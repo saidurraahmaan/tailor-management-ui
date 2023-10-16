@@ -4,6 +4,7 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { useOutletContext, useParams, useNavigate } from "react-router";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { updateOrder } from "./orderApi";
 import { STATUS } from "../../constants/fetch";
 import useApiHook from "../../utils/ApiCustomHook";
@@ -139,8 +140,19 @@ const OrderDetails = () => {
             </Grid>
           </Grid>
           <div className="flex justify-content-center pt-4 g-3">
-            <Button variant="contained">Customer Copy</Button>
-            <Button variant="contained" color="secondary">Production Copy</Button>
+            <Button
+              variant="contained"
+              onClick={() => navigate(APPROUTES.orderCustomerCopy(id))}
+            >
+              Customer Copy
+            </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => navigate(APPROUTES.orderProductionCopy(id))}
+            >
+              Production Copy
+            </Button>
           </div>
         </div>
       )}
@@ -159,6 +171,16 @@ const OrderDetails = () => {
         open={status === STATUS.ERROR}
         handleClose={handleToasterClose}
       />
+      <div className="py-2">
+        <Button
+          variant="contained"
+          color="warning"
+          onClick={() => navigate(-1)}
+          startIcon={<ArrowBackIcon />}
+        >
+          Back
+        </Button>
+      </div>
     </div>
   );
 };
