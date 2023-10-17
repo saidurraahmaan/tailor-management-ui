@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { OrderListDataTable } from "./index";
 import useApiHook from "../../utils/ApiCustomHook";
@@ -12,19 +12,23 @@ const OrderList = () => {
     "get",
     APIROUTES.placeOrder
   );
+  const [width, setWidth] = useState(0);
+  const targetRef = useRef();
 
   useEffect(() => {
     setDrawerText("Order List");
   }, [setDrawerText]);
 
-  console.log({ fetchStatus, responseData, error });
+  useEffect(() => {
+    setWidth(Math.floor(targetRef.current.offsetWidth / 8.4));
+  }, []);
 
   if (fetchStatus === STATUS.LOADING) return <CircularWithValueLabel />;
 
   return (
-    <div>
+    <div className="order-list-container" ref={targetRef}>
       {fetchStatus === STATUS.SUCCESS && (
-        <OrderListDataTable orderDataList={responseData} />
+        <OrderListDataTable orderDataList={responseData} mxWidth={width} />
       )}
     </div>
   );

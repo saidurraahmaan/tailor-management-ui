@@ -42,7 +42,7 @@ const VISIBLE_FIELDS = [
 //   // Add more data as needed
 // ];
 
-export default function OrderListDataTable({ orderDataList }) {
+export default function OrderListDataTable({ orderDataList, mxWidth }) {
   const navigate = useNavigate();
   // const [orderList, setOrderList] = useState([]);
 
@@ -52,6 +52,8 @@ export default function OrderListDataTable({ orderDataList }) {
       VISIBLE_FIELDS.map((obj) => ({
         field: obj.field,
         headerName: obj.header,
+        minWidth: 80,
+        maxWidth: mxWidth,
         flex: 1,
         headerAlign: "center",
         align: "center",

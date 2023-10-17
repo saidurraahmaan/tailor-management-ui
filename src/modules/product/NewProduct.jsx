@@ -3,8 +3,9 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import FormLabel from "@mui/material/FormLabel";
-import { TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import { MuiChipsInput } from "mui-chips-input";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { LoadingButton } from "@mui/lab";
@@ -126,14 +127,26 @@ const NewProduct = () => {
           disableDeleteOnBackspace
         />
       </div>
-      <div className="py-2 flex justify-content-center">
-        <LoadingButton
-          variant="contained"
-          onClick={handleAdd}
-          loading={status === STATUS.LOADING}
-        >
-          Add
-        </LoadingButton>
+      <div className="flex g-2 py-1 justify-content-between wd-50">
+        <div className="py-2">
+          <Button
+            variant="contained"
+            color="warning"
+            onClick={() => navigate(-1)}
+            startIcon={<ArrowBackIcon />}
+          >
+            Back
+          </Button>
+        </div>
+        <div className="py-2 flex justify-content-center">
+          <LoadingButton
+            variant="contained"
+            onClick={handleAdd}
+            loading={status === STATUS.LOADING}
+          >
+            Add
+          </LoadingButton>
+        </div>
       </div>
     </div>
   );
