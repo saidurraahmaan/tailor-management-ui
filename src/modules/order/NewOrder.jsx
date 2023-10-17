@@ -127,8 +127,9 @@ const NewOrder = () => {
   useEffect(() => {
     const fetchOrderNo = async () => {
       const response = await getOrderNo().catch((e) => console.log(e));
-
-      dispatch(updateOrderField({ field: "orderNo", value: response.data }));
+      if (response) {
+        dispatch(updateOrderField({ field: "orderNo", value: response.data }));
+      }
     };
     fetchOrderNo();
 

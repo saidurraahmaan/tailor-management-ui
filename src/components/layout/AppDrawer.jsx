@@ -68,6 +68,9 @@ export default function PermanentDrawerLeft({
             width: drawerWidth,
             boxSizing: "border-box",
           },
+          "& .MuiPaper-root": {
+            backgroundColor: "#e3d8c5",
+          },
         }}
         variant="permanent"
         anchor="left"
@@ -78,7 +81,7 @@ export default function PermanentDrawerLeft({
           <ListItem disablePadding>
             <ListItemButton onClick={() => handleClick(APPROUTES.orderList)}>
               <ListItemIcon>
-                <ListIcon />
+                <ListIcon sx={{ color: "#49ba67" }} />
               </ListItemIcon>
               <ListItemText primary={"Order list"} />
             </ListItemButton>
@@ -86,7 +89,7 @@ export default function PermanentDrawerLeft({
           <ListItem disablePadding>
             <ListItemButton onClick={() => handleClick(APPROUTES.newOrder)}>
               <ListItemIcon>
-                <AddCircleOutlineIcon />
+                <AddCircleOutlineIcon sx={{ color: "#49ba67" }} />
               </ListItemIcon>
               <ListItemText primary={"New order"} />
             </ListItemButton>
@@ -94,7 +97,7 @@ export default function PermanentDrawerLeft({
           <ListItem disablePadding>
             <ListItemButton onClick={() => handleClick(APPROUTES.product)}>
               <ListItemIcon>
-                <ViewListIcon />
+                <ViewListIcon sx={{ color: "#49ba67" }} />
               </ListItemIcon>
               <ListItemText primary={"Product List"} />
             </ListItemButton>
@@ -102,7 +105,7 @@ export default function PermanentDrawerLeft({
           <ListItem disablePadding>
             <ListItemButton onClick={() => handleClick(APPROUTES.cost)}>
               <ListItemIcon>
-                <AttachMoneyIcon />
+                <AttachMoneyIcon sx={{ color: "#49ba67" }} />
               </ListItemIcon>
               <ListItemText primary={"Cost"} />
             </ListItemButton>
@@ -110,7 +113,7 @@ export default function PermanentDrawerLeft({
           <ListItem disablePadding>
             <ListItemButton onClick={handleLogout}>
               <ListItemIcon>
-                <LogoutIcon />
+                <LogoutIcon sx={{ color: "#49ba67" }} />
               </ListItemIcon>
               <ListItemText primary={"Logout"} />
             </ListItemButton>

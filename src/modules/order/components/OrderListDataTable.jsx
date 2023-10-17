@@ -88,7 +88,7 @@ export default function OrderListDataTable({ orderDataList, mxWidth }) {
           return params.value;
         },
       })),
-    [navigate]
+    [navigate, mxWidth]
   );
 
   return (
