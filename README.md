@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Api Repository
+The api repository link : https://github.com/saidurraahmaan/tailor-management-api
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
