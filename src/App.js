@@ -15,7 +15,7 @@ import {
   OrderCustomerCopy,
   OrderProductionCopy,
 } from "./modules/order";
-import { NewProduct, ProductList } from "./modules/product";
+import { EditProduct, NewProduct, ProductList } from "./modules/product";
 import { Signup, Signin, RegistrationSuccess } from "./modules/auth";
 
 function App() {
@@ -92,6 +92,14 @@ function App() {
             element={
               <PrivateRoute>
                 <NewProduct />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={"/product/edit/:id"}
+            element={
+              <PrivateRoute>
+                <EditProduct />
               </PrivateRoute>
             }
           />

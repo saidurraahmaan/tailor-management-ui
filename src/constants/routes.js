@@ -7,6 +7,7 @@ export const APIROUTES = {
   getUserAllProduct: "/product/byUser",
   updateOrderById: (id) => `/order/${id}`,
   getOrderDetailsById: (id) => `/order/${id}`,
+  updateProductById: (id) => `/product/${id}`,
   getUserProductById: (id) => `/product/${id}`,
   getUserProductByType: (type) => `/product/type/${type}`,
 };
@@ -22,6 +23,7 @@ export const APPROUTES = {
   newProduct: "/product/new",
   orderSuccess: "/order/new/success",
   registrationSuccess: "/signup/success",
+  productEdit: (id) => `/product/edit/${id}`,
   orderDetails: (id) => `/order/details/${id}`,
   deliveryPage: (id) => `/order/delivery/${id}`,
   orderCustomerCopy: (id) => `/order/customercopy/${id}`,
