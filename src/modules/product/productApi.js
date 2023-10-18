@@ -12,3 +12,7 @@ export const getUserProductByType = (type) => {
 export const getUserProductById = (id) => {
   return HttpInstance.get(APIROUTES.getUserProductById(id));
 };
+
+export const updateProductById = (id, data) => {
+  return HttpInstance.put(APIROUTES.updateProductById(id), data);
+};

@@ -49,6 +49,7 @@ const ProductList = () => {
               key={ele._id}
               type={ele.productType}
               productName={ele.productName}
+              handleEdit={() => navigate(APPROUTES.productEdit(ele._id))}
             />
           ))}
         </Grid>
