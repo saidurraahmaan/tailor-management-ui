@@ -3,10 +3,10 @@ import { Button } from "@mui/material";
 import useApiHook from "../../utils/ApiCustomHook";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { APIROUTES, APPROUTES } from "../../constants/routes";
-import ProductListDetails from "./components/ProductListDetails";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import CircularWithValueLabel from "../../components/primitives/CircularLoader";
 import { STATUS } from "../../constants/fetch";
+import { ProductListWithoutDelete } from "./index.js";
 
 const ProductList = () => {
   const navigate = useNavigate();
@@ -41,11 +41,11 @@ const ProductList = () => {
       )}
       {fetchStatus === STATUS.SUCCESS && responseData.length > 0 && (
         <Grid container spacing={2} alignItems={"center"}>
-          <Grid xs={3}>ProductName</Grid>
-          <Grid xs={3}>Type</Grid>
-          <Grid xs={6}>Action</Grid>
+          <Grid xs={4}>ProductName</Grid>
+          <Grid xs={4}>Type</Grid>
+          <Grid xs={4}>Action</Grid>
           {responseData.map((ele) => (
-            <ProductListDetails
+            <ProductListWithoutDelete
               key={ele._id}
               type={ele.productType}
               productName={ele.productName}
