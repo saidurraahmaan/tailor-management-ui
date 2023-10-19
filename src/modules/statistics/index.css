@@ -1,0 +1,20 @@
+.box-design {
+  border: 1px solid black;
+  border-radius: 3px;
+  padding: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.bg-color-1 {
+  background-color: darkkhaki;
+  color: black;
+}
+.bg-color-2 {
+  background-color: coral;
+}
+
+.bg-color-3 {
+  background-color: teal;
+  color: white;
+}

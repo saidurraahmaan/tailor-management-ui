@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext, useSearchParams } from "react-router-dom";
 import { OrderListDataTable } from "./index";
 import useApiHook from "../../utils/ApiCustomHook";
 import { APIROUTES } from "../../constants/routes";
@@ -9,7 +9,19 @@ import CircularWithValueLabel from "../../components/primitives/CircularLoader";
 
 const OrderList = () => {
   const { setDrawerText } = useOutletContext();
-  const { fetchStatus, responseData } = useApiHook("get", APIROUTES.placeOrder);
+  let apiRoute = APIROUTES.placeOrder;
+
+  let [searchParams] = useSearchParams();
+  const queryParams = Object.fromEntries(searchParams);
+  const queryString = Object.keys(queryParams)
+    .map((key) => `${key}=${queryParams[key]}`)
+    .join("&");
+
+  if (queryString) {
+    apiRoute += "?" + queryString;
+  }
+
+  const { fetchStatus, responseData } = useApiHook("get", apiRoute);
   const [width, setWidth] = useState(0);
   const targetRef = useRef();
 
