@@ -15,13 +15,14 @@ export const APIROUTES = {
 export const APPROUTES = {
   home: "/",
   signin: "/",
-  cost: "/cost",
   signup: "/signup",
   product: "/product",
   orderList: "/orders",
   newOrder: "/order/new",
+  statistics: "/statistics",
   newProduct: "/product/new",
   orderSuccess: "/order/new/success",
+
   registrationSuccess: "/signup/success",
   productEdit: (id) => `/product/edit/${id}`,
   orderDetails: (id) => `/order/details/${id}`,

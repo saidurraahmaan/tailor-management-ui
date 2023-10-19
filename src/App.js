@@ -17,6 +17,7 @@ import {
 } from "./modules/order";
 import { EditProduct, NewProduct, ProductList } from "./modules/product";
 import { Signup, Signin, RegistrationSuccess } from "./modules/auth";
+import { OveralState } from "./modules/statistics";
 
 function App() {
   return (
@@ -100,6 +101,14 @@ function App() {
             element={
               <PrivateRoute>
                 <EditProduct />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={APPROUTES.statistics}
+            element={
+              <PrivateRoute>
+                <OveralState />
               </PrivateRoute>
             }
           />

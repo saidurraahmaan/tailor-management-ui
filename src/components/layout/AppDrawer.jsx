@@ -13,7 +13,7 @@ import ListItemText from "@mui/material/ListItemText";
 import ListIcon from "@mui/icons-material/List";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import ViewListIcon from "@mui/icons-material/ViewList";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import BarChartIcon from "@mui/icons-material/BarChart";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
 import { APPROUTES } from "../../constants/routes";
@@ -49,7 +49,7 @@ export default function PermanentDrawerLeft({
         position="fixed"
         sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
       >
-        <Toolbar>
+        <Toolbar sx={{ bgcolor: "#db93a0" }}>
           <Typography
             className="wd-100 text-center"
             variant="h6"
@@ -103,11 +103,11 @@ export default function PermanentDrawerLeft({
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton onClick={() => handleClick(APPROUTES.cost)}>
+            <ListItemButton onClick={() => handleClick(APPROUTES.statistics)}>
               <ListItemIcon>
-                <AttachMoneyIcon sx={{ color: "#49ba67" }} />
+                <BarChartIcon sx={{ color: "#49ba67" }} />
               </ListItemIcon>
-              <ListItemText primary={"Cost"} />
+              <ListItemText primary={"Statistics"} />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
