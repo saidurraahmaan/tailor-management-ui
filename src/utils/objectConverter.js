@@ -9,3 +9,24 @@ export const measuredItemsToCustomerOrderItems = (measuredItems) => {
   }));
   return orderItems;
 };
+
+export const statisticsObjectPieData = (state) => {
+  let data = [
+    {
+      id: 0,
+      label: "Total",
+      value: +state.totalOrders,
+    },
+    {
+      id: 1,
+      label:"Total",
+      value: +state.pendingOrders,
+    },
+    {
+      id: 2,
+      label: "Total",
+      value: +state.deliveredOrders,
+    },
+  ];
+  return data;
+};
