@@ -4,6 +4,8 @@
   padding: 15px;
   font-weight: 700;
   cursor: pointer;
+  width: 250px;
+  text-align: center;
 }
 
 .bg-color-1 {
@@ -17,4 +19,13 @@
 .bg-color-3 {
   background-color: teal;
   color: white;
+}
+
+.bg-color-4 {
+  background-color: rgb(116, 50, 192);
+  color: rgb(235, 229, 225);
+}
+
+.pt-4px{
+  padding-top: 4px;
 }
