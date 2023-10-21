@@ -1,3 +1,4 @@
 import Cost from "./Cost";
+import AddCost from "./AddCost";
 
-export { Cost };
+export { AddCost, Cost };

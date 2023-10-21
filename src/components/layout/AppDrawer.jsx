@@ -11,6 +11,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import ListIcon from "@mui/icons-material/List";
+import PriceChangeIcon from "@mui/icons-material/PriceChange";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import ViewListIcon from "@mui/icons-material/ViewList";
 import BarChartIcon from "@mui/icons-material/BarChart";
@@ -100,6 +101,14 @@ export default function PermanentDrawerLeft({
                 <ViewListIcon sx={{ color: "#49ba67" }} />
               </ListItemIcon>
               <ListItemText primary={"Product List"} />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton onClick={() => handleClick(APPROUTES.cost)}>
+              <ListItemIcon>
+                <PriceChangeIcon sx={{ color: "#49ba67" }} />
+              </ListItemIcon>
+              <ListItemText primary={"Cost State"} />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
