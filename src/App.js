@@ -18,6 +18,7 @@ import {
 import { EditProduct, NewProduct, ProductList } from "./modules/product";
 import { Signup, Signin, RegistrationSuccess } from "./modules/auth";
 import { OveralState } from "./modules/statistics";
+import { AddCost, Cost } from "./modules/cost";
 
 function App() {
   return (
@@ -85,6 +86,22 @@ function App() {
             element={
               <PrivateRoute>
                 <ProductList />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={APPROUTES.cost}
+            element={
+              <PrivateRoute>
+                <Cost />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={APPROUTES.newCost}
+            element={
+              <PrivateRoute>
+                <AddCost />
               </PrivateRoute>
             }
           />

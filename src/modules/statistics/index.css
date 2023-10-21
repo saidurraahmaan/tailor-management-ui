@@ -26,6 +26,11 @@
   color: rgb(235, 229, 225);
 }
 
+.bg-color-5 {
+  background-color: rgb(189, 18, 84);
+  color: rgb(235, 229, 225);
+}
+
 .pt-4px{
   padding-top: 4px;
 }

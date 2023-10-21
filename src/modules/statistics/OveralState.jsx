@@ -81,7 +81,7 @@ const OveralState = () => {
           <div className="font-14 pt-4px">{statistics.deliveredOrders} টি</div>
         </div>
         <div
-          className="box-design bg-color-2"
+          className="box-design bg-color-4"
           onClick={() =>
             navigate(
               `${APPROUTES.orderList}?isDelivered=false&tillDate=${dayjs()
@@ -94,7 +94,7 @@ const OveralState = () => {
           <div className="font-14 pt-4px">{statistics.nextWeekDelivery} টি</div>
         </div>
         <div
-          className="box-design bg-color-4"
+          className="box-design bg-color-5"
           onClick={() => navigate(`${APPROUTES.orderList}`)}
         >
           <div>মোট আয়</div>
