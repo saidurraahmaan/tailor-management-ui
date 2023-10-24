@@ -1,4 +1,5 @@
 import Toaster from "./patterns/Toaster";
+import AppCard from "./patterns/AppCard";
 import AppModal from "./patterns/AppModal";
 import NotFound from "./primitives/NotFound";
 import ErrorPage from "./primitives/ErrorPage";
@@ -15,6 +16,7 @@ import OrderedItemListCustomer from "./patterns/OrderedItemListCustomer";
 import OrderMeasurementProduction from "./patterns/OrderMeasurementProduction";
 
 export {
+  AppCard,
   Toaster,
   NotFound,
   AppModal,

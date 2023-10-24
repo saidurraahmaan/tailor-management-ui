@@ -6,6 +6,7 @@ import { getOrderState } from "./statisticsApi.js";
 import { STATUS } from "../../constants/fetch.js";
 import "./index.css";
 import { dateTimeFormat } from "../../constants/dateTimeFormat.js";
+import AppCard from "../../components/patterns/AppCard.jsx";
 
 const OveralState = () => {
   const navigate = useNavigate();
@@ -59,13 +60,14 @@ const OveralState = () => {
   return (
     <div>
       <div className="py-2 flex justify-content-center g-3 align-items-center flex-wrap">
-        <div
+        <AppCard />
+        {/* <div
           className="box-design bg-color-1"
           onClick={() => navigate(`${APPROUTES.orderList}`)}
         >
           <div>মোট অর্ডার</div>
           <div className="font-14 pt-4px">{statistics.totalOrders} টি</div>
-        </div>
+        </div> */}
         <div
           className="box-design bg-color-3"
           onClick={() => navigate(`${APPROUTES.orderList}?isDelivered=false`)}
