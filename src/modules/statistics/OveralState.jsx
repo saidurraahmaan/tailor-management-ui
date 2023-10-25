@@ -17,6 +17,8 @@ const OveralState = () => {
     pendingOrders: 0,
     deliveredOrders: 0,
     nextWeekDelivery: 0,
+    todayTotalOrder: 0,
+    lastWeekTotalOrder: 0,
     status: STATUS.IDLE,
   });
 
@@ -40,6 +42,8 @@ const OveralState = () => {
           pendingOrders,
           deliveredOrders,
           nextWeekDelivery,
+          todayTotalOrder,
+          lastWeekTotalOrder,
         } = response.data;
         setStatistics((prev) => ({
           ...prev,
@@ -48,9 +52,10 @@ const OveralState = () => {
           pendingOrders,
           deliveredOrders,
           nextWeekDelivery,
+          todayTotalOrder,
+          lastWeekTotalOrder,
           status: STATUS.SUCCESS,
         }));
-        console.log({ totalAmount });
       }
     };
 
@@ -62,15 +67,24 @@ const OveralState = () => {
       <div className="py-2 flex justify-content-center g-3 align-items-center flex-wrap">
         <AppCard
           title={"আজকের অর্ডার"}
-          value={`${statistics.totalOrders} টি`}
+          value={`${statistics.todayTotalOrder} টি`}
+          onCardClick={() =>
+            navigate(
+              `${APPROUTES.orderList}?orderDate=${dayjs().format(
+                dateTimeFormat.orderGridDate
+              )}`
+            )
+          }
         />
         <AppCard
           title={"গত সপ্তাহে মোট অর্ডার"}
-          value={`${statistics.totalOrders} টি`}
+          value={`${statistics.lastWeekTotalOrder} টি`}
           onCardClick={() =>
             navigate(
-              `${APPROUTES.orderList}?isDelivered=false&tillDate=${dayjs()
+              `${APPROUTES.orderList}?orderFromDate=${dayjs()
                 .subtract(7, "day")
+                .format(dateTimeFormat.orderGridDate)}&orderTillDate=${dayjs()
+                .subtract(1, "day")
                 .format(dateTimeFormat.orderGridDate)}`
             )
           }
@@ -92,7 +106,9 @@ const OveralState = () => {
           value={`${statistics.nextWeekDelivery} টি`}
           onCardClick={() =>
             navigate(
-              `${APPROUTES.orderList}?isDelivered=false&tillDate=${dayjs()
+              `${
+                APPROUTES.orderList
+              }?isDelivered=false&deliveryTillDate=${dayjs()
                 .add(7, "day")
                 .format(dateTimeFormat.orderGridDate)}`
             )
