@@ -15,6 +15,7 @@ import PriceChangeIcon from "@mui/icons-material/PriceChange";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import ViewListIcon from "@mui/icons-material/ViewList";
 import BarChartIcon from "@mui/icons-material/BarChart";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
 import { APPROUTES } from "../../constants/routes";
@@ -117,6 +118,14 @@ export default function PermanentDrawerLeft({
                 <BarChartIcon sx={{ color: "#49ba67" }} />
               </ListItemIcon>
               <ListItemText primary={"Statistics"} />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton onClick={() => handleClick(APPROUTES.profile)}>
+              <ListItemIcon>
+                <AccountBoxIcon sx={{ color: "#49ba67" }} />
+              </ListItemIcon>
+              <ListItemText primary={"Profile"} />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
