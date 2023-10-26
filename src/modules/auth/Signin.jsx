@@ -8,17 +8,23 @@ import { authInformation, successfulLogin } from "./authSlice";
 import "./index.css";
 import { STATUS } from "../../constants/fetch";
 import { APPROUTES } from "../../constants/routes";
+import { Toaster } from "../../components";
 
 const Signin = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [loginInfo, setLoginInfo] = useState({ username: "", password: "" });
   const [status, setStatus] = useState(STATUS.IDLE);
+  const [error, setError] = useState(null);
   const { isLoggedIn } = useSelector(authInformation);
 
   const handleError = (error) => {
-    console.log(error);
     setStatus(STATUS.ERROR);
+    if (error.data.message) {
+      setError(error.data.message);
+      return;
+    }
+    setError("something went wrong");
   };
 
   const handleSubmit = async () => {
@@ -31,6 +37,14 @@ const Signin = () => {
       dispatch(successfulLogin(response.data));
       navigate(APPROUTES.orderList);
     }
+  };
+
+  const handleToasterClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setStatus(STATUS.IDLE);
+    setError(null);
   };
 
   useEffect(() => {
@@ -88,6 +102,12 @@ const Signin = () => {
           </div>
         </div>
       </div>
+      <Toaster
+        severity={"error"}
+        message={error}
+        open={status === STATUS.ERROR}
+        handleClose={handleToasterClose}
+      />
     </Container>
   );
 };

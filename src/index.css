@@ -265,6 +265,9 @@ body {
 .h-100v {
   height: 100vh;
 }
+.h-70v {
+  height: 70vh;
+}
 .height-240 {
   height: 240px;
 }
