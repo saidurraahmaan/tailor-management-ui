@@ -16,7 +16,7 @@ import {
   OrderProductionCopy,
 } from "./modules/order";
 import { EditProduct, NewProduct, ProductList } from "./modules/product";
-import { Signup, Signin, RegistrationSuccess } from "./modules/auth";
+import { Signup, Signin, RegistrationSuccess, Profile } from "./modules/auth";
 import { OveralState } from "./modules/statistics";
 import { AddCost, Cost } from "./modules/cost";
 
@@ -102,6 +102,14 @@ function App() {
             element={
               <PrivateRoute>
                 <AddCost />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={APPROUTES.profile}
+            element={
+              <PrivateRoute>
+                <Profile />
               </PrivateRoute>
             }
           />
