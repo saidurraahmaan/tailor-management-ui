@@ -121,6 +121,11 @@ const OveralState = () => {
             navigate(`${APPROUTES.orderList}?isDelivered=true`)
           }
         />
+        <AppCard
+          title={"মোট আয়"}
+          value={`${statistics.totalAmount} টাকা`}
+          onCardClick={() => navigate(`${APPROUTES.orderList}`)}
+        />
       </div>
     </div>
   );

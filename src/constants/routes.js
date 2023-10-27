@@ -5,6 +5,7 @@ export const APIROUTES = {
   getUser: "/auth/getUser",
   orderState: "/order/state",
   register: "/auth/register",
+  updateUser: "/auth/update",
   getOrderNo: "/order/getOrderNo",
   getUserAllProduct: "/product/byUser",
   updateOrderById: (id) => `/order/${id}`,

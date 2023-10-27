@@ -12,3 +12,7 @@ export const registerUser = (data) => {
 export const loginUser = (credential) => {
   return HttpInstance.post(APIROUTES.login, credential);
 };
+
+export const updateUser = (data) => {
+  return HttpInstance.put(APIROUTES.updateUser, data);
+};
