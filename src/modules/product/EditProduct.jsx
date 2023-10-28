@@ -14,6 +14,7 @@ import { STATUS } from "../../constants/fetch";
 import { getUserProductById, updateProductById } from "./productApi";
 import { APPROUTES } from "../../constants/routes";
 import CircularWithValueLabel from "../../components/primitives/CircularLoader";
+import { Toaster } from "../../components";
 
 const EditProduct = () => {
   const navigate = useNavigate();
@@ -31,8 +32,13 @@ const EditProduct = () => {
   });
 
   const handleApiError = (error) => {
-    console.log(error);
     setStatus(STATUS.ERROR);
+
+    if (error.data?.message) {
+      setError((prev) => ({ ...prev, updateError: error.data.message }));
+      return;
+    }
+    setError((prev) => ({ ...prev, updateError: "something went wrong" }));
   };
 
   const handleUpdate = async () => {
@@ -52,9 +58,30 @@ const EditProduct = () => {
     }).catch((e) => handleApiError(e.response));
     if (response) {
       setStatus(STATUS.SUCCESS);
-      console.log(response);
-      navigate(APPROUTES.product);
     }
+  };
+
+  const handleUpdateToasterSuccessClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setError((prev) => ({
+      ...prev,
+      updateError: null,
+    }));
+    setStatus(STATUS.IDLE);
+    navigate(APPROUTES.product);
+  };
+
+  const handleUpdateToasterErrorClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setError((prev) => ({
+      ...prev,
+      updateError: null,
+    }));
+    setStatus(STATUS.IDLE);
   };
 
   useEffect(() => {
@@ -85,7 +112,7 @@ const EditProduct = () => {
   if (fetchStatus === STATUS.LOADING) {
     return <CircularWithValueLabel />;
   }
-  console.log({ error });
+
   return (
     <div>
       <div>
@@ -176,6 +203,19 @@ const EditProduct = () => {
           </div>
         </div>
       </div>
+      <Toaster
+        severity={"success"}
+        message={"আপনার প্রোডাক্টি সফলভাবে আপডেট হয়েছে"}
+        open={status === STATUS.SUCCESS}
+        handleClose={handleUpdateToasterSuccessClose}
+      />
+
+      <Toaster
+        severity={"error"}
+        message={error.updateError}
+        open={status === STATUS.ERROR}
+        handleClose={handleUpdateToasterErrorClose}
+      />
     </div>
   );
 };
