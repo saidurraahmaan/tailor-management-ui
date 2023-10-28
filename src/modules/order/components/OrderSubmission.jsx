@@ -29,13 +29,8 @@ const OrderSubmission = () => {
         (Number(element.makingCost) + Number(element.clothPrice)) *
           Number(element.quantity);
     });
-    // const totalCost = Number(makingCost) + Number(orderFinalData.clothPrice);
 
-    // const afterQuantity = Number(totalCost) * Number(orderFinalData.quantity);
-
-    const discountAmount = (Number(discount) / 100) * totalCost;
-
-    return totalCost - discountAmount;
+    return totalCost - discount;
   };
 
   const handleChange = ({ field, value }) => {
