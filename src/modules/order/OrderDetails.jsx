@@ -37,9 +37,7 @@ const OrderDetails = () => {
           Number(element.quantity);
     });
 
-    const discountAmount = (Number(discount) / 100) * totalCost;
-
-    return totalCost - discountAmount;
+    return totalCost - discount;
   };
 
   const handleModalOk = async () => {

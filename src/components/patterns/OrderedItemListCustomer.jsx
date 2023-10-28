@@ -9,8 +9,6 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const OrderedItemListCustomer = ({ orderedItems, advance, discount }) => {
-  
-  
   const calculateTotalPrice = () => {
     let totalCost = 0;
     orderedItems.forEach((element) => {
@@ -20,9 +18,7 @@ const OrderedItemListCustomer = ({ orderedItems, advance, discount }) => {
           Number(element.quantity);
     });
 
-    const discountAmount = (Number(discount) / 100) * totalCost;
-
-    return totalCost - discountAmount;
+    return totalCost - discount;
   };
 
   return (
@@ -40,13 +36,13 @@ const OrderedItemListCustomer = ({ orderedItems, advance, discount }) => {
             <Grid xs={9}>
               <Paper className="text-center ">
                 {ele.productName}
-                {ele.isTakingCloth && " + cloth"}
+                {ele.isTakingCloth && " + কাপড়"}
                 {" X "} {ele.quantity}
               </Paper>
             </Grid>
             <Grid xs={3}>
               <Paper className="text-center ">
-                {(ele.makingCost + ele.clothPrice) * ele.quantity}
+                {(ele.makingCost + ele.clothPrice) * ele.quantity} tk
               </Paper>
             </Grid>
           </React.Fragment>
@@ -55,19 +51,19 @@ const OrderedItemListCustomer = ({ orderedItems, advance, discount }) => {
           <Paper className="text-center">Discount</Paper>
         </Grid>
         <Grid xs={3}>
-          <Paper className="text-center">{discount} %</Paper>
+          <Paper className="text-center">{discount} tk</Paper>
         </Grid>
         <Grid xs={9}>
           <Paper className="text-center">Total</Paper>
         </Grid>
         <Grid xs={3}>
-          <Paper className="text-center">{calculateTotalPrice()}</Paper>
+          <Paper className="text-center">{calculateTotalPrice()} tk</Paper>
         </Grid>
         <Grid xs={9}>
           <Paper className="text-center">Advance</Paper>
         </Grid>
         <Grid xs={3}>
-          <Paper className="text-center">{advance}</Paper>
+          <Paper className="text-center">{advance} tk</Paper>
         </Grid>
 
         <Grid xs={9}>
@@ -75,7 +71,7 @@ const OrderedItemListCustomer = ({ orderedItems, advance, discount }) => {
         </Grid>
         <Grid xs={3}>
           <Paper className="text-center">
-            {calculateTotalPrice() - advance}
+            {calculateTotalPrice() - advance} tk
           </Paper>
         </Grid>
       </Grid>

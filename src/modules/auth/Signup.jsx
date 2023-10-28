@@ -53,7 +53,7 @@ const Signup = () => {
           <div className="pb-2">to get started</div>
           <div className="py-1">
             <TextField
-              label="Full Name"
+              label="আপনার নাম"
               variant="outlined"
               fullWidth
               value={userInfo.name}
@@ -62,7 +62,7 @@ const Signup = () => {
           </div>
           <div className="py-1">
             <TextField
-              label="Username"
+              label="ইউজারনেম"
               variant="outlined"
               fullWidth
               required
@@ -72,7 +72,7 @@ const Signup = () => {
           </div>
           <div className="py-1">
             <TextField
-              label="Email"
+              label="ইমেইল"
               variant="outlined"
               fullWidth
               value={userInfo.email}
@@ -81,7 +81,7 @@ const Signup = () => {
           </div>
           <div className="py-1">
             <TextField
-              label="Password"
+              label="পাসওয়ার্ড"
               variant="outlined"
               type="password"
               fullWidth
@@ -92,7 +92,7 @@ const Signup = () => {
           </div>
           <div className="py-1">
             <TextField
-              label="Store Name"
+              label="দোকানের নাম"
               variant="outlined"
               fullWidth
               required
@@ -102,7 +102,7 @@ const Signup = () => {
           </div>
           <div className="py-1">
             <TextField
-              label="Store Address"
+              label="দোকানের ঠিকানা"
               variant="outlined"
               fullWidth
               required
@@ -112,7 +112,7 @@ const Signup = () => {
           </div>
           <div className="py-1">
             <TextField
-              label="Phone"
+              label="মোবাইল"
               variant="outlined"
               fullWidth
               required

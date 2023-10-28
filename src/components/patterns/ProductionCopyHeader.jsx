@@ -10,8 +10,7 @@ const ProductionCopyHeader = () => {
   return (
     <Grid className="font-14" container spacing={2}>
       <Grid
-        className="py-1 font-32 font-w-700 text-center"
-        style={{ fontFamily: "cursive " }}
+        className="py-1 font-32 font-w-900 text-center font-i text-uppercase"
         xs={12}
       >
         {user.storeName}

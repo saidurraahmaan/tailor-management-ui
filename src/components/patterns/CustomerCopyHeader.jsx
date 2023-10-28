@@ -8,11 +8,9 @@ const CustomerCopyHeader = () => {
   const { user } = useSelector(authInformation);
 
   return (
-    
     <Grid className="font-14" container spacing={2}>
       <Grid
-        className="py-1 font-20 font-w-700 text-center"
-        style={{ fontFamily: "cursive " }}
+        className="py-1 font-20 font-w-900 text-center text-uppercase font-i"
         xs={12}
       >
         {user.storeName}

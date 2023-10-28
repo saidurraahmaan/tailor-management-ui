@@ -22,6 +22,7 @@ import { APPROUTES } from "../../constants/routes";
 import { useDispatch, useSelector } from "react-redux";
 import { resetState } from "../../services/logoutService";
 import { authInformation } from "../../modules/auth/authSlice";
+import tailorImg from "../../assets/images/tailor.png";
 
 const drawerWidth = 220;
 
@@ -77,7 +78,25 @@ export default function PermanentDrawerLeft({
         variant="permanent"
         anchor="left"
       >
-        <Toolbar>{storeName}</Toolbar>
+        <Toolbar
+          onClick={() => navigate(APPROUTES.orderList)}
+          sx={{ cursor: "pointer" }}
+        >
+          <div>
+            <img src={tailorImg} alt="tailor" height={64} />
+          </div>
+          <Box
+            sx={{
+              ml: "4px",
+              fontSize: 12,
+              fontWeight: 1000,
+              fontStyle: "italic",
+              textTransform: "uppercase",
+            }}
+          >
+            {storeName}
+          </Box>
+        </Toolbar>
         <Divider />
         <List>
           <ListItem disablePadding>

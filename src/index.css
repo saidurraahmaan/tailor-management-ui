@@ -199,6 +199,10 @@ body {
   font-size: 40px;
 }
 
+.font-w-900 {
+  font-weight: 900;
+}
+
 .font-w-700 {
   font-weight: 700;
 }
@@ -237,7 +241,9 @@ body {
 .cursor-pointer {
   cursor: pointer;
 }
-
+.text-uppercase {
+  text-transform: uppercase;
+}
 /* width */
 
 .wd-100 {
