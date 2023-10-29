@@ -6,6 +6,7 @@ const OrderInfoProduction = ({
   deliveryDate,
   productName,
   quantity,
+  customerMobile,
 }) => {
   return (
     <Grid className="font-14" container spacing={2}>
@@ -24,6 +25,10 @@ const OrderInfoProduction = ({
       <Grid xs={6}>
         <span className="font-w-700">কোয়ান্টিটি: </span>
         {quantity}
+      </Grid>
+      <Grid xs={6}>
+        <span className="font-w-700">কাস্টমার মোবাইল: </span>
+        {customerMobile}
       </Grid>
     </Grid>
   );

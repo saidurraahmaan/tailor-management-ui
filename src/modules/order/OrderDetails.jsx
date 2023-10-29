@@ -154,6 +154,9 @@ const OrderDetails = () => {
             >
               Production Copy
             </Button>
+            <Button variant="contained" color="error">
+              Cancel Order
+            </Button>
           </div>
         </div>
       )}
