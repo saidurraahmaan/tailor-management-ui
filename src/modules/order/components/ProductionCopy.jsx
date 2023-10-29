@@ -9,7 +9,12 @@ import {
 } from "../../../components";
 import { dateTimeFormat } from "../../../constants/dateTimeFormat";
 
-const ProductionCopy = ({ orderNo, delivery, measuredItems }) => {
+const ProductionCopy = ({
+  orderNo,
+  delivery,
+  measuredItems,
+  customerMobile,
+}) => {
   const { toPDF, targetRef } = usePDF({
     method: "open",
     filename: "multipage-example.pdf",
@@ -30,6 +35,7 @@ const ProductionCopy = ({ orderNo, delivery, measuredItems }) => {
                 deliveryDate={dayjs(delivery).format(
                   dateTimeFormat.invoiceDate
                 )}
+                customerMobile={customerMobile}
               />
               <Divider sx={{ backgroundColor: "aqua", marginBlock: 1 }} />
               <OrderMeasurementProduction

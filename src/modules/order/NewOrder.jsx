@@ -48,8 +48,15 @@ const NewOrder = () => {
   const [showingState, setShowingState] = useState(showingStateInitialState);
   const [tabValue, setTabValue] = useState(NewOrderTabConstant.ProductList);
 
-  const { orderNo, delivery, measuredItems, advance, discount, status } =
-    useSelector(getOrderReducer);
+  const {
+    orderNo,
+    delivery,
+    measuredItems,
+    advance,
+    discount,
+    status,
+    mobileNumber,
+  } = useSelector(getOrderReducer);
 
   const handleFetchItemError = (error) => {
     setNewOrderState((prev) => ({ ...prev, productFetchStatus: STATUS.ERROR }));
@@ -169,6 +176,7 @@ const NewOrder = () => {
               orderNo={orderNo}
               measuredItems={measuredItems}
               delivery={delivery}
+              customerMobile={mobileNumber}
             />
           )}
           {tabValue === NewOrderTabConstant.CustomerCopy && (
@@ -178,6 +186,7 @@ const NewOrder = () => {
               delivery={delivery}
               advance={advance}
               discount={discount}
+              customerMobile={mobileNumber}
             />
           )}
         </div>

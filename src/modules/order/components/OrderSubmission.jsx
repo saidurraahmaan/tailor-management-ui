@@ -87,7 +87,7 @@ const OrderSubmission = () => {
 
         <Grid xs={12} md={6} lg={4}>
           <TextField
-            label="Discount (%)"
+            label="Discount (tk)"
             variant="outlined"
             type="number"
             fullWidth
@@ -105,7 +105,7 @@ const OrderSubmission = () => {
         </Grid>
         <Grid xs={12} md={6} lg={4}>
           <TextField
-            label="Total Price"
+            label="Total Price (tk)"
             variant="outlined"
             type="number"
             fullWidth
@@ -115,7 +115,7 @@ const OrderSubmission = () => {
         </Grid>
         <Grid xs={12} md={6} lg={4}>
           <TextField
-            label="Advance"
+            label="Advance (tk)"
             variant="outlined"
             type="number"
             fullWidth
@@ -129,7 +129,7 @@ const OrderSubmission = () => {
 
         <Grid xs={12} md={6} lg={4}>
           <TextField
-            label="Due"
+            label="Due (tk)"
             variant="outlined"
             type="number"
             fullWidth

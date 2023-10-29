@@ -16,6 +16,7 @@ const CustomerCopy = ({
   measuredItems,
   advance,
   discount,
+  customerMobile,
 }) => {
   const [height, setHeight] = useState(0);
   const targetRef = useRef();
@@ -23,7 +24,7 @@ const CustomerCopy = ({
   useLayoutEffect(() => {
     setHeight(targetRef.current.offsetHeight);
   }, []);
-  // console.log(height);
+
   return (
     <div>
       <div className="flex justify-content-center" ref={targetRef}>
@@ -34,6 +35,7 @@ const CustomerCopy = ({
             orderNo={orderNo}
             orderDate={dayjs().format(dateTimeFormat.invoiceDate)}
             deliveryDate={dayjs(delivery).format(dateTimeFormat.invoiceDate)}
+            customerMobile={customerMobile}
           />
           <Divider sx={{ backgroundColor: "aqua", marginBlock: 1 }} />
           <OrderedItemListCustomer
