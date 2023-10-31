@@ -83,7 +83,7 @@ export default function PermanentDrawerLeft({
           sx={{ cursor: "pointer" }}
         >
           <div>
-            <img src={tailorImg} alt="tailor" height={64} />
+            <img src={tailorImg} alt="tailor" height={55} />
           </div>
           <Box
             sx={{

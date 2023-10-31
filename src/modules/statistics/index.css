@@ -1,11 +1,12 @@
 .box-design {
   border: 1px solid black;
   border-radius: 3px;
-  padding: 15px;
+  padding: 5px 0px;
   font-weight: 700;
   cursor: pointer;
-  width: 250px;
+  width: 180px;
   text-align: center;
+  font-size: 14px;
 }
 
 .bg-color-1 {
@@ -30,6 +31,17 @@
   background-color: rgb(189, 18, 84);
   color: rgb(235, 229, 225);
 }
+
+.bg-color-6 {
+  background-color: rgb(150, 85, 170);
+  color: rgb(235, 229, 225);
+}
+
+.bg-color-7 {
+  background-color: rgb(4, 106, 165);
+  color: rgb(235, 229, 225);
+}
+
 
 .pt-4px{
   padding-top: 4px;

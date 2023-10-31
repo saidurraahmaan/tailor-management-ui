@@ -1,4 +1,4 @@
 import OveralState from "./OveralState";
-import OrderDeliveryPie from "./components/OrderDeliveryPie";
+import LastThirtyDayOrderCountBar from "./components/LastThirtyDayOrderCountBar";
 
-export { OveralState, OrderDeliveryPie };
+export { OveralState, LastThirtyDayOrderCountBar };
