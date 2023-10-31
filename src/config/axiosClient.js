@@ -1,4 +1,5 @@
 import axios from "axios";
+import { resetState } from "../services/logoutService";
 
 const HttpInstance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -29,6 +30,19 @@ HttpInstance.interceptors.request.use(
     return config;
   },
   (error) => {
+    return Promise.reject(error);
+  }
+);
+
+HttpInstance.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error.response.status === 401) {
+      window.location.href = "/";
+      store.dispatch(resetState());
+    }
     return Promise.reject(error);
   }
 );
