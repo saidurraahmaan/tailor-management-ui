@@ -4,9 +4,9 @@ import { useNavigate, useOutletContext } from "react-router-dom";
 import { APPROUTES } from "../../constants/routes.js";
 import { getOrderState } from "./statisticsApi.js";
 import { STATUS } from "../../constants/fetch.js";
-import "./index.css";
 import { dateTimeFormat } from "../../constants/dateTimeFormat.js";
-import AppCard from "../../components/patterns/AppCard.jsx";
+import "./index.css";
+import LastThirtyDayOrderCountBar from "./components/LastThirtyDayOrderCountBar.jsx";
 
 const OveralState = () => {
   const navigate = useNavigate();
@@ -19,6 +19,7 @@ const OveralState = () => {
     nextWeekDelivery: 0,
     todayTotalOrder: 0,
     lastWeekTotalOrder: 0,
+    lastThirtyDayOrderList: [],
     status: STATUS.IDLE,
   });
 
@@ -44,6 +45,7 @@ const OveralState = () => {
           nextWeekDelivery,
           todayTotalOrder,
           lastWeekTotalOrder,
+          lastThirtyDayOrderList,
         } = response.data;
         setStatistics((prev) => ({
           ...prev,
@@ -54,6 +56,7 @@ const OveralState = () => {
           nextWeekDelivery,
           todayTotalOrder,
           lastWeekTotalOrder,
+          lastThirtyDayOrderList,
           status: STATUS.SUCCESS,
         }));
       }
@@ -64,22 +67,23 @@ const OveralState = () => {
 
   return (
     <div>
-      <div className="py-2 flex justify-content-center g-3 align-items-center flex-wrap">
-        <AppCard
-          title={"আজকের অর্ডার"}
-          value={`${statistics.todayTotalOrder} টি`}
-          onCardClick={() =>
+      <div className="py-2  flex  g-3 align-items-center flex-wrap">
+        <div
+          className="box-design bg-color-1"
+          onClick={() =>
             navigate(
               `${APPROUTES.orderList}?orderDate=${dayjs().format(
                 dateTimeFormat.orderGridDate
               )}`
             )
           }
-        />
-        <AppCard
-          title={"গত সপ্তাহে মোট অর্ডার"}
-          value={`${statistics.lastWeekTotalOrder} টি`}
-          onCardClick={() =>
+        >
+          <div>আজকে মোট অর্ডার</div>
+          <div>{statistics.todayTotalOrder} টি</div>
+        </div>
+        <div
+          className="box-design bg-color-2"
+          onClick={() =>
             navigate(
               `${APPROUTES.orderList}?orderFromDate=${dayjs()
                 .subtract(7, "day")
@@ -88,23 +92,28 @@ const OveralState = () => {
                 .format(dateTimeFormat.orderGridDate)}`
             )
           }
-        />
-        <AppCard
-          title={"মোট অর্ডার"}
-          value={`${statistics.totalOrders} টি`}
-          onCardClick={() => navigate(`${APPROUTES.orderList}`)}
-        />
-        <AppCard
-          title={"মোট পেন্ডিং অর্ডার"}
-          value={`${statistics.pendingOrders} টি`}
-          onCardClick={() =>
-            navigate(`${APPROUTES.orderList}?isDelivered=false`)
-          }
-        />
-        <AppCard
-          title={"আগামী সপ্তাহে ডেলিভারি"}
-          value={`${statistics.nextWeekDelivery} টি`}
-          onCardClick={() =>
+        >
+          <div>গত সপ্তাহে মোট অর্ডার</div>
+          <div>{statistics.lastWeekTotalOrder} টি</div>
+        </div>
+
+        <div
+          className="box-design bg-color-3"
+          onClick={() => navigate(`${APPROUTES.orderList}`)}
+        >
+          <div>মোট অর্ডার</div>
+          <div>{statistics.totalOrders} টি</div>
+        </div>
+        <div
+          className="box-design bg-color-7"
+          onClick={() => navigate(`${APPROUTES.orderList}?isDelivered=false`)}
+        >
+          <div>মোট পেন্ডিং ডেলিভারি</div>
+          <div>{statistics.pendingOrders} টি</div>
+        </div>
+        <div
+          className="box-design bg-color-4"
+          onClick={() =>
             navigate(
               `${
                 APPROUTES.orderList
@@ -113,20 +122,28 @@ const OveralState = () => {
                 .format(dateTimeFormat.orderGridDate)}`
             )
           }
-        />
-        <AppCard
-          title={"মোট ডেলিভারেড অর্ডার"}
-          value={`${statistics.deliveredOrders} টি`}
-          onCardClick={() =>
-            navigate(`${APPROUTES.orderList}?isDelivered=true`)
-          }
-        />
-        <AppCard
-          title={"মোট আয়"}
-          value={`${statistics.totalAmount} টাকা`}
-          onCardClick={() => navigate(`${APPROUTES.orderList}`)}
-        />
+        >
+          <div>আগামী সপ্তাহে ডেলিভারি</div>
+          <div>{statistics.nextWeekDelivery} টি</div>
+        </div>
+        <div
+          className="box-design bg-color-5"
+          onClick={() => navigate(`${APPROUTES.orderList}?isDelivered=true`)}
+        >
+          <div>মোট ডেলিভারেড অর্ডার</div>
+          <div>{statistics.deliveredOrders} টি</div>
+        </div>
+        <div
+          className="box-design bg-color-6"
+          onClick={() => navigate(`${APPROUTES.orderList}`)}
+        >
+          <div>মোট আয়</div>
+          <div>{statistics.totalAmount} টাকা</div>
+        </div>
       </div>
+      {statistics.status === STATUS.SUCCESS && (
+        <LastThirtyDayOrderCountBar data={statistics.lastThirtyDayOrderList} />
+      )}
     </div>
   );
 };
