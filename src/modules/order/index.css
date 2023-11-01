@@ -29,7 +29,7 @@
   padding: 3px;
 }
 
-.MuiSvgIcon-root {
+.MuiInput-root .MuiSvgIcon-root {
   color: rgb(198, 71, 209);
 }
 
