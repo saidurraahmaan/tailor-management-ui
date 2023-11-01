@@ -6,7 +6,7 @@ import { APIROUTES, APPROUTES } from "../../constants/routes";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import CircularWithValueLabel from "../../components/primitives/CircularLoader";
 import { STATUS } from "../../constants/fetch";
-import { ProductListWithoutDelete } from "./index.js";
+import { PaginatedProductList } from "./index.js";
 import emptyListImg from "../../assets/images/empty.gif";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
@@ -51,18 +51,17 @@ const ProductList = () => {
       </div>
 
       {fetchStatus === STATUS.SUCCESS && responseData.length > 0 && (
-        <Grid container spacing={2} alignItems={"center"}>
+        <Grid
+          container
+          spacing={2}
+          display={"flex"}
+          alignItems={"center"}
+          justifyContent={"center"}
+        >
           <Grid xs={4}>ProductName</Grid>
           <Grid xs={4}>Type</Grid>
           <Grid xs={4}>Action</Grid>
-          {responseData.map((ele) => (
-            <ProductListWithoutDelete
-              key={ele._id}
-              type={ele.productType}
-              productName={ele.productName}
-              handleEdit={() => navigate(APPROUTES.productEdit(ele._id))}
-            />
-          ))}
+          <PaginatedProductList data={responseData} itemsPerPage={10} />
         </Grid>
       )}
     </div>
