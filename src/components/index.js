@@ -5,6 +5,7 @@ import NotFound from "./primitives/NotFound";
 import ErrorPage from "./primitives/ErrorPage";
 import ApplicationLayout from "./layout/AppLayout";
 import PrivateRoute from "./primitives/PrivateRoute";
+import PaginatedList from "./patterns/PaginatedList";
 import UnAuthorized from "./primitives/UnAuthorized";
 import OrderCustomerInfo from "./patterns/OrderCustomerInfo";
 import OrderInfoCustomer from "./patterns/OrderInfoCustomer";
@@ -23,6 +24,7 @@ export {
   ErrorPage,
   UnAuthorized,
   PrivateRoute,
+  PaginatedList,
   ApplicationLayout,
   OrderInfoCustomer,
   OrderCustomerInfo,

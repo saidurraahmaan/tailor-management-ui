@@ -22,5 +22,17 @@
   background-image: url("../../assets//images/paid.png");
   background-size: 40% 40%;
   background-repeat: no-repeat;
-  background-position: center ;
+  background-position: center;
+}
+
+.MuiInput-root {
+  padding: 3px;
+}
+
+.MuiInput-root .MuiSvgIcon-root {
+  color: rgb(198, 71, 209);
+}
+
+.MuiInput-root .MuiInputBase-input {
+  color: rgb(12, 109, 219);
 }

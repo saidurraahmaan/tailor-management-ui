@@ -1,13 +1,15 @@
-import ProductList from "./ProductList";
 import NewProduct from "./NewProduct";
-import ProductListDetails from "./components/ProductListDetails";
-import ProductListWithoutDelete from "./components/ProductListwithoutDelete";
+import ProductList from "./ProductList";
 import EditProduct from "./EditProduct";
+import ProductListDetails from "./components/ProductListDetails";
+import PaginatedProductList from "./components/PaginatedProductList";
+import ProductListWithoutDelete from "./components/ProductListwithoutDelete";
 
 export {
-  ProductList,
   NewProduct,
   EditProduct,
+  ProductList,
   ProductListDetails,
+  PaginatedProductList,
   ProductListWithoutDelete,
 };
