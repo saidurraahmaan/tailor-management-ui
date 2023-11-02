@@ -20,7 +20,7 @@ const Signin = () => {
 
   const handleError = (error) => {
     setStatus(STATUS.ERROR);
-    if (error.data.message) {
+    if (error?.data.message) {
       setError(error.data.message);
       return;
     }

@@ -5,7 +5,7 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { useOutletContext, useParams, useNavigate } from "react-router";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { updateOrder } from "./orderApi";
+import { deleteOrder, updateOrder } from "./orderApi";
 import { STATUS } from "../../constants/fetch";
 import useApiHook from "../../utils/ApiCustomHook";
 import { Toaster, AppModal } from "../../components";
@@ -25,30 +25,20 @@ const OrderDetails = () => {
   );
 
   const [openModal, setModalOpen] = useState(false);
+  const [openDeleteModal, setDeleteModalOpen] = useState(false);
   const [status, setStatus] = useState(STATUS.IDLE);
-
-  const calculateTotalPrice = () => {
-    let totalCost = 0;
-    const { measuredItems, discount } = responseData;
-    measuredItems.forEach((element) => {
-      totalCost =
-        totalCost +
-        (Number(element.makingCost) + Number(element.clothPrice)) *
-          Number(element.quantity);
-    });
-
-    return totalCost - discount;
-  };
 
   const handleModalOk = async () => {
     setStatus(STATUS.LOADING);
 
     const updatedData = {
       isDelivered: true,
+      total: responseData.total,
       orderNo: responseData.orderNo,
       advance: responseData.advance,
       delivery: responseData.delivery,
       discount: responseData.discount,
+      clothPrice: responseData.clothPrice,
       customerName: responseData.customerName,
       mobileNumber: responseData.mobileNumber,
       measuredItems: responseData.measuredItems,
@@ -64,6 +54,21 @@ const OrderDetails = () => {
     if (response) {
       setStatus(STATUS.SUCCESS);
       navigate(APPROUTES.deliveryPage(responseData._id));
+    }
+  };
+
+  const handleModalOkDelete = async () => {
+    setStatus(STATUS.LOADING);
+
+    setDeleteModalOpen(false);
+
+    const response = await deleteOrder(id).catch((e) =>
+      setStatus(STATUS.ERROR)
+    );
+
+    if (response) {
+      setStatus(STATUS.SUCCESS);
+      navigate(APPROUTES.orderList);
     }
   };
 
@@ -103,11 +108,15 @@ const OrderDetails = () => {
             </Grid>
             <Grid xs={2}>
               <div className="pb-1">মোট</div>
-              <div>{calculateTotalPrice()}</div>
+              <div>{responseData.total}</div>
             </Grid>
             <Grid xs={2}>
               <div className="pb-1">বাকি</div>
-              <div>{calculateTotalPrice() - responseData.advance}</div>
+              <div>
+                {responseData.total -
+                  Number(responseData.advance) -
+                  Number(responseData.discount)}
+              </div>
             </Grid>
             <Grid xs={2}>
               <div className="pb-1">ডেলিভারি হয়েছে?</div>
@@ -154,7 +163,11 @@ const OrderDetails = () => {
             >
               Production Copy
             </Button>
-            <Button variant="contained" color="error">
+            <Button
+              variant="contained"
+              color="error"
+              onClick={() => setDeleteModalOpen(true)}
+            >
               Cancel Order
             </Button>
           </div>
@@ -167,6 +180,15 @@ const OrderDetails = () => {
         handleOk={handleModalOk}
       >
         আপনি নিশ্চিত যে ডেলিভারি দিচ্ছেন?
+      </AppModal>
+
+      <AppModal
+        open={openDeleteModal}
+        title={"ক্যান্সেল অর্ডার"}
+        handleClose={() => setDeleteModalOpen(false)}
+        handleOk={handleModalOkDelete}
+      >
+        আপনি নিশ্চিত যে অর্ডার ক্যান্সেল করছেন?
       </AppModal>
 
       <Toaster

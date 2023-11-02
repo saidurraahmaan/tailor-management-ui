@@ -13,10 +13,12 @@ import { dateTimeFormat } from "../../../constants/dateTimeFormat";
 const CustomerCopy = ({
   orderNo,
   delivery,
-  measuredItems,
   advance,
   discount,
-  customerMobile,
+  orderDate,
+  clothPrice,
+  customerName,
+  measuredItems,
 }) => {
   const [height, setHeight] = useState(0);
   const targetRef = useRef();
@@ -33,14 +35,15 @@ const CustomerCopy = ({
           <Divider sx={{ backgroundColor: "aqua", marginBlock: 1 }} />
           <OrderInfoCustomer
             orderNo={orderNo}
-            orderDate={dayjs().format(dateTimeFormat.invoiceDate)}
+            orderDate={dayjs(orderDate).format(dateTimeFormat.invoiceDate)}
             deliveryDate={dayjs(delivery).format(dateTimeFormat.invoiceDate)}
-            customerMobile={customerMobile}
+            customerName={customerName}
           />
           <Divider sx={{ backgroundColor: "aqua", marginBlock: 1 }} />
           <OrderedItemListCustomer
             advance={advance}
             discount={discount}
+            clothPrice={clothPrice}
             orderedItems={measuredItemsToCustomerOrderItems(measuredItems)}
           />
           <div className="text-center py-2 font-12">
@@ -64,7 +67,7 @@ const CustomerCopy = ({
             })
           }
         >
-          Preview Customer Copy
+          কাস্টমার কপি সংরক্ষন করুন
         </Button>
       </div>
     </div>

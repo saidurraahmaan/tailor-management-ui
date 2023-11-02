@@ -5,11 +5,12 @@ import { placeNewOrder } from "./orderApi";
 
 const initialState = {
   orderNo: 0,
-  customerName: "",
-  delivery: dayjs(),
   advance: 0,
-  mobileNumber: "",
+  customerName: "",
   discount: 0,
+  clothPrice: 0,
+  delivery: dayjs(),
+  mobileNumber: "",
   measuredItems: [],
   status: STATUS.IDLE,
 };
@@ -33,12 +34,13 @@ const orderSlice = createSlice({
       })
       .addCase(placeNewOrder.fulfilled, (state) => {
         state.orderNo = initialState.orderNo;
-        state.customerName = initialState.customerName;
         state.advance = initialState.advance;
         state.delivery = initialState.delivery;
-        state.measuredItems = initialState.measuredItems;
-        state.mobileNumber = initialState.mobileNumber;
         state.discount = initialState.discount;
+        state.clothPrice = initialState.clothPrice;
+        state.mobileNumber = initialState.mobileNumber;
+        state.customerName = initialState.customerName;
+        state.measuredItems = initialState.measuredItems;
         state.status = STATUS.SUCCESS;
       })
       .addCase(placeNewOrder.rejected, (state, action) => {

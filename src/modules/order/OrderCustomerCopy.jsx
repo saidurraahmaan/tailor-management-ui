@@ -25,6 +25,7 @@ const OrderCustomerCopy = () => {
   if (fetchStatus === STATUS.LOADING) {
     return <CircularWithValueLabel />;
   }
+  console.log(responseData);
 
   return (
     <div>
@@ -32,10 +33,13 @@ const OrderCustomerCopy = () => {
         <div>
           <CustomerCopy
             orderNo={responseData.orderNo}
-            delivery={responseData.delivery}
             advance={responseData.advance}
-            measuredItems={responseData.measuredItems}
             discount={responseData.discount}
+            delivery={responseData.deliveryDate}
+            orderDate={responseData.orderDate}
+            clothPrice={responseData.clothPrice}
+            customerName={responseData.customerName}
+            measuredItems={responseData.measuredItems}
           />
         </div>
       )}

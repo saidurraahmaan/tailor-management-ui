@@ -59,22 +59,7 @@ const Measurement = ({
         </div>
       </div>
       <Grid container spacing={2} className="py-2">
-        <Grid xs={12} md={6} lg={4}>
-          <TextField
-            label="Cloth Price"
-            variant="outlined"
-            type="number"
-            // fullWidth
-            value={orderInfo.clothPrice}
-            inputProps={{ min: "0" }}
-            onChange={(e) =>
-              setOrderInfo((prev) => ({
-                ...prev,
-                clothPrice: e.target.value,
-              }))
-            }
-          />
-        </Grid>
+
         <Grid xs={12} md={6} lg={4}>
           <TextField
             label="Making Cost"

@@ -38,6 +38,7 @@ import {
 } from "./orderConstant";
 import { getOrderNo } from "./orderApi";
 import { APPROUTES } from "../../constants/routes";
+import dayjs from "dayjs";
 
 const NewOrder = () => {
   const { setDrawerText } = useOutletContext();
@@ -49,13 +50,14 @@ const NewOrder = () => {
   const [tabValue, setTabValue] = useState(NewOrderTabConstant.ProductList);
 
   const {
+    status,
     orderNo,
     delivery,
-    measuredItems,
     advance,
     discount,
-    status,
-    mobileNumber,
+    customerName,
+    clothPrice,
+    measuredItems,
   } = useSelector(getOrderReducer);
 
   const handleFetchItemError = (error) => {
@@ -174,19 +176,22 @@ const NewOrder = () => {
           {tabValue === NewOrderTabConstant.ProductionCopy && (
             <ProductionCopy
               orderNo={orderNo}
-              measuredItems={measuredItems}
               delivery={delivery}
-              customerMobile={mobileNumber}
+              orderDate={dayjs()}
+              customerName={customerName}
+              measuredItems={measuredItems}
             />
           )}
           {tabValue === NewOrderTabConstant.CustomerCopy && (
             <CustomerCopy
-              orderNo={orderNo}
-              measuredItems={measuredItems}
-              delivery={delivery}
+              clothPrice={clothPrice}
               advance={advance}
+              orderDate={dayjs()}
+              orderNo={orderNo}
               discount={discount}
-              customerMobile={mobileNumber}
+              delivery={delivery}
+              customerName={customerName}
+              measuredItems={measuredItems}
             />
           )}
         </div>

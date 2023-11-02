@@ -32,7 +32,9 @@ const OrderProductionCopy = () => {
         <div>
           <ProductionCopy
             orderNo={responseData.orderNo}
-            delivery={responseData.delivery}
+            orderDate={responseData.orderDate}
+            delivery={responseData.deliveryDate}
+            customerName={responseData.customerName}
             measuredItems={responseData.measuredItems}
           />
         </div>
