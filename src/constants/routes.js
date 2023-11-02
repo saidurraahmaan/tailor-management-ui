@@ -9,6 +9,7 @@ export const APIROUTES = {
   getOrderNo: "/order/getOrderNo",
   getUserAllProduct: "/product/byUser",
   updateOrderById: (id) => `/order/${id}`,
+  deleteOrderById: (id) => `/order/${id}`,
   getOrderDetailsById: (id) => `/order/${id}`,
   updateProductById: (id) => `/product/${id}`,
   getUserProductById: (id) => `/product/${id}`,

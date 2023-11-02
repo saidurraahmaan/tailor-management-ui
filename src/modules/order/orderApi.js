@@ -13,6 +13,9 @@ export const newOrder = (order) => {
 export const updateOrder = (updatedOrderData, id) => {
   return HttpInstance.put(APIROUTES.updateOrderById(id), updatedOrderData);
 };
+export const deleteOrder = (id) => {
+  return HttpInstance.delete(APIROUTES.deleteOrderById(id));
+};
 
 export const userOrderList = () => {
   return HttpInstance.get(APIROUTES.placeOrder);

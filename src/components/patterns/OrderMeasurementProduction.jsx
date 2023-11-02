@@ -2,8 +2,18 @@ import React, { Fragment } from "react";
 import FiberManualRecordRoundedIcon from "@mui/icons-material/FiberManualRecordRounded";
 
 const OrderMeasurementProduction = ({ measurements, descriptions }) => {
+  const isAnyTrue = () => {
+    let isTrue = false;
+    descriptions.forEach((element) => {
+      if (element.value) {
+        isTrue = true;
+      }
+    });
+    return isTrue;
+  };
+
   return (
-    <div className="font-12">
+    <div className="font-14">
       <div className="pt-2 pb-1 font-w-700">মাপ</div>
       <div className="flex align-items-center g-2 ">
         {measurements.map((ele) => (
@@ -13,21 +23,27 @@ const OrderMeasurementProduction = ({ measurements, descriptions }) => {
           </div>
         ))}
       </div>
-      <div className="pt-2 pb-1 font-w-700">বর্ণনা</div>
-      <div className="flex align-items-center g-2 ">
-        {descriptions.map((ele) => (
-          <Fragment key={ele._id}>
-            {ele.value && (
-              <div className="flex align-items-center">
-                <div className="flex align-items-center">
-                  <FiberManualRecordRoundedIcon />
-                </div>
-                <div className="flex align-items-center">{ele.label} </div>
-              </div>
-            )}
-          </Fragment>
-        ))}
-      </div>
+      {isAnyTrue() ? (
+        <>
+          <div className="pt-2 pb-1 font-w-700">বর্ণনা</div>
+          <div className="flex align-items-center g-2 ">
+            {descriptions.map((ele) => (
+              <Fragment key={ele._id}>
+                {ele.value && (
+                  <div className="flex align-items-center">
+                    <div className="flex align-items-center">
+                      <FiberManualRecordRoundedIcon />
+                    </div>
+                    <div className="flex align-items-center">{ele.label} </div>
+                  </div>
+                )}
+              </Fragment>
+            ))}
+          </div>
+        </>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

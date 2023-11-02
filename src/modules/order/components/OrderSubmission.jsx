@@ -12,10 +12,11 @@ const OrderSubmission = () => {
   const dispatch = useDispatch();
 
   const {
-    discount,
-    customerName,
-    delivery,
     advance,
+    discount,
+    delivery,
+    clothPrice,
+    customerName,
     mobileNumber,
     measuredItems,
     status,
@@ -25,12 +26,10 @@ const OrderSubmission = () => {
     let totalCost = 0;
     measuredItems.forEach((element) => {
       totalCost =
-        totalCost +
-        (Number(element.makingCost) + Number(element.clothPrice)) *
-          Number(element.quantity);
+        totalCost + Number(element.makingCost) * Number(element.quantity);
     });
 
-    return totalCost - discount;
+    return totalCost + Number(clothPrice);
   };
 
   const handleChange = ({ field, value }) => {
@@ -39,11 +38,12 @@ const OrderSubmission = () => {
 
   const handlePlaceOrderClick = async () => {
     const orderData = {
-      customerName,
-      delivery,
       advance,
-      mobileNumber,
+      delivery,
       discount,
+      clothPrice,
+      customerName,
+      mobileNumber,
       measuredItems,
     };
     // console.log(orderData);
@@ -84,6 +84,19 @@ const OrderSubmission = () => {
             }
           />
         </Grid>
+        <Grid xs={12} md={6} lg={4}>
+          <TextField
+            label="Cloth Price"
+            variant="outlined"
+            type="number"
+            fullWidth
+            value={clothPrice}
+            inputProps={{ min: "0" }}
+            onChange={(e) =>
+              handleChange({ field: "clothPrice", value: +e.target.value })
+            }
+          />
+        </Grid>
 
         <Grid xs={12} md={6} lg={4}>
           <TextField
@@ -91,15 +104,10 @@ const OrderSubmission = () => {
             variant="outlined"
             type="number"
             fullWidth
-            inputProps={{ min: "0", max: "100" }}
+            inputProps={{ min: "0" }}
             value={discount}
-            onInput={(e) => {
-              e.target.value = Math.max(0, parseInt(e.target.value))
-                .toString()
-                .slice(0, 2);
-            }}
             onChange={(e) =>
-              handleChange({ field: "discount", value: e.target.value })
+              handleChange({ field: "discount", value: +e.target.value })
             }
           />
         </Grid>
@@ -122,7 +130,7 @@ const OrderSubmission = () => {
             value={advance}
             inputProps={{ min: "0" }}
             onChange={(e) =>
-              handleChange({ field: "advance", value: e.target.value })
+              handleChange({ field: "advance", value: +e.target.value })
             }
           />
         </Grid>
@@ -133,7 +141,7 @@ const OrderSubmission = () => {
             variant="outlined"
             type="number"
             fullWidth
-            value={calculateTotalPrice() - Number(advance)}
+            value={calculateTotalPrice() - Number(advance) - Number(discount)}
             inputProps={{ readOnly: true }}
           />
         </Grid>

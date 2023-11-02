@@ -8,27 +8,30 @@ const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: "#b0b5c2",
 }));
 
-const OrderedItemListCustomer = ({ orderedItems, advance, discount }) => {
+const OrderedItemListCustomer = ({
+  advance,
+  discount,
+  clothPrice,
+  orderedItems,
+}) => {
   const calculateTotalPrice = () => {
     let totalCost = 0;
     orderedItems.forEach((element) => {
       totalCost =
-        totalCost +
-        (Number(element.makingCost) + Number(element.clothPrice)) *
-          Number(element.quantity);
+        totalCost + Number(element.makingCost) * Number(element.quantity);
     });
 
-    return totalCost - discount;
+    return totalCost + Number(clothPrice);
   };
 
   return (
     <div>
-      <Grid container spacing={1} className="font-12">
+      <Grid container spacing={1} className="font-14">
         <Grid xs={9}>
-          <Item className="text-center ">Description</Item>
+          <Item className="text-center ">বর্ণনা</Item>
         </Grid>
         <Grid xs={3}>
-          <Item className="text-center ">Price</Item>
+          <Item className="text-center ">মুল্য</Item>
         </Grid>
 
         {orderedItems.map((ele) => (
@@ -36,42 +39,48 @@ const OrderedItemListCustomer = ({ orderedItems, advance, discount }) => {
             <Grid xs={9}>
               <Paper className="text-center ">
                 {ele.productName}
-                {ele.isTakingCloth && " + কাপড়"}
                 {" X "} {ele.quantity}
               </Paper>
             </Grid>
             <Grid xs={3}>
               <Paper className="text-center ">
-                {(ele.makingCost + ele.clothPrice) * ele.quantity} tk
+                {Number(ele.makingCost) * Number(ele.quantity)} টাকা
               </Paper>
             </Grid>
           </React.Fragment>
         ))}
         <Grid xs={9}>
-          <Paper className="text-center">Discount</Paper>
+          <Paper className="text-center">কাপড়</Paper>
         </Grid>
         <Grid xs={3}>
-          <Paper className="text-center">{discount} tk</Paper>
+          <Paper className="text-center">{clothPrice} টাকা</Paper>
         </Grid>
         <Grid xs={9}>
-          <Paper className="text-center">Total</Paper>
+          <Paper className="text-center">মোট</Paper>
         </Grid>
         <Grid xs={3}>
-          <Paper className="text-center">{calculateTotalPrice()} tk</Paper>
+          <Paper className="text-center">{calculateTotalPrice()} টাকা</Paper>
         </Grid>
         <Grid xs={9}>
-          <Paper className="text-center">Advance</Paper>
+          <Paper className="text-center">ডিস্কাউন্ট</Paper>
         </Grid>
         <Grid xs={3}>
-          <Paper className="text-center">{advance} tk</Paper>
+          <Paper className="text-center">{discount} টাকা</Paper>
         </Grid>
 
         <Grid xs={9}>
-          <Paper className="text-center">Due</Paper>
+          <Paper className="text-center">এডভান্স</Paper>
+        </Grid>
+        <Grid xs={3}>
+          <Paper className="text-center">{advance} টাকা</Paper>
+        </Grid>
+
+        <Grid xs={9}>
+          <Paper className="text-center">বাকী</Paper>
         </Grid>
         <Grid xs={3}>
           <Paper className="text-center">
-            {calculateTotalPrice() - advance} tk
+            {calculateTotalPrice() - Number(advance) - Number(discount)} টাকা
           </Paper>
         </Grid>
       </Grid>

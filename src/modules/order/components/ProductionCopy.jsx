@@ -12,14 +12,16 @@ import { dateTimeFormat } from "../../../constants/dateTimeFormat";
 const ProductionCopy = ({
   orderNo,
   delivery,
+  orderDate,
   measuredItems,
-  customerMobile,
+
+  customerName,
 }) => {
   const { toPDF, targetRef } = usePDF({
     method: "open",
     filename: "multipage-example.pdf",
   });
-
+  
   return (
     <div>
       <div ref={targetRef}>
@@ -35,7 +37,8 @@ const ProductionCopy = ({
                 deliveryDate={dayjs(delivery).format(
                   dateTimeFormat.invoiceDate
                 )}
-                customerMobile={customerMobile}
+                orderDate={dayjs(orderDate).format(dateTimeFormat.invoiceDate)}
+                customerName={customerName}
               />
               <Divider sx={{ backgroundColor: "aqua", marginBlock: 1 }} />
               <OrderMeasurementProduction
@@ -48,7 +51,7 @@ const ProductionCopy = ({
       </div>
       <div className="flex justify-content-center py-2">
         <Button variant="contained" onClick={toPDF}>
-          Save Production Copy
+          প্রোডাকশন কপি সংরক্ষন করুন
         </Button>
       </div>
     </div>

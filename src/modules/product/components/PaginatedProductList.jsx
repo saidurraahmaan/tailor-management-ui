@@ -43,27 +43,26 @@ const PaginatedProductList = ({ data, itemsPerPage }) => {
           </Fragment>
         )
       )}
-      <div className="flex justify-content-center wd-100">
-        <Pagination
-          count={pageCount}
-          page={currentPage}
-          onChange={handlePageChange}
-          color="secondary"
-          sx={{
-            "& .MuiPaginationItem-page": {
-              fontSize: "20px",
-              padding: 1,
-            },
-          }}
-          renderItem={(item) => (
-            <PaginationItem
-              slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
-              {...item}
-            />
-          )}
-          className="pt-5"
-        />
-      </div>
+
+      <Pagination
+        count={pageCount}
+        page={currentPage}
+        onChange={handlePageChange}
+        color="secondary"
+        sx={{
+          "& .MuiPaginationItem-page": {
+            fontSize: "20px",
+            padding: 1,
+          },
+        }}
+        renderItem={(item) => (
+          <PaginationItem
+            slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
+            {...item}
+          />
+        )}
+        className="pt-5"
+      />
     </>
   );
 };

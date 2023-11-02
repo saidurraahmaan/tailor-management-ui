@@ -54,14 +54,11 @@ const ProductList = () => {
         <Grid
           container
           spacing={2}
-          display={"flex"}
-          alignItems={"center"}
-          justifyContent={"center"}
         >
           <Grid xs={4}>ProductName</Grid>
           <Grid xs={4}>Type</Grid>
           <Grid xs={4}>Action</Grid>
-          <PaginatedProductList data={responseData} itemsPerPage={10} />
+          <PaginatedProductList data={responseData} itemsPerPage={8} />
         </Grid>
       )}
     </div>
