@@ -5,10 +5,11 @@ import { useNavigate, Link } from "react-router-dom";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import unauthorizeImg from "../../assets/images/unauthorize.webp";
 import { APPROUTES } from "../../constants/routes";
+import Footer from "../patterns/Footer";
 
 const UnAuthorized = () => {
   const navigate = useNavigate();
-  
+
   return (
     <Container maxWidth="sm">
       <Grid container alignItems={"center"} className="p-5" minHeight="80vh">
@@ -57,6 +58,7 @@ const UnAuthorized = () => {
           </div>
         </Grid>
       </Grid>
+      <Footer />
     </Container>
   );
 };
