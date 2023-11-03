@@ -8,7 +8,7 @@ import { authInformation, successfulLogin } from "./authSlice";
 import "./index.css";
 import { STATUS } from "../../constants/fetch";
 import { APPROUTES } from "../../constants/routes";
-import { Toaster } from "../../components";
+import { Footer, Toaster } from "../../components";
 
 const Signin = () => {
   const navigate = useNavigate();
@@ -108,6 +108,7 @@ const Signin = () => {
         open={status === STATUS.ERROR}
         handleClose={handleToasterClose}
       />
+      <Footer />
     </Container>
   );
 };

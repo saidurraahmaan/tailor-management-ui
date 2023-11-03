@@ -4,6 +4,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import carTreeImg from "../../assets/images/car_tree.page_not_found.gif";
+import Footer from "../patterns/Footer";
 
 const NotFound = () => {
   const navigate = useNavigate();
@@ -48,6 +49,7 @@ const NotFound = () => {
           </div>
         </Grid>
       </Grid>
+      <Footer />
     </Container>
   );
 };

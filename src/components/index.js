@@ -1,3 +1,4 @@
+import Footer from "./patterns/Footer";
 import Toaster from "./patterns/Toaster";
 import AppCard from "./patterns/AppCard";
 import AppModal from "./patterns/AppModal";
@@ -17,6 +18,7 @@ import OrderedItemListCustomer from "./patterns/OrderedItemListCustomer";
 import OrderMeasurementProduction from "./patterns/OrderMeasurementProduction";
 
 export {
+  Footer,
   AppCard,
   Toaster,
   NotFound,
