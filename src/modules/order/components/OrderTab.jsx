@@ -21,10 +21,34 @@ export default function OrderTab({ value, setValue, setShowingState }) {
       textColor="secondary"
       indicatorColor="secondary"
     >
-      <Tab value={NewOrderTabConstant.ProductList} label="Measured Products" />
-      <Tab value={NewOrderTabConstant.OrderInfo} label="Order info" />
-      <Tab value={NewOrderTabConstant.ProductionCopy} label="Production Copy" />
-      <Tab value={NewOrderTabConstant.CustomerCopy} label="Customer Copy" />
+      <Tab
+        className={`${
+          value !== NewOrderTabConstant.ProductList ? "tab-btn-color" : ""
+        }`}
+        value={NewOrderTabConstant.ProductList}
+        label="Measured Products"
+      />
+      <Tab
+        className={`${
+          value !== NewOrderTabConstant.OrderInfo ? "tab-btn-color" : ""
+        }`}
+        value={NewOrderTabConstant.OrderInfo}
+        label="Order info"
+      />
+      <Tab
+        className={`${
+          value !== NewOrderTabConstant.ProductionCopy ? "tab-btn-color" : ""
+        }`}
+        value={NewOrderTabConstant.ProductionCopy}
+        label="Production Copy"
+      />
+      <Tab
+        className={`${
+          value !== NewOrderTabConstant.CustomerCopy ? "tab-btn-color" : ""
+        }`}
+        value={NewOrderTabConstant.CustomerCopy}
+        label="Customer Copy"
+      />
     </Tabs>
   );
 }

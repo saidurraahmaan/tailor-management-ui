@@ -153,7 +153,7 @@ const OrderSubmission = () => {
           loading={status === STATUS.LOADING}
           onClick={handlePlaceOrderClick}
         >
-          Place the order
+          অর্ডার করুন 
         </LoadingButton>
       </div>
     </>

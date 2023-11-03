@@ -15,24 +15,23 @@ const MeasurementFields = ({ orderInfo, setOrderInfo }) => {
 
   return (
     <React.Fragment>
-      {productMeasurements.map((ele) => (
-        <Grid key={ele._id} container spacing={3} alignItems={"center"}>
-          <Grid xs={6} sm={5} lg={4}>
-            {ele.label}
-          </Grid>
-          <Grid xs={6} sm={5} lg={4}>
+      <Grid container spacing={3} alignItems={"center"}>
+        {productMeasurements.map((ele) => (
+          <Grid key={ele._id} xs={3} sm={2} lg={1}>
+            <div className="text-center py-1">{ele.label}</div>
             <TextField
               type={"number"}
               size="small"
               inputProps={{
+                min: "0",
                 style: { padding: "4px 12px", textAlign: "center" },
               }}
               value={ele.value}
-              onChange={(e) => handleChange(e.target.value, ele._id)}
+              onChange={(e) => handleChange(+e.target.value, ele._id)}
             />
           </Grid>
-        </Grid>
-      ))}
+        ))}
+      </Grid>
     </React.Fragment>
   );
 };
