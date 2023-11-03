@@ -44,23 +44,17 @@ const Measurement = ({
     dispatch(updateOrderField({ field: "measuredItems", value: updatedItems }));
     setOrderInfo(orderInfoInitialState);
   };
-  // console.log(orderInfo);
+
   return (
     <div>
-      <div className="flex align-items-start g-3 py-1">
-        <div className="wd-30">
-          <MeasurementFields
-            orderInfo={orderInfo}
-            setOrderInfo={setOrderInfo}
-          />
-        </div>
-        <div className="wd-70">
-          <DescriptionBoxes orderInfo={orderInfo} setOrderInfo={setOrderInfo} />
-        </div>
+      <div className="py-1">
+        <MeasurementFields orderInfo={orderInfo} setOrderInfo={setOrderInfo} />
+      </div>
+      <div className="py-2">
+        <DescriptionBoxes orderInfo={orderInfo} setOrderInfo={setOrderInfo} />
       </div>
       <Grid container spacing={2} className="py-2">
-
-        <Grid xs={12} md={6} lg={4}>
+        <Grid xs={6} md={4} lg={2}>
           <TextField
             label="Making Cost"
             variant="outlined"
@@ -75,7 +69,7 @@ const Measurement = ({
             }
           />
         </Grid>
-        <Grid xs={12} md={6} lg={4}>
+        <Grid xs={6} md={4} lg={2}>
           <TextField
             label="Quantity"
             variant="outlined"
@@ -94,7 +88,7 @@ const Measurement = ({
 
       <div className="pt-4 flex justify-content-center">
         <Button variant="contained" onClick={handleAddBtnClick} color="success">
-          {_id ? "Update" : "Add"}
+          {_id ? "Update" : "প্রোডাক্টটি যোগ করুন"}
         </Button>
       </div>
     </div>

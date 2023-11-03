@@ -1,5 +1,4 @@
 import React from "react";
-
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import FormGroup from "@mui/material/FormGroup";
@@ -20,20 +19,22 @@ const DescriptionBoxes = ({ orderInfo, setOrderInfo }) => {
 
   return (
     <React.Fragment>
-      {productDescriptions.map((ele) => (
-        <FormGroup key={ele._id}>
-          <FormControlLabel
-            control={
-              <Checkbox
-                size="small"
-                checked={ele.value}
-                onChange={(e) => handleChange(e.target.checked, ele._id)}
-              />
-            }
-            label={ele.label}
-          />
-        </FormGroup>
-      ))}
+      <div className="flex align-items-center g-3">
+        {productDescriptions.map((ele) => (
+          <FormGroup key={ele._id}>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  size="small"
+                  checked={ele.value}
+                  onChange={(e) => handleChange(e.target.checked, ele._id)}
+                />
+              }
+              label={ele.label}
+            />
+          </FormGroup>
+        ))}
+      </div>
     </React.Fragment>
   );
 };
