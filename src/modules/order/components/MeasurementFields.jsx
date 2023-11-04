@@ -1,5 +1,5 @@
 import React from "react";
-import { TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 
 const MeasurementFields = ({ orderInfo, setOrderInfo }) => {
@@ -15,16 +15,18 @@ const MeasurementFields = ({ orderInfo, setOrderInfo }) => {
 
   return (
     <React.Fragment>
-      <Grid container spacing={3} alignItems={"center"}>
+      <Grid container spacing={2} alignItems={"center"}>
         {productMeasurements.map((ele) => (
-          <Grid key={ele._id} xs={3} sm={2} lg={1}>
-            <div className="text-center py-1">{ele.label}</div>
+          <Grid key={ele._id} xs={4} sm={3} lg={2}>
+            <Box className="py-1 text-center">{ele.label}</Box>
+
             <TextField
               type={"number"}
+              fullWidth
               size="small"
               inputProps={{
                 min: "0",
-                style: { padding: "4px 12px", textAlign: "center" },
+                // style: { textAlign: "center" },
               }}
               value={ele.value}
               onChange={(e) => handleChange(+e.target.value, ele._id)}
