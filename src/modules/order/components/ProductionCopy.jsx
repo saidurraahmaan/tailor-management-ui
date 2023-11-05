@@ -51,7 +51,7 @@ const ProductionCopy = ({
       </div>
       <div className="flex justify-content-center py-2">
         <Button variant="contained" onClick={toPDF}>
-          প্রোডাকশন কপি সংরক্ষন করুন
+          প্রোডাকশন কপি প্রিন্ট করুন
         </Button>
       </div>
     </div>

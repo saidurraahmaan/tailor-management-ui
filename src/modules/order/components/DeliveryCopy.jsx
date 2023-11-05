@@ -1,9 +1,9 @@
 import React, { useRef, useLayoutEffect, useState } from "react";
 import { Button, Divider } from "@mui/material";
-import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import generatePDF from "react-to-pdf";
 import {
   CustomerCopyHeader,
+  OrderInfoCustomer,
   OrderedItemListCustomer,
 } from "../../../components";
 import dayjs from "dayjs";
@@ -14,9 +14,12 @@ import paidimage from "../../../assets/images/paid.png";
 const DeliveryCopy = ({
   orderNo,
   delivery,
-  measuredItems,
   advance,
   discount,
+  orderDate,
+  clothPrice,
+  customerName,
+  measuredItems,
 }) => {
   const [height, setHeight] = useState(0);
   const targetRef = useRef();
@@ -24,27 +27,24 @@ const DeliveryCopy = ({
   useLayoutEffect(() => {
     setHeight(targetRef.current.offsetHeight);
   }, []);
-  
+
   return (
     <div>
-      <div className="flex justify-content-center" ref={targetRef}>
+      <div className="flex justify-content-center py-2" ref={targetRef}>
         <div className="customer-copy-container wd-100">
           <CustomerCopyHeader />
           <Divider sx={{ backgroundColor: "aqua", marginBlock: 1 }} />
-          <Grid className="font-12" container spacing={2}>
-            <Grid xs={6}>
-              <span className="font-w-700">অর্ডার নং: </span>
-              {orderNo}
-            </Grid>
-            <Grid xs={6}>
-              <span className="font-w-700">তারিখ: </span>
-              {dayjs(delivery).format(dateTimeFormat.invoiceDate)}
-            </Grid>
-          </Grid>
+          <OrderInfoCustomer
+            orderNo={orderNo}
+            orderDate={dayjs(orderDate).format(dateTimeFormat.invoiceDate)}
+            deliveryDate={dayjs(delivery).format(dateTimeFormat.invoiceDate)}
+            customerName={customerName}
+          />
           <Divider sx={{ backgroundColor: "aqua", marginBlock: 1 }} />
           <OrderedItemListCustomer
             advance={advance}
             discount={discount}
+            clothPrice={clothPrice}
             orderedItems={measuredItemsToCustomerOrderItems(measuredItems)}
           />
           <div className="py-2 flex justify-content-center">
@@ -73,7 +73,7 @@ const DeliveryCopy = ({
             })
           }
         >
-          ডেলিভারি কপি দেখুন
+          প্রিন্ট ডেলিভারি কপি
         </Button>
       </div>
     </div>
