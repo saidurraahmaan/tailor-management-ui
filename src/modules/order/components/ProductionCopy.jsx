@@ -21,40 +21,40 @@ const ProductionCopy = ({
     method: "open",
     filename: "multipage-example.pdf",
   });
-  
+
   return (
-    <div>
+    <>
       <div ref={targetRef}>
-        {measuredItems.map((ele) => (
-          <div className="flex justify-content-center" key={ele._id}>
-            <div className="production-container wd-100">
-              <ProductionCopyHeader />
-              <Divider sx={{ backgroundColor: "aqua", marginBlock: 1 }} />
-              <OrderInfoProduction
-                orderNo={orderNo}
-                productName={ele.productName}
-                quantity={ele.quantity}
-                deliveryDate={dayjs(delivery).format(
-                  dateTimeFormat.invoiceDate
-                )}
-                orderDate={dayjs(orderDate).format(dateTimeFormat.invoiceDate)}
-                customerName={customerName}
-              />
-              <Divider sx={{ backgroundColor: "aqua", marginBlock: 1 }} />
-              <OrderMeasurementProduction
-                measurements={ele.productMeasurements}
-                descriptions={ele.productDescriptions}
-              />
-            </div>
+        <div className="flex justify-content-center my-1">
+          <div className="production-container wd-100">
+            <ProductionCopyHeader />
+            <Divider sx={{ backgroundColor: "aqua", marginBlock: 1 }} />
+            <OrderInfoProduction
+              orderNo={orderNo}
+              deliveryDate={dayjs(delivery).format(dateTimeFormat.invoiceDate)}
+              orderDate={dayjs(orderDate).format(dateTimeFormat.invoiceDate)}
+              customerName={customerName}
+            />
+            <Divider sx={{ backgroundColor: "aqua", marginBlock: 1 }} />
+            {measuredItems.map((ele) => (
+              <React.Fragment key={ele._id}>
+                <OrderMeasurementProduction
+                  productName={ele.productName}
+                  quantity={ele.quantity}
+                  measurements={ele.productMeasurements}
+                  descriptions={ele.productDescriptions}
+                />
+              </React.Fragment>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
       <div className="flex justify-content-center py-2">
         <Button variant="contained" onClick={toPDF}>
-          প্রোডাকশন কপি সংরক্ষন করুন
+          প্রোডাকশন কপি প্রিন্ট করুন
         </Button>
       </div>
-    </div>
+    </>
   );
 };
 

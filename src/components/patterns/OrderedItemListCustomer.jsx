@@ -1,11 +1,19 @@
 import React from "react";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import { Paper } from "@mui/material";
+import {  Paper } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import "../index.css";
 
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: "#b0b5c2",
+  // backgroundColor: "#b0b5c2",
+  fontWeight: 700,
+  padding: "8px",
+  border: "1px solid",
+}));
+
+const PaperItem = styled(Paper)(({ theme }) => ({
+  padding: "4px 8px",
+  border: "1px solid",
 }));
 
 const OrderedItemListCustomer = ({
@@ -28,60 +36,61 @@ const OrderedItemListCustomer = ({
     <div>
       <Grid container spacing={1} className="font-14">
         <Grid xs={9}>
-          <Item className="text-center ">বর্ণনা</Item>
+          <Item className="text-center">বর্ণনা</Item>
         </Grid>
         <Grid xs={3}>
-          <Item className="text-center ">মুল্য</Item>
+          <Item className="text-center">মুল্য</Item>
         </Grid>
-
+        {/* <Divider sx={{ backgroundColor: "aqua", marginBlock: 1 }} /> */}
+        <Grid xs={9}>
+          <PaperItem>কাপড়</PaperItem>
+        </Grid>
+        <Grid xs={3}>
+          <PaperItem>{clothPrice} টাকা</PaperItem>
+        </Grid>
         {orderedItems.map((ele) => (
           <React.Fragment key={ele.id}>
             <Grid xs={9}>
-              <Paper className="text-center ">
+              <PaperItem>
                 {ele.productName}
                 {" X "} {ele.quantity}
-              </Paper>
+              </PaperItem>
             </Grid>
             <Grid xs={3}>
-              <Paper className="text-center ">
+              <PaperItem>
                 {Number(ele.makingCost) * Number(ele.quantity)} টাকা
-              </Paper>
+              </PaperItem>
             </Grid>
           </React.Fragment>
         ))}
+
         <Grid xs={9}>
-          <Paper className="text-center">কাপড়</Paper>
+          <PaperItem>মোট</PaperItem>
         </Grid>
         <Grid xs={3}>
-          <Paper className="text-center">{clothPrice} টাকা</Paper>
+          <PaperItem>{calculateTotalPrice()} টাকা</PaperItem>
         </Grid>
         <Grid xs={9}>
-          <Paper className="text-center">মোট</Paper>
+          <PaperItem>ডিস্কাউন্ট</PaperItem>
         </Grid>
         <Grid xs={3}>
-          <Paper className="text-center">{calculateTotalPrice()} টাকা</Paper>
-        </Grid>
-        <Grid xs={9}>
-          <Paper className="text-center">ডিস্কাউন্ট</Paper>
-        </Grid>
-        <Grid xs={3}>
-          <Paper className="text-center">{discount} টাকা</Paper>
+          <PaperItem>{discount} টাকা</PaperItem>
         </Grid>
 
         <Grid xs={9}>
-          <Paper className="text-center">এডভান্স</Paper>
+          <PaperItem>এডভান্স</PaperItem>
         </Grid>
         <Grid xs={3}>
-          <Paper className="text-center">{advance} টাকা</Paper>
+          <PaperItem>{advance} টাকা</PaperItem>
         </Grid>
 
         <Grid xs={9}>
-          <Paper className="text-center">বাকী</Paper>
+          <PaperItem>বাকী</PaperItem>
         </Grid>
         <Grid xs={3}>
-          <Paper className="text-center">
+          <PaperItem>
             {calculateTotalPrice() - Number(advance) - Number(discount)} টাকা
-          </Paper>
+          </PaperItem>
         </Grid>
       </Grid>
     </div>
