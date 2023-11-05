@@ -17,9 +17,8 @@ const MeasurementFields = ({ orderInfo, setOrderInfo }) => {
     <React.Fragment>
       <Grid container spacing={2} alignItems={"center"}>
         {productMeasurements.map((ele) => (
-          <Grid key={ele._id} xs={4} sm={3} lg={2}>
+          <Grid key={ele._id} xs={3} md={2} lg={1.5}>
             <Box className="py-1 text-center">{ele.label}</Box>
-
             <TextField
               type={"number"}
               fullWidth
