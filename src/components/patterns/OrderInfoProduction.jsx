@@ -11,20 +11,21 @@ const OrderInfoProduction = ({
     <Grid className="font-14" container spacing={2}>
       <Grid xs={6}>
         <span className="font-w-700">অর্ডার নং: </span>
-        {orderNo}
+        <span className="font-16">{orderNo}</span>
       </Grid>
       <Grid xs={6}>
         <span className="font-w-700">অর্ডার তারিখ: </span>
-        {orderDate}
+        <span className="font-16">{orderDate}</span>
       </Grid>
 
       <Grid xs={6}>
         <span className="font-w-700">কাস্টমারের নাম: </span>
-        {customerName}
+        <span className="font-16">{customerName}</span>
       </Grid>
       <Grid xs={6}>
         <span className="font-w-700">ডেলিভারি তারিখ: </span>
-        {deliveryDate}
+
+        <span className="font-16">{deliveryDate}</span>
       </Grid>
     </Grid>
   );
