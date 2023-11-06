@@ -15,16 +15,13 @@ const CustomerCopyHeader = () => {
       >
         {user.storeName}
       </Grid>
-      <Grid className="py-1 font-14  font-w-700" xs={6}>
+      <Grid className="py-1 font-14  font-w-700 text-center" xs={12}>
         {user.storeAddress}
       </Grid>
 
-      <Grid className="py-1 font-14 " xs={6}>
+      <Grid className="py-1 font-14 text-center" xs={12}>
         <span className="font-w-700">মোবাইল:</span> {user.phone}
       </Grid>
-      {/* <Grid className="py-1" xs={6}>
-        <span className="font-w-700">Email:</span> {user.email}
-      </Grid> */}
     </Grid>
   );
 };
