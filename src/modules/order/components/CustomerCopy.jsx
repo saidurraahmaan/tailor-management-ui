@@ -39,7 +39,7 @@ const CustomerCopy = ({
             deliveryDate={dayjs(delivery).format(dateTimeFormat.invoiceDate)}
             customerName={customerName}
           />
-          <Divider sx={{ backgroundColor: "aqua", marginBlock: 1 }} />
+          <Divider sx={{  marginBlock: 1 }} />
           <OrderedItemListCustomer
             advance={advance}
             discount={discount}

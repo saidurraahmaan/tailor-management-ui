@@ -1,20 +1,22 @@
 import React from "react";
-import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import {  Paper } from "@mui/material";
-import { styled } from "@mui/material/styles";
 import "../index.css";
 
-const Item = styled(Paper)(({ theme }) => ({
-  // backgroundColor: "#b0b5c2",
-  fontWeight: 700,
-  padding: "8px",
-  border: "1px solid",
-}));
+const tableStyle = {
+  border: "1px solid #000",
+  borderCollapse: "collapse",
+  width: "100%",
+};
 
-const PaperItem = styled(Paper)(({ theme }) => ({
-  padding: "4px 8px",
-  border: "1px solid",
-}));
+const cellStyle = {
+  border: "1px solid #000",
+  padding: "8px",
+};
+
+const valueCellStyle = {
+  border: "1px solid #000",
+  padding: "8px",
+  textAlign: "end",
+};
 
 const OrderedItemListCustomer = ({
   advance,
@@ -25,8 +27,7 @@ const OrderedItemListCustomer = ({
   const calculateTotalPrice = () => {
     let totalCost = 0;
     orderedItems.forEach((element) => {
-      totalCost =
-        totalCost + Number(element.makingCost) * Number(element.quantity);
+      totalCost += Number(element.makingCost) * Number(element.quantity);
     });
 
     return totalCost + Number(clothPrice);
@@ -34,65 +35,52 @@ const OrderedItemListCustomer = ({
 
   return (
     <div>
-      <Grid container spacing={1} className="font-14">
-        <Grid xs={9}>
-          <Item className="text-center">বর্ণনা</Item>
-        </Grid>
-        <Grid xs={3}>
-          <Item className="text-center">মুল্য</Item>
-        </Grid>
-        {/* <Divider sx={{ backgroundColor: "aqua", marginBlock: 1 }} /> */}
-        <Grid xs={9}>
-          <PaperItem>কাপড়</PaperItem>
-        </Grid>
-        <Grid xs={3}>
-          <PaperItem>{clothPrice} টাকা</PaperItem>
-        </Grid>
-        {orderedItems.map((ele) => (
-          <React.Fragment key={ele.id}>
-            <Grid xs={9}>
-              <PaperItem>
-                {ele.productName}
-                {" X "} {ele.quantity}
-              </PaperItem>
-            </Grid>
-            <Grid xs={3}>
-              <PaperItem>
-                {Number(ele.makingCost) * Number(ele.quantity)} টাকা
-              </PaperItem>
-            </Grid>
-          </React.Fragment>
-        ))}
-
-        <Grid xs={9}>
-          <PaperItem>মোট</PaperItem>
-        </Grid>
-        <Grid xs={3}>
-          <PaperItem>{calculateTotalPrice()} টাকা</PaperItem>
-        </Grid>
-        <Grid xs={9}>
-          <PaperItem>ডিস্কাউন্ট</PaperItem>
-        </Grid>
-        <Grid xs={3}>
-          <PaperItem>{discount} টাকা</PaperItem>
-        </Grid>
-
-        <Grid xs={9}>
-          <PaperItem>এডভান্স</PaperItem>
-        </Grid>
-        <Grid xs={3}>
-          <PaperItem>{advance} টাকা</PaperItem>
-        </Grid>
-
-        <Grid xs={9}>
-          <PaperItem>বাকী</PaperItem>
-        </Grid>
-        <Grid xs={3}>
-          <PaperItem>
-            {calculateTotalPrice() - Number(advance) - Number(discount)} টাকা
-          </PaperItem>
-        </Grid>
-      </Grid>
+      <table style={tableStyle} className="font-14">
+        <thead>
+          <tr>
+            <th className="text-center" style={cellStyle}>
+              বর্ণনা
+            </th>
+            <th className="text-center" style={cellStyle}>
+              মুল্য
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style={cellStyle}>কাপড়</td>
+            <td style={valueCellStyle}>{clothPrice} </td>
+          </tr>
+          {orderedItems.map((ele) => (
+            <tr key={ele.id}>
+              <td style={cellStyle}>
+                {ele.productName} X {ele.quantity}
+              </td>
+              <td style={valueCellStyle}>
+                {Number(ele.makingCost) * Number(ele.quantity)}
+              </td>
+            </tr>
+          ))}
+          <tr>
+            <td style={cellStyle}>মোট</td>
+            <td style={valueCellStyle}>{calculateTotalPrice()} </td>
+          </tr>
+          <tr>
+            <td style={cellStyle}>ডিস্কাউন্ট</td>
+            <td style={valueCellStyle}>{discount} </td>
+          </tr>
+          <tr>
+            <td style={cellStyle}>এডভান্স</td>
+            <td style={valueCellStyle}>{advance} </td>
+          </tr>
+          <tr>
+            <td style={cellStyle}>বাকী</td>
+            <td style={valueCellStyle}>
+              {calculateTotalPrice() - Number(advance) - Number(discount)}
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 };
