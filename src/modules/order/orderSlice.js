@@ -23,6 +23,27 @@ const orderSlice = createSlice({
       const { field, value } = action.payload;
       state[field] = value;
     },
+    updateOrderStates(state, action) {
+      const {
+        orderNo,
+        advance,
+        customerName,
+        discount,
+        clothPrice,
+        delivery,
+        mobileNumber,
+        measuredItems,
+      } = action.payload;
+
+      state.orderNo = orderNo;
+      state.advance = advance;
+      state.discount = discount;
+      state.delivery = dayjs(delivery);
+      state.clothPrice = clothPrice;
+      state.customerName = customerName;
+      state.mobileNumber = mobileNumber;
+      state.measuredItems = measuredItems;
+    },
     resetOrderSlice(state) {
       Object.assign(state, initialState);
     },
@@ -51,6 +72,7 @@ const orderSlice = createSlice({
 });
 
 export const getOrderReducer = (state) => state.order;
-export const { updateOrderField, resetOrderSlice } = orderSlice.actions;
+export const { updateOrderField, resetOrderSlice, updateOrderStates } =
+  orderSlice.actions;
 
 export default orderSlice.reducer;

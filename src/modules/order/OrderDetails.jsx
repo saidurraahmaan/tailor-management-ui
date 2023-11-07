@@ -57,6 +57,20 @@ const OrderDetails = () => {
     }
   };
 
+  const handleAddNewOrderFrom = () => {
+    const orderDetails = {
+      mobileNumber: "",
+      customerName: "",
+      delivery: new Date(),
+      orderNo: responseData.orderNo,
+      advance: responseData.advance,
+      discount: responseData.discount,
+      clothPrice: responseData.clothPrice,
+      measuredItems: responseData.measuredItems,
+    };
+    navigate(APPROUTES.newOrder, { state: orderDetails });
+  };
+
   const handleModalOkDelete = async () => {
     setStatus(STATUS.LOADING);
 
@@ -154,21 +168,35 @@ const OrderDetails = () => {
               variant="contained"
               onClick={() => navigate(APPROUTES.orderCustomerCopy(id))}
             >
-              Customer Copy
+              কাস্টমার কপি
             </Button>
             <Button
               variant="contained"
               color="secondary"
               onClick={() => navigate(APPROUTES.orderProductionCopy(id))}
             >
-              Production Copy
+              প্রোডাকশন কপি
             </Button>
             <Button
               variant="contained"
               color="error"
               onClick={() => setDeleteModalOpen(true)}
             >
-              Cancel Order
+              ক্যান্সেল অর্ডার
+            </Button>
+            <Button
+              variant="contained"
+              color="success"
+              onClick={handleAddNewOrderFrom}
+            >
+              এখান থেকে নতুন অর্ডার
+            </Button>
+            <Button
+              variant="contained"
+              color="warning"
+              onClick={() => setDeleteModalOpen(true)}
+            >
+              এডিট করুন
             </Button>
           </div>
         </div>

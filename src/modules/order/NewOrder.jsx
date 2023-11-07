@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useOutletContext } from "react-router-dom";
+import { useLocation, useOutletContext } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import { STATUS } from "../../constants/fetch";
 import {
@@ -30,6 +30,7 @@ import {
   getOrderReducer,
   resetOrderSlice,
   updateOrderField,
+  updateOrderStates,
 } from "./orderSlice";
 import {
   newOrderInitialState,
@@ -44,6 +45,7 @@ const NewOrder = () => {
   const { setDrawerText } = useOutletContext();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { state } = useLocation();
   const [newOrderState, setNewOrderState] = useState(newOrderInitialState);
   const [orderInfo, setOrderInfo] = useState(orderInfoInitialState);
   const [showingState, setShowingState] = useState(showingStateInitialState);
@@ -152,6 +154,12 @@ const NewOrder = () => {
       navigate(APPROUTES.orderSuccess);
     }
   }, [navigate, status]);
+
+  useEffect(() => {
+    if (state) {
+      dispatch(updateOrderStates(state));
+    }
+  }, [state, dispatch]);
 
   return (
     <div>

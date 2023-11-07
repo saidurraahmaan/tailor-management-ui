@@ -29,7 +29,7 @@ const CustomerCopy = ({
 
   return (
     <div>
-      <div className="flex justify-content-center" ref={targetRef}>
+      <div className="flex justify-content-center pt-3" ref={targetRef}>
         <div className="customer-copy-container wd-100">
           <CustomerCopyHeader />
           <Divider sx={{ backgroundColor: "aqua", marginBlock: 1 }} />
