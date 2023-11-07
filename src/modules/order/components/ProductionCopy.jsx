@@ -25,7 +25,7 @@ const ProductionCopy = ({
   return (
     <>
       <div ref={targetRef}>
-        <div className="flex justify-content-center my-1">
+        <div className="flex justify-content-center pt-2">
           <div className="production-container wd-100">
             <ProductionCopyHeader />
             <Divider sx={{ backgroundColor: "aqua", marginBlock: 1 }} />
