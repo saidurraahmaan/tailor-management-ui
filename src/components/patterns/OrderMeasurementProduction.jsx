@@ -21,13 +21,8 @@ const OrderMeasurementProduction = ({
   return (
     <div className="font-14 py-2">
       <Grid container spacing={2}>
-        <Grid xs={6}>
-          <span className="font-w-700">অর্ডার আইটেম: </span>
-          {productName}
-        </Grid>
-        <Grid xs={6}>
-          <span className="font-w-700">কোয়ান্টিটি: </span>
-          <span className="font-16">{quantity}</span>
+        <Grid xs={12} sx={{ fontWeight: 700 }}>
+          {productName} X {quantity}
         </Grid>
       </Grid>
       <div className="py-1 font-w-700">মাপ</div>
@@ -35,7 +30,9 @@ const OrderMeasurementProduction = ({
         {measurements.map((ele) => (
           <div className="text-center" key={ele._id}>
             <div className="production-order-item-field">{ele.label}</div>
-            <div className="production-order-item-value font-16">{ele.value || 0}</div>
+            <div className="production-order-item-value font-16">
+              {ele.value || 0}
+            </div>
           </div>
         ))}
       </div>

@@ -5,10 +5,10 @@ import { placeNewOrder } from "./orderApi";
 
 const initialState = {
   orderNo: 0,
-  advance: 0,
+  advance: "",
   customerName: "",
-  discount: 0,
-  clothPrice: 0,
+  discount: "",
+  clothPrice: "",
   delivery: dayjs(),
   mobileNumber: "",
   measuredItems: [],

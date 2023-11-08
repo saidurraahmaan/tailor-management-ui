@@ -62,10 +62,10 @@ const OrderDetails = () => {
       mobileNumber: "",
       customerName: "",
       delivery: new Date(),
-      orderNo: responseData.orderNo,
-      advance: responseData.advance,
-      discount: responseData.discount,
-      clothPrice: responseData.clothPrice,
+      orderNo: 0,
+      advance: "",
+      discount: "",
+      clothPrice: "",
       measuredItems: responseData.measuredItems,
     };
     navigate(APPROUTES.newOrder, { state: orderDetails });
@@ -94,7 +94,7 @@ const OrderDetails = () => {
   };
 
   useEffect(() => {
-    setDrawerText("Order Details");
+    setDrawerText("অর্ডারের বিস্তারিত");
   }, [setDrawerText]);
 
   if (fetchStatus === STATUS.LOADING) {
@@ -189,12 +189,12 @@ const OrderDetails = () => {
               color="success"
               onClick={handleAddNewOrderFrom}
             >
-              এখান থেকে নতুন অর্ডার
+              পুনরায় অর্ডার করুন
             </Button>
             <Button
               variant="contained"
               color="warning"
-              onClick={() => setDeleteModalOpen(true)}
+              onClick={() => navigate(APPROUTES.editOrder(id))}
             >
               এডিট করুন
             </Button>

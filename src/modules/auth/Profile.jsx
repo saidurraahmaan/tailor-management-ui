@@ -125,7 +125,7 @@ const Profile = () => {
   }, []);
 
   useEffect(() => {
-    setDrawerText("Profile");
+    setDrawerText("প্রোফাইল");
   }, [setDrawerText]);
 
   return (

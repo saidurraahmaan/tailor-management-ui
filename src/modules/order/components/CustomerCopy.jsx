@@ -29,8 +29,8 @@ const CustomerCopy = ({
 
   return (
     <div>
-      <div className="flex justify-content-center pt-3" ref={targetRef}>
-        <div className="customer-copy-container wd-100">
+      <div className="flex justify-content-center pt-2">
+        <div className="customer-copy-container wd-100" ref={targetRef}>
           <CustomerCopyHeader />
           <Divider sx={{ backgroundColor: "aqua", marginBlock: 1 }} />
           <OrderInfoCustomer
@@ -39,7 +39,7 @@ const CustomerCopy = ({
             deliveryDate={dayjs(delivery).format(dateTimeFormat.invoiceDate)}
             customerName={customerName}
           />
-          <Divider sx={{  marginBlock: 1 }} />
+          <Divider sx={{ marginBlock: 1 }} />
           <OrderedItemListCustomer
             advance={advance}
             discount={discount}
@@ -62,7 +62,7 @@ const CustomerCopy = ({
                 unit: "px",
                 format: [height - 50, height - 250],
                 // default is 'portrait'
-                orientation: "landscape",
+                // orientation: "landscape",
               },
             })
           }

@@ -18,7 +18,7 @@ const DeliveryPage = () => {
   );
 
   useEffect(() => {
-    setDrawerText("Order Delivery");
+    setDrawerText("অর্ডার ডেলিভারি");
   }, [setDrawerText]);
 
   if (fetchStatus === STATUS.LOADING) {

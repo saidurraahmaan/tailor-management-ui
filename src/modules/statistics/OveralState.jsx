@@ -29,7 +29,7 @@ const OveralState = () => {
   };
 
   useEffect(() => {
-    setDrawerText("Statistics");
+    setDrawerText("পরিসংখ্যান");
   }, [setDrawerText]);
 
   useEffect(() => {

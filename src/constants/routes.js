@@ -29,8 +29,9 @@ export const APPROUTES = {
   statistics: "/statistics",
   newProduct: "/product/new",
   orderSuccess: "/order/new/success",
-
   registrationSuccess: "/signup/success",
+  
+  editOrder: (id) => `/order/edit/${id}`,
   productEdit: (id) => `/product/edit/${id}`,
   orderDetails: (id) => `/order/details/${id}`,
   deliveryPage: (id) => `/order/delivery/${id}`,

@@ -15,8 +15,8 @@ export const orderInfoInitialState = {
   productType: "",
   productMeasurements: [],
   productDescriptions: [],
-  makingCost: 0,
-  quantity: 1,
+  makingCost: "",
+  quantity: "",
 };
 
 export const showingStateInitialState = {

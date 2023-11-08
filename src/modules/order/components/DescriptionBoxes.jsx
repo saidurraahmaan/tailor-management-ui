@@ -19,7 +19,7 @@ const DescriptionBoxes = ({ orderInfo, setOrderInfo }) => {
 
   return (
     <React.Fragment>
-      <div className="flex align-items-center g-3">
+      <div className="flex align-items-center g-3 flex-wrap">
         {productDescriptions.map((ele) => (
           <FormGroup key={ele._id}>
             <FormControlLabel
