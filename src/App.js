@@ -14,6 +14,7 @@ import {
   SuccessfulOrder,
   OrderCustomerCopy,
   OrderProductionCopy,
+  EditOrder,
 } from "./modules/order";
 import { EditProduct, NewProduct, ProductList } from "./modules/product";
 import { Signup, Signin, RegistrationSuccess, Profile } from "./modules/auth";
@@ -126,6 +127,14 @@ function App() {
             element={
               <PrivateRoute>
                 <EditProduct />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={"/order/edit/:id"}
+            element={
+              <PrivateRoute>
+                <EditOrder />
               </PrivateRoute>
             }
           />

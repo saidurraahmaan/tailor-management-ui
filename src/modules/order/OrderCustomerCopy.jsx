@@ -19,7 +19,7 @@ const OrderCustomerCopy = () => {
   );
 
   useEffect(() => {
-    setDrawerText("Order Customer Copy");
+    setDrawerText("কাস্টমার কপি");
   }, [setDrawerText]);
 
   if (fetchStatus === STATUS.LOADING) {

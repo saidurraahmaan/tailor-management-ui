@@ -85,7 +85,7 @@ const EditProduct = () => {
   };
 
   useEffect(() => {
-    setDrawerText("Update Product");
+    setDrawerText("আপডেট প্রোডাক্ট");
   }, [setDrawerText]);
 
   useEffect(() => {

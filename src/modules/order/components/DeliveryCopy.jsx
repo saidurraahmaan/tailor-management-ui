@@ -30,8 +30,8 @@ const DeliveryCopy = ({
 
   return (
     <div>
-      <div className="flex justify-content-center py-2" ref={targetRef}>
-        <div className="customer-copy-container wd-100">
+      <div className="flex justify-content-center py-2" >
+        <div className="customer-copy-container wd-100" ref={targetRef}>
           <CustomerCopyHeader />
           <Divider sx={{ backgroundColor: "aqua", marginBlock: 1 }} />
           <OrderInfoCustomer
@@ -68,7 +68,7 @@ const DeliveryCopy = ({
                 unit: "px",
                 format: [height - 50, height - 250],
                 // default is 'portrait'
-                orientation: "landscape",
+                // orientation: "landscape",
               },
             })
           }

@@ -132,7 +132,7 @@ const NewOrder = () => {
   };
 
   useEffect(() => {
-    setDrawerText("New Order");
+    setDrawerText("নতুন অর্ডার");
   }, [setDrawerText]);
 
   useEffect(() => {

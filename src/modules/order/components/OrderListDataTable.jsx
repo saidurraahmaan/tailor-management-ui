@@ -55,8 +55,8 @@ export default function OrderListDataTable({ orderDataList, mxWidth }) {
         minWidth: 80,
         maxWidth: mxWidth,
         flex: 1,
-        headerAlign: "center",
-        align: "center",
+        // headerAlign: "center",
+        // align: "center",
         renderCell: (params) => {
           if (obj.field === "productName" && Array.isArray(params.value)) {
             return params.value.join(",");

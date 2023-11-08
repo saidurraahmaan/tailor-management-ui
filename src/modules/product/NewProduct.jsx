@@ -57,7 +57,7 @@ const NewProduct = () => {
   };
 
   useEffect(() => {
-    setDrawerText("Add New Product");
+    setDrawerText("নতুন প্রোডাক্ট যোগ করুন");
   }, [setDrawerText]);
 
   return (

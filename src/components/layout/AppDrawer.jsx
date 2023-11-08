@@ -17,7 +17,7 @@ import ViewListIcon from "@mui/icons-material/ViewList";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { APPROUTES } from "../../constants/routes";
 import { useDispatch, useSelector } from "react-redux";
 import { resetState } from "../../services/logoutService";
@@ -33,6 +33,8 @@ export default function PermanentDrawerLeft({
 }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
+
   const {
     user: { storeName },
   } = useSelector(authInformation);
@@ -52,7 +54,7 @@ export default function PermanentDrawerLeft({
         position="fixed"
         sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
       >
-        <Toolbar sx={{ bgcolor: "#db93a0" }}>
+        <Toolbar sx={{ bgcolor: "#38a9d9" }}>
           <Typography
             className="wd-100 text-center"
             variant="h6"
@@ -72,7 +74,7 @@ export default function PermanentDrawerLeft({
             boxSizing: "border-box",
           },
           "& .MuiPaper-root": {
-            backgroundColor: "#e3d8c5",
+            backgroundColor: "#bcd0d1",
           },
         }}
         variant="permanent"
@@ -100,51 +102,81 @@ export default function PermanentDrawerLeft({
         <Divider />
         <List>
           <ListItem disablePadding>
-            <ListItemButton onClick={() => handleClick(APPROUTES.orderList)}>
+            <ListItemButton
+              onClick={() => handleClick(APPROUTES.orderList)}
+              sx={{
+                bgcolor: pathname === APPROUTES.orderList && "aliceblue",
+              }}
+            >
               <ListItemIcon>
                 <ListIcon sx={{ color: "#49ba67" }} />
               </ListItemIcon>
-              <ListItemText primary={"Order list"} />
+              <ListItemText primary={"অর্ডারের তালিকা"} />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton onClick={() => handleClick(APPROUTES.newOrder)}>
+            <ListItemButton
+              onClick={() => handleClick(APPROUTES.newOrder)}
+              sx={{
+                bgcolor: pathname === APPROUTES.newOrder && "aliceblue",
+              }}
+            >
               <ListItemIcon>
                 <AddCircleOutlineIcon sx={{ color: "#49ba67" }} />
               </ListItemIcon>
-              <ListItemText primary={"New order"} />
+              <ListItemText primary={"নতুন অর্ডার"} />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton onClick={() => handleClick(APPROUTES.product)}>
+            <ListItemButton
+              onClick={() => handleClick(APPROUTES.product)}
+              sx={{
+                bgcolor: pathname === APPROUTES.product && "aliceblue",
+              }}
+            >
               <ListItemIcon>
                 <ViewListIcon sx={{ color: "#49ba67" }} />
               </ListItemIcon>
-              <ListItemText primary={"Product List"} />
+              <ListItemText primary={"প্রোডাক্টের তালিকা"} />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton onClick={() => handleClick(APPROUTES.cost)}>
+            <ListItemButton
+              onClick={() => handleClick(APPROUTES.cost)}
+              sx={{
+                bgcolor: pathname === APPROUTES.cost && "aliceblue",
+              }}
+            >
               <ListItemIcon>
                 <PriceChangeIcon sx={{ color: "#49ba67" }} />
               </ListItemIcon>
-              <ListItemText primary={"Cost State"} />
+              <ListItemText primary={"খররের হিসাব"} />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton onClick={() => handleClick(APPROUTES.statistics)}>
+            <ListItemButton
+              onClick={() => handleClick(APPROUTES.statistics)}
+              sx={{
+                bgcolor: pathname === APPROUTES.statistics && "aliceblue",
+              }}
+            >
               <ListItemIcon>
                 <BarChartIcon sx={{ color: "#49ba67" }} />
               </ListItemIcon>
-              <ListItemText primary={"Statistics"} />
+              <ListItemText primary={"পরিসংখ্যান"} />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton onClick={() => handleClick(APPROUTES.profile)}>
+            <ListItemButton
+              onClick={() => handleClick(APPROUTES.profile)}
+              sx={{
+                bgcolor: pathname === APPROUTES.profile && "aliceblue",
+              }}
+            >
               <ListItemIcon>
                 <AccountBoxIcon sx={{ color: "#49ba67" }} />
               </ListItemIcon>
-              <ListItemText primary={"Profile"} />
+              <ListItemText primary={"প্রোফাইল"} />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
@@ -152,7 +184,7 @@ export default function PermanentDrawerLeft({
               <ListItemIcon>
                 <LogoutIcon sx={{ color: "#49ba67" }} />
               </ListItemIcon>
-              <ListItemText primary={"Logout"} />
+              <ListItemText primary={"লগআউট"} />
             </ListItemButton>
           </ListItem>
         </List>

@@ -34,7 +34,7 @@ const OrderList = () => {
   const targetRef = useRef();
 
   useEffect(() => {
-    setDrawerText("Order List");
+    setDrawerText("অর্ডারের তালিকা");
   }, [setDrawerText]);
 
   useEffect(() => {

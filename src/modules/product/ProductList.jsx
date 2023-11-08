@@ -20,7 +20,7 @@ const ProductList = () => {
   );
 
   useEffect(() => {
-    setDrawerText("Product List");
+    setDrawerText("প্রোডাক্টের তালিকা");
   }, [setDrawerText]);
 
   if (fetchStatus === STATUS.LOADING) {
@@ -58,7 +58,7 @@ const ProductList = () => {
           <Grid xs={4}>ProductName</Grid>
           <Grid xs={4}>Type</Grid>
           <Grid xs={4}>Action</Grid>
-          <PaginatedProductList data={responseData} itemsPerPage={8} />
+          <PaginatedProductList data={responseData} itemsPerPage={6} />
         </Grid>
       )}
     </div>
