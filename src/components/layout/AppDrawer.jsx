@@ -150,7 +150,7 @@ export default function PermanentDrawerLeft({
               <ListItemIcon>
                 <PriceChangeIcon sx={{ color: "#49ba67" }} />
               </ListItemIcon>
-              <ListItemText primary={"খররের হিসাব"} />
+              <ListItemText primary={"খরচের হিসাব"} />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
