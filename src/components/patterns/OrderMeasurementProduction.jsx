@@ -26,7 +26,7 @@ const OrderMeasurementProduction = ({
         </Grid>
       </Grid>
       <div className="py-1 font-w-700">মাপ</div>
-      <div className="flex align-items-center g-2 ">
+      <div className="flex align-items-center g-2 flex-wrap">
         {measurements.map((ele) => (
           <div className="text-center" key={ele._id}>
             <div className="production-order-item-field">{ele.label}</div>

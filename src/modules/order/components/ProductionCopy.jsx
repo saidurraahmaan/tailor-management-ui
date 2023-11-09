@@ -1,6 +1,5 @@
 import React from "react";
 import dayjs from "dayjs";
-import { usePDF } from "react-to-pdf";
 import { Button, Divider } from "@mui/material";
 import {
   ProductionCopyHeader,
@@ -8,18 +7,22 @@ import {
   OrderMeasurementProduction,
 } from "../../../components";
 import { dateTimeFormat } from "../../../constants/dateTimeFormat";
+import { useRef } from "react";
+import { useReactToPrint } from "react-to-print";
 
 const ProductionCopy = ({
   orderNo,
   delivery,
   orderDate,
   measuredItems,
-
   customerName,
 }) => {
-  const { toPDF, targetRef } = usePDF({
-    method: "open",
-    filename: "multipage-example.pdf",
+  const targetRef = useRef();
+
+  const handlePrint = useReactToPrint({
+    content: () => targetRef.current,
+    documentTitle: `production_copy_${orderNo}`,
+    onAfterPrint: () => console.log("Printed PDF successfully!"),
   });
 
   return (
@@ -50,7 +53,7 @@ const ProductionCopy = ({
         </div>
       </div>
       <div className="flex justify-content-center py-2">
-        <Button variant="contained" onClick={toPDF}>
+        <Button variant="contained" onClick={handlePrint}>
           প্রোডাকশন কপি প্রিন্ট করুন
         </Button>
       </div>
