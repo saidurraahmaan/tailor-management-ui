@@ -48,7 +48,7 @@ const DeliveryCopy = ({
               clothPrice={clothPrice}
               orderedItems={measuredItemsToCustomerOrderItems(measuredItems)}
             />
-            <div className="py-2 flex justify-content-center">
+            <div className="flex justify-content-center">
               <img
                 src={paidimage}
                 alt="paid-img"
