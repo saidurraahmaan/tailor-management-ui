@@ -10,6 +10,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import { TextField } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { STATUS } from "../../../constants/fetch";
+import { getRangeState } from "../statisticsApi";
+import { APIROUTES } from "../../../constants/routes";
+import dayjs from "dayjs";
+import { dateTimeFormat } from "../../../constants/dateTimeFormat";
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -48,21 +52,42 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 export default function CostAccordion() {
-  const [expanded, setExpanded] = React.useState("panel1");
+  const [expanded, setExpanded] = React.useState(null);
   const [dateRange, setDateRange] = React.useState([null, null]);
   const [startDate, endDate] = dateRange;
+  const [fetchData, setFetchDate] = React.useState({
+    totalIncome: 0,
+    totalOrders: 0,
+  });
   const [fetchStatus, setFetchStatus] = React.useState(STATUS.IDLE);
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
+
   const ExampleCustomInput = React.forwardRef(({ value, onClick }, ref) => (
     <TextField ref={ref} onClick={onClick} value={value} autoComplete="off" />
   ));
 
-  const handleBtnClick = () => {
-    console.log({ startDate, endDate });
+  const handleBtnClick = async () => {
     setFetchStatus(STATUS.LOADING);
+
+    const url =
+      APIROUTES.getRangeState +
+      `?from=${dayjs(startDate).format(
+        dateTimeFormat.orderGridDate
+      )}&to=${dayjs(endDate).format(dateTimeFormat.orderGridDate)}`;
+    const response = await getRangeState(url).catch((e) =>
+      setFetchStatus(STATUS.ERROR)
+    );
+    if (response) {
+      setFetchDate((prev) => ({
+        ...prev,
+        totalIncome: response.data.totalIncome,
+        totalOrders: response.data.totalOrders,
+      }));
+      setFetchStatus(STATUS.SUCCESS);
+    }
   };
 
   return (
@@ -97,7 +122,16 @@ export default function CostAccordion() {
               রেজাল্ট দেখুন
             </LoadingButton>
           </div>
-          {fetchStatus !== STATUS.IDLE && <div>Hello </div>}
+          {fetchStatus === STATUS.SUCCESS && (
+            <div>
+              <div className="py-2">
+                Total Order in this range: {fetchData.totalOrders}
+              </div>
+              <div className="py-2">
+                Total Income in this range: {fetchData.totalIncome}
+              </div>
+            </div>
+          )}
         </AccordionDetails>
       </Accordion>
     </div>

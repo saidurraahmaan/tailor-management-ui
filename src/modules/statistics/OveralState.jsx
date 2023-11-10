@@ -20,7 +20,7 @@ const OveralState = () => {
     nextWeekDelivery: 0,
     todayTotalOrder: 0,
     lastWeekTotalOrder: 0,
-    lastThirtyDayOrderList: [],
+    lastRangeDayOrderList: [],
     status: STATUS.IDLE,
   });
 
@@ -46,7 +46,7 @@ const OveralState = () => {
           nextWeekDelivery,
           todayTotalOrder,
           lastWeekTotalOrder,
-          lastThirtyDayOrderList,
+          lastRangeDayOrderList,
         } = response.data;
         setStatistics((prev) => ({
           ...prev,
@@ -57,7 +57,7 @@ const OveralState = () => {
           nextWeekDelivery,
           todayTotalOrder,
           lastWeekTotalOrder,
-          lastThirtyDayOrderList,
+          lastRangeDayOrderList,
           status: STATUS.SUCCESS,
         }));
       }
@@ -144,7 +144,7 @@ const OveralState = () => {
       </div>
       <CostAccordion />
       {statistics.status === STATUS.SUCCESS && (
-        <LastThirtyDayOrderCountBar data={statistics.lastThirtyDayOrderList} />
+        <LastThirtyDayOrderCountBar data={statistics.lastRangeDayOrderList} />
       )}
     </div>
   );

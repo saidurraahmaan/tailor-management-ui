@@ -3,10 +3,11 @@ export const APIROUTES = {
   placeOrder: "/order",
   addProduct: "/product",
   getUser: "/auth/getUser",
-  orderState: "/order/state",
   register: "/auth/register",
   updateUser: "/auth/update",
+  orderState: "/order/state",
   getOrderNo: "/order/getOrderNo",
+  getRangeState: "/order/rangeState",
   getUserAllProduct: "/product/byUser",
   updateOrderById: (id) => `/order/${id}`,
   deleteOrderById: (id) => `/order/${id}`,
@@ -30,7 +31,7 @@ export const APPROUTES = {
   newProduct: "/product/new",
   orderSuccess: "/order/new/success",
   registrationSuccess: "/signup/success",
-  
+
   editOrder: (id) => `/order/edit/${id}`,
   productEdit: (id) => `/product/edit/${id}`,
   orderDetails: (id) => `/order/details/${id}`,
