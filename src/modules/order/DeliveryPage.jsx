@@ -24,7 +24,7 @@ const DeliveryPage = () => {
   if (fetchStatus === STATUS.LOADING) {
     return <CircularWithValueLabel />;
   }
-  console.log(responseData)
+  // console.log(responseData)
   return (
     <>
       {fetchStatus === STATUS.SUCCESS && responseData.isDelivered && (
