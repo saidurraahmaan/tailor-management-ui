@@ -1,7 +1,7 @@
 import React from "react";
 
 const Cost = () => {
-  return <div>Cost summary</div>;
+  return <div>এই ফিচারটি এখনো করা হয় নি</div>;
 };
 
 export default Cost;

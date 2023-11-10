@@ -7,6 +7,7 @@ import { STATUS } from "../../constants/fetch.js";
 import { dateTimeFormat } from "../../constants/dateTimeFormat.js";
 import "./index.css";
 import LastThirtyDayOrderCountBar from "./components/LastThirtyDayOrderCountBar.jsx";
+import CostAccordion from "./components/CostAccordion.jsx";
 
 const OveralState = () => {
   const navigate = useNavigate();
@@ -141,6 +142,7 @@ const OveralState = () => {
           <div>{statistics.totalAmount} টাকা</div>
         </div>
       </div>
+      <CostAccordion />
       {statistics.status === STATUS.SUCCESS && (
         <LastThirtyDayOrderCountBar data={statistics.lastThirtyDayOrderList} />
       )}

@@ -47,10 +47,14 @@ const OrderedItemListCustomer = ({
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td style={cellStyle}>কাপড়</td>
-            <td style={valueCellStyle}>{clothPrice} </td>
-          </tr>
+          {clothPrice ? (
+            <tr>
+              <td style={cellStyle}>কাপড়</td>
+              <td style={valueCellStyle}>{clothPrice} </td>
+            </tr>
+          ) : (
+            <></>
+          )}
           {orderedItems.map((ele) => (
             <tr key={ele.id}>
               <td style={cellStyle}>
@@ -67,11 +71,11 @@ const OrderedItemListCustomer = ({
           </tr>
           <tr>
             <td style={cellStyle}>ডিস্কাউন্ট</td>
-            <td style={valueCellStyle}>{discount} </td>
+            <td style={valueCellStyle}>{discount || 0} </td>
           </tr>
           <tr>
             <td style={cellStyle}>এডভান্স</td>
-            <td style={valueCellStyle}>{advance} </td>
+            <td style={valueCellStyle}>{advance || 0} </td>
           </tr>
           <tr>
             <td style={cellStyle}>বাকী</td>

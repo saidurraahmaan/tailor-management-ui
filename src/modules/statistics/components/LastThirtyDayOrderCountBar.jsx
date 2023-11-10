@@ -43,7 +43,7 @@ export default function LastThirtyDayOrderCountBar({ data }) {
         {...chartSetting}
       />
       <div className="text-center font-w-700 font-secondary">
-        শেষ ২৫ দিনের অর্ডারের অবস্থা
+        শেষ {data.length} দিনের অর্ডারের অবস্থা
       </div>
     </div>
   );
