@@ -37,7 +37,7 @@ import {
   orderInfoInitialState,
   showingStateInitialState,
 } from "./orderConstant";
-import { getOrderNo } from "./orderApi";
+import { getOrderNo, placeNewOrder } from "./orderApi";
 import { APPROUTES } from "../../constants/routes";
 import dayjs from "dayjs";
 
@@ -60,6 +60,7 @@ const NewOrder = () => {
     customerName,
     clothPrice,
     measuredItems,
+    mobileNumber,
   } = useSelector(getOrderReducer);
 
   const handleFetchItemError = (error) => {
@@ -131,6 +132,20 @@ const NewOrder = () => {
     }
   };
 
+  const handlePlaceOrderClick = async () => {
+    const orderData = {
+      advance,
+      delivery,
+      discount,
+      clothPrice,
+      customerName,
+      mobileNumber,
+      measuredItems,
+    };
+    // console.log(orderData);
+    dispatch(placeNewOrder(orderData));
+  };
+
   useEffect(() => {
     setDrawerText("নতুন অর্ডার");
   }, [setDrawerText]);
@@ -180,7 +195,13 @@ const NewOrder = () => {
               setOrderInfo={setOrderInfo}
             />
           )}
-          {tabValue === NewOrderTabConstant.OrderInfo && <OrderSubmission />}
+          {tabValue === NewOrderTabConstant.OrderInfo && (
+            <OrderSubmission
+              onSave={handlePlaceOrderClick}
+              buttonText={"সেভ করুন"}
+              status={status}
+            />
+          )}
           {tabValue === NewOrderTabConstant.ProductionCopy && (
             <ProductionCopy
               orderNo={orderNo}
