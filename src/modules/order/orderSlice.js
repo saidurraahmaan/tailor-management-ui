@@ -34,7 +34,7 @@ const orderSlice = createSlice({
         mobileNumber,
         measuredItems,
       } = action.payload;
-
+      
       state.orderNo = orderNo;
       state.advance = advance;
       state.discount = discount;

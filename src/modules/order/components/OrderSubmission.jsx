@@ -6,9 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getOrderReducer, updateOrderField } from "../orderSlice";
 import { LoadingButton } from "@mui/lab";
 import { STATUS } from "../../../constants/fetch";
-import { placeNewOrder } from "../orderApi";
 
-const OrderSubmission = () => {
+const OrderSubmission = ({ buttonText, onSave, status }) => {
   const dispatch = useDispatch();
 
   const {
@@ -19,7 +18,6 @@ const OrderSubmission = () => {
     customerName,
     mobileNumber,
     measuredItems,
-    status,
   } = useSelector(getOrderReducer);
 
   const calculateTotalPrice = () => {
@@ -34,20 +32,6 @@ const OrderSubmission = () => {
 
   const handleChange = ({ field, value }) => {
     dispatch(updateOrderField({ field, value }));
-  };
-
-  const handlePlaceOrderClick = async () => {
-    const orderData = {
-      advance,
-      delivery,
-      discount,
-      clothPrice,
-      customerName,
-      mobileNumber,
-      measuredItems,
-    };
-    // console.log(orderData);
-    dispatch(placeNewOrder(orderData));
   };
 
   return (
@@ -151,9 +135,9 @@ const OrderSubmission = () => {
           variant="contained"
           color="secondary"
           loading={status === STATUS.LOADING}
-          onClick={handlePlaceOrderClick}
+          onClick={onSave}
         >
-          সেভ করুন
+          {buttonText}
         </LoadingButton>
       </div>
     </>

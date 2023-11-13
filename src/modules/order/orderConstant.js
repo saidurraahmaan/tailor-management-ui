@@ -24,3 +24,9 @@ export const showingStateInitialState = {
   productMeasurement: false,
   measurementTabAddBtn: true,
 };
+
+export const showingStateInitialStateEdit = {
+  productType: false,
+  productMeasurement: false,
+  measurementTabAddBtn: true,
+};
