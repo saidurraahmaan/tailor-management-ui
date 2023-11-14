@@ -17,7 +17,7 @@ const Toaster = ({
   return (
     <Snackbar
       open={open}
-      autoHideDuration={autoHideDuration || 5000}
+      autoHideDuration={autoHideDuration || 100000}
       onClose={handleClose}
       anchorOrigin={{
         vertical: "bottom",

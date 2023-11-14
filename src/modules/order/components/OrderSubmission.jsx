@@ -6,11 +6,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { getOrderReducer, updateOrderField } from "../orderSlice";
 import { LoadingButton } from "@mui/lab";
 import { STATUS } from "../../../constants/fetch";
+import { Toaster } from "../../../components";
 
-const OrderSubmission = ({ buttonText, onSave, status }) => {
+const OrderSubmission = ({
+  buttonText,
+  onSave,
+  status,
+  error,
+  handleToasterClose,
+}) => {
   const dispatch = useDispatch();
 
   const {
+    orderNo,
     advance,
     discount,
     delivery,
@@ -34,9 +42,32 @@ const OrderSubmission = ({ buttonText, onSave, status }) => {
     dispatch(updateOrderField({ field, value }));
   };
 
+  const checkButtonDisable = () => {
+    console.log(customerName);
+    if (
+      !customerName ||
+      !mobileNumber ||
+      clothPrice === "" ||
+      discount === "" ||
+      advance === ""
+    )
+      return true;
+
+    return false;
+  };
+
   return (
     <>
       <Grid container spacing={4} mt={2}>
+        <Grid xs={12} md={6} lg={4}>
+          <TextField
+            label="Order No"
+            variant="outlined"
+            inputProps={{ readOnly: true }}
+            fullWidth
+            value={orderNo}
+          />
+        </Grid>
         <Grid xs={12} md={6} lg={4}>
           <TextField
             label="Customer Name"
@@ -130,8 +161,9 @@ const OrderSubmission = ({ buttonText, onSave, status }) => {
           />
         </Grid>
       </Grid>
-      <div className="py-2 flex justify-content-end">
+      <div className="pt-4 flex justify-content-end">
         <LoadingButton
+          disabled={checkButtonDisable()}
           variant="contained"
           color="secondary"
           loading={status === STATUS.LOADING}
@@ -140,6 +172,12 @@ const OrderSubmission = ({ buttonText, onSave, status }) => {
           {buttonText}
         </LoadingButton>
       </div>
+      <Toaster
+        severity={"error"}
+        message={error}
+        open={status === STATUS.ERROR}
+        handleClose={handleToasterClose}
+      />
     </>
   );
 };

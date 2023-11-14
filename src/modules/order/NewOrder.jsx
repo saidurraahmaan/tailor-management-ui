@@ -52,6 +52,7 @@ const NewOrder = () => {
   const [tabValue, setTabValue] = useState(NewOrderTabConstant.ProductList);
 
   const {
+    error,
     status,
     orderNo,
     delivery,
@@ -146,6 +147,15 @@ const NewOrder = () => {
     dispatch(placeNewOrder(orderData));
   };
 
+  const handleSubmissionToasterClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    dispatch(updateOrderField({ field: "status", value: STATUS.IDLE }));
+    dispatch(updateOrderField({ field: "error", value: null }));
+  };
+
   useEffect(() => {
     setDrawerText("নতুন অর্ডার");
   }, [setDrawerText]);
@@ -197,9 +207,11 @@ const NewOrder = () => {
           )}
           {tabValue === NewOrderTabConstant.OrderInfo && (
             <OrderSubmission
-              onSave={handlePlaceOrderClick}
-              buttonText={"সেভ করুন"}
               status={status}
+              buttonText={"সেভ করুন"}
+              error={error}
+              onSave={handlePlaceOrderClick}
+              handleToasterClose={handleSubmissionToasterClose}
             />
           )}
           {tabValue === NewOrderTabConstant.ProductionCopy && (
