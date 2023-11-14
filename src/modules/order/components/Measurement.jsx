@@ -45,6 +45,12 @@ const Measurement = ({
     setOrderInfo(orderInfoInitialState);
   };
 
+  const checkButtonDisable = () => {
+    if (!orderInfo.quantity || !orderInfo.makingCost) return true;
+    if (orderInfo.quantity < 1 || orderInfo.makingCost < 0) return true;
+    return false;
+  };
+
   return (
     <div>
       <div className="py-1">
@@ -87,7 +93,12 @@ const Measurement = ({
       </Grid>
 
       <div className="pt-4 flex justify-content-center">
-        <Button variant="contained" onClick={handleAddBtnClick} color="success">
+        <Button
+          color="success"
+          variant="contained"
+          onClick={handleAddBtnClick}
+          disabled={checkButtonDisable()}
+        >
           {_id ? "Update" : "প্রোডাক্টটি যোগ করুন"}
         </Button>
       </div>

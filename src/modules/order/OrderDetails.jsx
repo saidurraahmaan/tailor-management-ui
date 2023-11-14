@@ -101,6 +101,7 @@ const OrderDetails = () => {
     return <CircularWithValueLabel />;
   }
 
+ 
   return (
     <div>
       {fetchStatus === STATUS.SUCCESS && responseData && (
@@ -181,6 +182,7 @@ const OrderDetails = () => {
               variant="contained"
               color="error"
               onClick={() => setDeleteModalOpen(true)}
+              disabled={responseData.isDelivered}
             >
               ক্যান্সেল অর্ডার
             </Button>
@@ -195,6 +197,7 @@ const OrderDetails = () => {
               variant="contained"
               color="warning"
               onClick={() => navigate(APPROUTES.editOrder(id))}
+              disabled={responseData.isDelivered}
             >
               এডিট করুন
             </Button>

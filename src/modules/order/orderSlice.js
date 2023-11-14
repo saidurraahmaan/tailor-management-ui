@@ -13,6 +13,7 @@ const initialState = {
   mobileNumber: "",
   measuredItems: [],
   status: STATUS.IDLE,
+  error: null,
 };
 
 const orderSlice = createSlice({
@@ -34,7 +35,7 @@ const orderSlice = createSlice({
         mobileNumber,
         measuredItems,
       } = action.payload;
-      
+
       state.orderNo = orderNo;
       state.advance = advance;
       state.discount = discount;
@@ -63,6 +64,7 @@ const orderSlice = createSlice({
         state.customerName = initialState.customerName;
         state.measuredItems = initialState.measuredItems;
         state.status = STATUS.SUCCESS;
+        state.error = null
       })
       .addCase(placeNewOrder.rejected, (state, action) => {
         state.status = STATUS.ERROR;

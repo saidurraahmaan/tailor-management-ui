@@ -51,15 +51,17 @@ const ProductList = () => {
       </div>
 
       {fetchStatus === STATUS.SUCCESS && responseData.length > 0 && (
-        <Grid
-          container
-          spacing={2}
-        >
-          <Grid xs={4}>ProductName</Grid>
-          <Grid xs={4}>Type</Grid>
-          <Grid xs={4}>Action</Grid>
-          <PaginatedProductList data={responseData} itemsPerPage={6} />
-        </Grid>
+        <>
+          <Grid container spacing={2}>
+            <Grid xs={9} container>
+              <Grid xs={3}>Product Name</Grid>
+              <Grid xs={3}>Type</Grid>
+              <Grid xs={3}>Action</Grid>
+            </Grid>
+            <Grid xs={3}></Grid>
+          </Grid>
+          <PaginatedProductList data={responseData} itemsPerPage={10} />
+        </>
       )}
     </div>
   );

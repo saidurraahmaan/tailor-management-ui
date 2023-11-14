@@ -57,6 +57,7 @@ const EditOrder = () => {
   );
   const [tabValue, setTabValue] = useState(NewOrderTabConstant.ProductList);
   const [updateStatus, setUpdateStatus] = useState(STATUS.IDLE);
+  const [error, setError] = useState(null);
 
   const {
     orderNo,
@@ -149,13 +150,23 @@ const EditOrder = () => {
       mobileNumber,
       measuredItems,
     };
-    const response = await updateOrder(orderData, id).catch((e) =>
-      setUpdateStatus(STATUS.ERROR)
-    );
+    const response = await updateOrder(orderData, id).catch((e) => {
+      setError(e.message);
+      setUpdateStatus(STATUS.ERROR);
+    });
     if (response) {
       setUpdateStatus(STATUS.SUCCESS);
       navigate(APPROUTES.orderDetails(id));
     }
+  };
+
+  const handleSubmissionToasterClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setUpdateStatus(STATUS.IDLE);
+    setError(null);
   };
 
   useEffect(() => {
@@ -199,6 +210,8 @@ const EditOrder = () => {
               onSave={handlePlaceOrderClick}
               buttonText={"আপডেট করুন"}
               status={updateStatus}
+              error={error}
+              handleToasterClose={handleSubmissionToasterClose}
             />
           )}
           {tabValue === NewOrderTabConstant.ProductionCopy && (
