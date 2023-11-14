@@ -34,13 +34,16 @@ const PaginatedProductList = ({ data, itemsPerPage }) => {
       ))}
       {Array.from({ length: itemsPerPage - currentData.length }).map(
         (_, index) => (
-          <Fragment key={index}>
-            <Grid xs={4}></Grid>
-            <Grid xs={4}></Grid>
-            <Grid xs={4} sx={{ visibility: "hidden" }}>
-              <Button variant="contained">Edit</Button>
+          <Grid container spacing={2} key={index}>
+            <Grid xs={9}>
+              <Grid xs={3}></Grid>
+              <Grid xs={3}></Grid>
+              <Grid xs={3} sx={{ visibility: "hidden" }}>
+                <Button variant="contained">Edit</Button>
+              </Grid>
             </Grid>
-          </Fragment>
+            <Grid xs={3}></Grid>
+          </Grid>
         )
       )}
 
