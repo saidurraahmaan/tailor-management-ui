@@ -43,7 +43,7 @@ const OrderSubmission = ({
   };
 
   const checkButtonDisable = () => {
-    console.log(customerName);
+    
     if (
       !customerName ||
       !mobileNumber ||
