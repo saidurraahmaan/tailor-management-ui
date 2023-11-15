@@ -67,7 +67,7 @@ const NewProduct = () => {
           required
           label="Product Name"
           variant="outlined"
-          sx={{ width: "50%" }}
+          sx={{ width: "25%" }}
           value={productInfo.productName}
           onChange={(e) =>
             setProductInfo({ ...productInfo, productName: e.target.value })
@@ -106,7 +106,7 @@ const NewProduct = () => {
       <div className="py-2">
         <MuiChipsInput
           required
-          sx={{ width: "50%" }}
+          sx={{ width: "25%" }}
           label="Measurement"
           value={productInfo.measurements}
           onChange={(newChips) =>
@@ -120,7 +120,7 @@ const NewProduct = () => {
           required
           label="Description"
           value={productInfo.descriptions}
-          sx={{ width: "50%" }}
+          sx={{ width: "25%" }}
           onChange={(newChips) =>
             setProductInfo({ ...productInfo, descriptions: newChips })
           }
