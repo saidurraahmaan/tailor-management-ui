@@ -59,7 +59,7 @@ const OrderSubmission = ({
   return (
     <>
       <Grid container spacing={4} mt={2}>
-        <Grid xs={12} md={6} lg={4}>
+        <Grid xs={6} md={4} lg={2}>
           <TextField
             label="Order No"
             variant="outlined"
@@ -68,7 +68,7 @@ const OrderSubmission = ({
             value={orderNo}
           />
         </Grid>
-        <Grid xs={12} md={6} lg={4}>
+        <Grid xs={6} md={4} lg={2}>
           <TextField
             label="Customer Name"
             variant="outlined"
@@ -79,7 +79,7 @@ const OrderSubmission = ({
             }
           />
         </Grid>
-        <Grid xs={12} md={6} lg={4}>
+        <Grid xs={6} md={4} lg={2}>
           <TextField
             label="Mobile Number"
             variant="outlined"
@@ -90,7 +90,7 @@ const OrderSubmission = ({
             }
           />
         </Grid>
-        <Grid xs={12} md={6} lg={4}>
+        <Grid xs={6} md={4} lg={2}>
           <ResponsiveCalendar
             label={"Delivery Date"}
             value={delivery}
@@ -99,7 +99,7 @@ const OrderSubmission = ({
             }
           />
         </Grid>
-        <Grid xs={12} md={6} lg={4}>
+        <Grid xs={6} md={4} lg={2}>
           <TextField
             label="Cloth Price"
             variant="outlined"
@@ -113,7 +113,7 @@ const OrderSubmission = ({
           />
         </Grid>
 
-        <Grid xs={12} md={6} lg={4}>
+        <Grid xs={6} md={4} lg={2}>
           <TextField
             label="Discount (tk)"
             variant="outlined"
@@ -126,7 +126,7 @@ const OrderSubmission = ({
             }
           />
         </Grid>
-        <Grid xs={12} md={6} lg={4}>
+        <Grid xs={6} md={4} lg={2}>
           <TextField
             label="Total Price (tk)"
             variant="outlined"
@@ -136,7 +136,7 @@ const OrderSubmission = ({
             value={calculateTotalPrice()}
           />
         </Grid>
-        <Grid xs={12} md={6} lg={4}>
+        <Grid xs={6} md={4} lg={2}>
           <TextField
             label="Advance (tk)"
             variant="outlined"
@@ -150,7 +150,7 @@ const OrderSubmission = ({
           />
         </Grid>
 
-        <Grid xs={12} md={6} lg={4}>
+        <Grid xs={6} md={4} lg={2}>
           <TextField
             label="Due (tk)"
             variant="outlined"

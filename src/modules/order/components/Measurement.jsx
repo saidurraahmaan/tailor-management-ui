@@ -60,7 +60,7 @@ const Measurement = ({
         <DescriptionBoxes orderInfo={orderInfo} setOrderInfo={setOrderInfo} />
       </div>
       <Grid container spacing={2} className="py-2">
-        <Grid xs={6} md={4} lg={2}>
+        <Grid xs={4} md={3} lg={1.5}>
           <TextField
             label="Making Cost"
             variant="outlined"
@@ -75,7 +75,7 @@ const Measurement = ({
             }
           />
         </Grid>
-        <Grid xs={6} md={4} lg={2}>
+        <Grid xs={4} md={3} lg={1.5}>
           <TextField
             label="Quantity"
             variant="outlined"

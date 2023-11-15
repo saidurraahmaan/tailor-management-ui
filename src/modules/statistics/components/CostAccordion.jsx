@@ -125,10 +125,10 @@ export default function CostAccordion() {
           {fetchStatus === STATUS.SUCCESS && (
             <div>
               <div className="py-2">
-                Total Order in this range: {fetchData.totalOrders}
+                মোট অর্ডার: {fetchData.totalOrders}
               </div>
               <div className="py-2">
-                Total Income in this range: {fetchData.totalIncome}
+                মোট আয়:  {fetchData.totalIncome}
               </div>
             </div>
           )}
