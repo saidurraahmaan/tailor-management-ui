@@ -93,6 +93,17 @@ const OrderDetails = () => {
     setStatus(STATUS.IDLE);
   };
 
+  const calculateDue = () => {
+    if (responseData.isDelivered) {
+      return 0;
+    }
+    return (
+      responseData.total -
+      Number(responseData.advance) -
+      Number(responseData.discount)
+    );
+  };
+
   useEffect(() => {
     setDrawerText("অর্ডারের বিস্তারিত");
   }, [setDrawerText]);
@@ -101,7 +112,6 @@ const OrderDetails = () => {
     return <CircularWithValueLabel />;
   }
 
- 
   return (
     <div>
       {fetchStatus === STATUS.SUCCESS && responseData && (
@@ -127,11 +137,7 @@ const OrderDetails = () => {
             </Grid>
             <Grid xs={2}>
               <div className="pb-1">বাকি</div>
-              <div>
-                {responseData.total -
-                  Number(responseData.advance) -
-                  Number(responseData.discount)}
-              </div>
+              <div>{calculateDue()}</div>
             </Grid>
             <Grid xs={2}>
               <div className="pb-1">ডেলিভারি হয়েছে?</div>
