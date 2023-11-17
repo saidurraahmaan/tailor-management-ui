@@ -49,45 +49,58 @@ export default function OrderListDataTable({ orderDataList, mxWidth }) {
   // Otherwise filter will be applied on fields such as the hidden column id
   const columns = React.useMemo(
     () =>
-      VISIBLE_FIELDS.map((obj) => ({
-        field: obj.field,
-        headerName: obj.header,
-        minWidth: 80,
-        maxWidth: mxWidth,
-        flex: 1,
-        // headerAlign: "center",
-        // align: "center",
-        renderCell: (params) => {
-          if (obj.field === "productName" && Array.isArray(params.value)) {
-            return params.value.join(",");
-          }
-          if (obj.field.includes("Date")) {
-            return dayjs(params.value).format(dateTimeFormat.orderGridDate);
-          }
-          if (obj.field === "isDelivered") {
-            return params.value ? (
-              <CheckCircleIcon style={{ color: "green" }} />
-            ) : (
-              <CancelIcon style={{ color: "red" }} />
-            );
-          }
-          if (obj.field === "action") {
-            return (
-              <div>
-                <Button
-                  variant="contained"
-                  onClick={() =>
-                    navigate(APPROUTES.orderDetails(params.row.id))
-                  }
-                >
-                  Details
-                </Button>
-              </div>
-            );
-          }
-          return params.value;
-        },
-      })),
+      VISIBLE_FIELDS.map((obj) => {
+        const column = {
+          field: obj.field,
+          headerName: obj.header,
+          minWidth: 80,
+          maxWidth: mxWidth,
+          flex: 1,
+          // headerAlign: "center",
+          // align: "center",
+          renderCell: (params) => {
+            if (obj.field === "productName" && Array.isArray(params.value)) {
+              return params.value.join(",");
+            }
+            if (obj.field.includes("Date")) {
+              return dayjs(params.value).format(dateTimeFormat.orderGridDate);
+            }
+            if (obj.field === "isDelivered") {
+              return params.value ? (
+                <CheckCircleIcon style={{ color: "green" }} />
+              ) : (
+                <CancelIcon style={{ color: "red" }} />
+              );
+            }
+            if (obj.field === "action") {
+              return (
+                <div>
+                  <Button
+                    variant="contained"
+                    onClick={() =>
+                      navigate(APPROUTES.orderDetails(params.row.id))
+                    }
+                  >
+                    Details
+                  </Button>
+                </div>
+              );
+            }
+            return params.value;
+          },
+        };
+     
+        if (obj.field === "orderNo") {
+          column.headerAlign = "right";
+          column.align = "right";
+        }
+
+       
+        if (obj.field === "isDelivered") {
+          column.maxWidth = 100;
+        }
+        return column;
+      }),
     [navigate, mxWidth]
   );
 
