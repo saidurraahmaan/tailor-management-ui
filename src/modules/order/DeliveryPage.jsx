@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
-import { Button } from "@mui/material";
-import { useNavigate, useOutletContext, useParams } from "react-router-dom";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+
+import { useOutletContext, useParams } from "react-router-dom";
 import useApiHook from "../../utils/ApiCustomHook";
 import { APIROUTES } from "../../constants/routes";
 import { STATUS } from "../../constants/fetch";
@@ -10,7 +9,7 @@ import DeliveryCopy from "./components/DeliveryCopy";
 
 const DeliveryPage = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
+
   const { setDrawerText } = useOutletContext();
   const { fetchStatus, responseData } = useApiHook(
     "get",
@@ -47,16 +46,6 @@ const DeliveryPage = () => {
           <div>এই অর্ডারটি এখনো ডেলিভারি করা হয় নি!!</div>
         </div>
       )}
-      <div className="py-2">
-        <Button
-          variant="contained"
-          color="warning"
-          onClick={() => navigate(-1)}
-          startIcon={<ArrowBackIcon />}
-        >
-          Back
-        </Button>
-      </div>
     </>
   );
 };
