@@ -23,6 +23,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { resetState } from "../../services/logoutService";
 import { authInformation } from "../../modules/auth/authSlice";
 import tailorImg from "../../assets/images/tailor.png";
+import KeyboardReturnSharpIcon from "@mui/icons-material/KeyboardReturnSharp";
+import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import { IconButton } from "@mui/material";
 
 const drawerWidth = 220;
 
@@ -55,14 +58,18 @@ export default function PermanentDrawerLeft({
         sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
       >
         <Toolbar sx={{ bgcolor: "#38a9d9" }}>
-          <Typography
-            className="wd-100 text-center"
-            variant="h6"
-            noWrap
-            component="div"
-          >
-            {drawerText}
-          </Typography>
+          <Grid container spacing={2} width={"100%"} alignItems={"center"}>
+            <Grid xs={5}>
+              <IconButton variant="contained" onClick={() => navigate(-1)}>
+                <KeyboardReturnSharpIcon sx={{ color: "white" }} />
+              </IconButton>
+            </Grid>
+            <Grid xs={7}>
+              <Typography variant="h6" noWrap component="div">
+                {drawerText}
+              </Typography>
+            </Grid>
+          </Grid>
         </Toolbar>
       </AppBar>
       <Drawer

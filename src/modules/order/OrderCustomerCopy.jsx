@@ -1,16 +1,14 @@
 import React, { useEffect } from "react";
-import { useNavigate, useOutletContext, useParams } from "react-router-dom";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { useOutletContext, useParams } from "react-router-dom";
 import useApiHook from "../../utils/ApiCustomHook";
 import { APIROUTES } from "../../constants/routes";
 import { STATUS } from "../../constants/fetch";
 import CircularWithValueLabel from "../../components/primitives/CircularLoader";
 import CustomerCopy from "./components/CustomerCopy";
-import { Button } from "@mui/material";
 
 const OrderCustomerCopy = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
+
   const { setDrawerText } = useOutletContext();
 
   const { fetchStatus, responseData } = useApiHook(
@@ -25,7 +23,6 @@ const OrderCustomerCopy = () => {
   if (fetchStatus === STATUS.LOADING) {
     return <CircularWithValueLabel />;
   }
-  console.log(responseData);
 
   return (
     <div>
@@ -43,16 +40,6 @@ const OrderCustomerCopy = () => {
           />
         </div>
       )}
-      <div className="py-2">
-        <Button
-          variant="contained"
-          color="warning"
-          onClick={() => navigate(-1)}
-          startIcon={<ArrowBackIcon />}
-        >
-          Back
-        </Button>
-      </div>
     </div>
   );
 };
