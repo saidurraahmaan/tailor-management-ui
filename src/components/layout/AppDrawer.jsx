@@ -25,7 +25,7 @@ import { authInformation } from "../../modules/auth/authSlice";
 import tailorImg from "../../assets/images/tailor.png";
 import KeyboardReturnSharpIcon from "@mui/icons-material/KeyboardReturnSharp";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import { IconButton } from "@mui/material";
+import { Button } from "@mui/material";
 
 const drawerWidth = 220;
 
@@ -60,9 +60,13 @@ export default function PermanentDrawerLeft({
         <Toolbar sx={{ bgcolor: "#38a9d9" }}>
           <Grid container spacing={2} width={"100%"} alignItems={"center"}>
             <Grid xs={5}>
-              <IconButton variant="contained" onClick={() => navigate(-1)}>
+              <Button
+                variant="contained"
+                color="warning"
+                onClick={() => navigate(-1)}
+              >
                 <KeyboardReturnSharpIcon sx={{ color: "white" }} />
-              </IconButton>
+              </Button>
             </Grid>
             <Grid xs={7}>
               <Typography variant="h6" noWrap component="div">
