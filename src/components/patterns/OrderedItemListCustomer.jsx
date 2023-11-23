@@ -42,7 +42,7 @@ const OrderedItemListCustomer = ({
               বর্ণনা
             </th>
             <th className="text-center" style={cellStyle}>
-              মুল্য
+              মূল্য
             </th>
           </tr>
         </thead>
