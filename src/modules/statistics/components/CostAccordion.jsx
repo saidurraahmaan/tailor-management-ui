@@ -57,6 +57,7 @@ export default function CostAccordion() {
   const [startDate, endDate] = dateRange;
   const [fetchData, setFetchDate] = React.useState({
     totalIncome: 0,
+    totalDeliveredOrders: 0,
     totalOrders: 0,
   });
   const [fetchStatus, setFetchStatus] = React.useState(STATUS.IDLE);
@@ -85,6 +86,7 @@ export default function CostAccordion() {
         ...prev,
         totalIncome: response.data.totalIncome,
         totalOrders: response.data.totalOrders,
+        totalDeliveredOrders: response.data.totalDeliveredOrders,
       }));
       setFetchStatus(STATUS.SUCCESS);
     }
@@ -125,11 +127,10 @@ export default function CostAccordion() {
           {fetchStatus === STATUS.SUCCESS && (
             <div>
               <div className="py-2">
-                মোট অর্ডার: {fetchData.totalOrders}
+                মোট ডেলিভারি করা অর্ডার: {fetchData.totalDeliveredOrders}
               </div>
-              <div className="py-2">
-                মোট আয়:  {fetchData.totalIncome}
-              </div>
+              <div className="py-2">মোট অর্ডার: {fetchData.totalOrders}</div>
+              <div className="py-2">মোট আয়: {fetchData.totalIncome}</div>
             </div>
           )}
         </AccordionDetails>
