@@ -58,8 +58,8 @@ const OrderDetails = () => {
 
   const handleAddNewOrderFrom = () => {
     const orderDetails = {
-      mobileNumber: "",
-      customerName: "",
+      mobileNumber: responseData.mobileNumber,
+      customerName: responseData.customerName,
       delivery: new Date(),
       orderNo: 0,
       advance: "",
