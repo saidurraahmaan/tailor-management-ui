@@ -1,7 +1,7 @@
 # Login
-To login use the following credentials:
-username:saidur
-password:saidur
+To login use the following credentials:\
+username: saidur\
+password: saidur
 
 # Api Repository
 The api repository link : https://github.com/saidurraahmaan/tailor-management-api
